@@ -1,3 +1,18 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
 <%= image_tag "TSWIFT.jpg" %>
+<%= form_tag("/trips", method: "post") do %>
+  <div>
+    <%= label_tag(:destination, "Country:") %>
+    <%= text_field_tag(:destination) %>
+  </div>
+  <div>
+    <%= label_tag(:start_date, "Start Date:") %>
+    <%= text_field_tag(:start_date, nil, type: "date") %>
+  </div>
+  <div>
+    <%= label_tag(:end_date, "End Date:") %>
+    <%= text_field_tag(:end_date, nil, type: "date") %>
+  </div>
+  <%= submit_tag("Submit") %>
+<% end %>
