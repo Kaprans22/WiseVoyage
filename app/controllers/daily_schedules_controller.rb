@@ -1,0 +1,2 @@
+class DailySchedulesController < ApplicationController
+end
