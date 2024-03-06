@@ -6,39 +6,38 @@
   top: 0;
   width: 100%;
   height: auto;
-  background-image: linear-gradient(to bottom, black, rgba(255, 255, 255, 0));
-  transition: background-color 0.5s ease;
+  background-image: linear-gradient(to bottom, rgb(7, 7, 7), rgba(255, 255, 255, 0));
+  transition: background-color 0.7s ease;
   height: 80px;
 }
 
-// .navbar-solid {
-//   background: rgb(5, 4, 4);
-//   color: white;
-// }
+.icon {
+  transform: translateY(-200px);
+}
+
+.hyperlink {
+  transform: translateY(15px);
+}
 
 .navbar-solid .navbar-collapse {
   flex-grow: 0;
 }
 
-.navbar-solid .navbar-brand img {
+.navbar-logo img {
   width: 40px;
 }
 
 .nav-item {
   display: flex;
   margin: 0 10px;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-}
-
-.nav-item img {
-  width: 48px;
-  height: 48px;
-  margin-right: 5px;
-  text-align: center;
 }
 
 .nav-item a {
   color: white;
+  margin: 0px 10px 10px 0px;
 }
 
 .nav-item a:hover {
@@ -47,4 +46,54 @@
 
 .nav-item img:hover {
   color: #6f6f6f;
+}
+
+.nav-item img {
+  width: 42px;
+  height: 42px;
+  margin-right: 5px;
+  text-align: center;
+}
+
+///* nav-item sizes *///////////////////////////////
+// .nav-item a#about-us img {
+//   width: 60px;
+//   height: 60px;
+// }
+
+// .nav-item a#home img {
+//   width: 40px;
+//   height: 40px;
+// }
+
+// .nav-item a#dashboard img {
+//   width: 40px;
+//   height: 40px;
+// }
+
+///* Transition for navbar *////////////////////////
+.solid {
+  background: rgb(5, 4, 4);
+  .hyperlink {
+    transform: translateY(-40px);
+    transition: 0.5s;
+  }
+  .icon {
+    transform: translateY(-20px);
+    transition: 0.5s;
+  }
+  .navbar {
+    height: 20px !important;
+  }
+}
+
+.faded {
+  .hyperlink {
+    transform: translateY(15px);
+    transition: 0.5s;
+  }
+  .icon {
+    transform: translateY(-200px);
+    transition: 0.5s;
+  }
 }

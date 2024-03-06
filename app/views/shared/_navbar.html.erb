@@ -1,34 +1,28 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-solid">
+<div class="navbar navbar-expand-sm navbar-light" data-controller="navbar" data-action="scroll@window->navbar#scroll">
   <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag "TSWIFT.jpg" %>
-    <% end %>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div>
+      <%= link_to "#", class: "navbar-logo" do %>
+        <%= image_tag "TSWIFT.jpg" %>
+      <% end %>
+    </div>
+    <div class="" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
+        <!-- About us -->
         <li class="nav-item">
-          <%= link_to "About us", "#", class: "nav-link" %>
-          <a href="#"><%= image_tag "icons/group-icon.png" %></a>
+          <span class="hyperlink"><%= link_to "About us", "#", class: "nav-link" %></span>
+          <a class="icon" href="#" id="about-us"><%= image_tag "icons/group128.png" %></a>
         </li>
+        <!-- Home -->
         <li class="nav-item">
-          <%= link_to "Home", "#", class: "nav-link" %>
-          <a href="#"><%= image_tag "icons/home64.png" %></a>
+          <span class="hyperlink"><%= link_to "Home", "#", class: "nav-link" %></span>
+          <a class="icon" href="#" id="home"><%= image_tag "icons/home64.png" %></a>
         </li>
+        <!-- Dashboard -->
         <li class="nav-item">
-          <%= link_to "Dashboard", "#", class: "nav-link" %>
-          <a href="#"><%= image_tag "icons/user48.png"  %></a>
-        </li>
-        <li class="nav-item dropdown"></li>
+          <span class="hyperlink"><%= link_to "Dashboard", "#", class: "nav-link" %></span>
+          <a class="icon" href="#" id="dashboard"><%= image_tag "icons/user48.png"  %></a>
         </li>
       </ul>
     </div>
   </div>
-  <script>
-  </script>
 </div>
