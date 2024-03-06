@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_04_161905) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_05_154318) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,12 +19,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_161905) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "oauth_tokens", force: :cascade do |t|
+    t.string "access_token"
+    t.string "refresh_token"
+    t.datetime "expires_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "singleton_guard"
+  end
+
   create_table "trips", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "destination"
     t.date "start_date"
     t.date "end_date"
+    t.string "content"
   end
 
   create_table "user_trips", force: :cascade do |t|

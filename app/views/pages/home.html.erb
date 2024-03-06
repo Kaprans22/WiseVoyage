@@ -1,7 +1,7 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
 <%= image_tag "TSWIFT.jpg" %>
-<%= form_tag("/trips", method: "post") do %>
+<%= form_tag("/trips", method: "post", remote: true) do %>
   <div>
     <%= label_tag(:destination, "Country:") %>
     <%= text_field_tag(:destination) %>
@@ -21,3 +21,13 @@
   </header>
   <%= image_tag "TSWIFT.jpg" %>
 </main>
+<br>
+<div id="trips">
+  <% @trips.each do |trip| %>
+    <h2>Destination: <%= trip.destination %></h2>
+    <p>Content: <%= trip.content %></p>
+<%= button_to 'Delete', trip_path(trip), method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
+</div>
+<br>
+<%= button_to 'Delete All', destroy_all_trips_path, method: :delete, data: { confirm: 'Are you sure?' } %>
