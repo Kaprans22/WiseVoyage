@@ -5,17 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <%= javascript_include_tag 'map' %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js' %>
     <%= javascript_importmap_tags %>
+    <%# <link rel="preconnect" href="https://fonts.googleapis.com"> %>
+<%# <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> %>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@318&display=swap" rel="stylesheet">
+
   </head>
 
-  <body><%= render "shared/navbar" %>
+  <body>
+    <%= render "shared/navbar" %>
     <%= render "shared/flashes" %>
-
     <%= yield %>
   </body>
 </html>
