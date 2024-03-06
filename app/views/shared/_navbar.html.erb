@@ -4,19 +4,25 @@
       <%= image_tag "TSWIFT.jpg" %>
     <% end %>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
+          <%= link_to "About us", "#", class: "nav-link" %>
+          <a href="#"><%= image_tag "icons/group-icon.png" %></a>
+        </li>
+        <li class="nav-item">
           <%= link_to "Home", "#", class: "nav-link" %>
-          <%= image_tag "icons/home48.png" %>
+          <a href="#"><%= image_tag "icons/home64.png" %></a>
         </li>
         <li class="nav-item">
           <%= link_to "Dashboard", "#", class: "nav-link" %>
-          <%= image_tag "icons/user48.png"  %>
+          <a href="#"><%= image_tag "icons/user48.png"  %></a>
         </li>
         <li class="nav-item dropdown"></li>
         </li>
