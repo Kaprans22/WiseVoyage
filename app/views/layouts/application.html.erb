@@ -11,11 +11,15 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js' %>
     <%= javascript_importmap_tags %>
+    <%# <link rel="preconnect" href="https://fonts.googleapis.com"> %>
+<%# <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> %>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@318&display=swap" rel="stylesheet">
+
   </head>
 
-  <body><%= render "shared/navbar" %>
-<%= render "shared/flashes" %>
-
+  <body>
+    <%= render "shared/navbar" %>
+    <%= render "shared/flashes" %>
     <%= yield %>
   </body>
 </html>
