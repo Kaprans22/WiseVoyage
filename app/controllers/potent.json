@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "potent-airfoil-416210",
+  "private_key_id": "4a40933d602d9a6cd89c6f959eb9a16dd73fc6e8",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCfoOZZdZxk45Wi\n0nBzOXp4ZH8YggO9IRLIBp0r+SUxwTNrTK51mxnE9aVKjWqwQsEhdwxiu9C45kpw\n8kQVZ88H4AFHJRNggQuwHCh7PZjBlaOBP+p5cUivFDXDGP0LaxnnkrgFG41+QOy4\nDFsPdH+I+Hqr4Ws68mgPcgcP2/YFsbv5c4j2ZDSo6/z/5XSn2Mr2bgixy5k5G96b\n6EpViypHzVHGROeKKU/AbEjR9gDRYTTPMjoS9Sd35hPd8zwmpuhL+2hgzveBzKTC\noaQwyCkwy5HFNThWWQkvq0zYIGc1mVb+UGo7AQn4Fk/Y62A8J9DRob0WnhQ1XTLz\nU5AJxsUnAgMBAAECggEAG49ZFerzZIvSgvkYRxyOY4jeVKnl4Vp7dqOFsVjjrhJw\nQT9NA6sSqOnMbvG5kNMFqzR1o/pPUA0anyOE07lHilGHhvQEw22kSfSinJyG6i1e\nvGr/nZYMeYXgvl1rGvST1WKEeQVHyZuGA0TG2AVCG7Di5RgXPmcpxjjmtTtB37uI\n7qexmtk5kK1cRglV8HlHt12wJY7E6sJ2deF+l0MqmCvxvSHWpcQvJ3T/eDXT9RKj\nFpLBnILoCzLqh6CIFaBILIq+BLBsxvWa+Mey5Jiirti5kj//iL0jFfAGViinyOUr\n5jI4pSV0OncO408nXNj0N2KP+nWy6uBOwPwPr1FyuQKBgQDb5qBuKw0gNKBkGLR/\n2wPqHV2lJMsTHa/+QKGWo0lSwgRY0FZ4jIFhYvCF9eb7Zq03P76ZjHxtxSfMKh+j\n7aqLkcQeNVSYpPdijRp5yz1RZSZXz5k4rbIsKWXLdCoF6MM2Ykqezge1hdi4rkw9\n9RYCN8lgWurGvzKEoNF7GHSTRQKBgQC51VDwKCatD53RKX2nrSbdzTMPpv/4Wb6F\nGlJAp4+m5OkIruYinkvN+Xptjyw53QkZ+O6iVEcqGJQdEKHZYOkLjbEzyLuzVcbZ\nIXHQrrjD2iOCPw8vw+B+KCk32wl/1MpBBcS04g4i4Ie5Xe8NX0so2AAmrpXWJdft\ne/YE2QqnewKBgCRUHo70x89ZQmIm/rLcsPHddhoRUQdQcUHU1Z04TqXAbc1qZc62\nj61SFiBbdpRz6wvkmQ1u+yN7Xc7J6r4/RlyWcUr4ToiFQGVkoEocvH2U81ewcUS+\n1V+cWzfYchTV1mJGrMM9kGJ5wUsJaIkX01H8e2VSv9Sjw6nLk6/9Y0ztAoGAOoI5\nG4PouXBDRgmEMHjJ1ee3feQcj3riC1JAN28KQYes/zjh6GBiiZVUwI3lZMp9BRpl\nN+LFDTHz4DrOWnyyoxqXgjBfOJV3KAHprcR1E+TobSehhm5rjgzi/V0PXpoGm/ZO\n+ox52u1KjkhO7azlIxTu5z7smiIMHA99ZAVZ32UCgYBBr3hDtSxezPEsRXSmxiYU\nW77NFDwIpUybmlhpOWQy4BstSHTrawkdfVHTyMuZoHeRhq9DDe9i6v+pWJPGeaER\njHZBhneBczXaLnd1Yqf1L3HMt3KavIFQKr1i5ym+XotQpY080k4oANfxv02yuDqI\nqNFN4YfsU+P7lkDxoXSDiA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "wisequery@potent-airfoil-416210.iam.gserviceaccount.com",
+  "client_id": "102454982996557175133",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/wisequery%40potent-airfoil-416210.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

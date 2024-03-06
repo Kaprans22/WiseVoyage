@@ -1,58 +1,79 @@
 class TripsController < ApplicationController
   def index
     @trips = Trip.all
-    render json: @trips
   end
-
-  def show
-    # Retrieve a specific trip
-    @trip = Trip.find(params[:id])
-
-    # Get data from API
-    url = ENV['searchAI']
-    uri = URI(url)
-
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-
-    request = Net::HTTP::Post.new(uri.path)
-    request['Content-Type'] = 'application/json'
-
-    body = {
-      "instances": [
-        { "prompt": "what can i do in #{@trip.destination} from #{@trip.start_date} to #{@trip.end_date}?"}
-      ]
-    }
-
-    request.body = body.to_json
-
-    response = http.request(request)
-
-    if response.code == '200'
-      result = JSON.parse(response.body)
-      # Add the result to the trip data
-      @trip_data = @trip.attributes
-      @trip_data[:api_data] = result
-    else
-      # Handle the error here
-      @trip_data = @trip
-    end
-
-    render json: @trip_data
-  end
-
   def show
     # Retrieve a specific trip
     @trip = Trip.find(params[:id])
     render json: @trip
   end
+  def destroy_all
+    Trip.destroy_all
+    redirect_to root_path
+  end
 
   def create
-    # Create a new trip
-    require 'net/http'
     @trip = Trip.new(trip_params)
     if @trip.save
-      # Get data from API
+      content = get_trip_suggestions(@trip.destination, @trip.start_date, @trip.end_date)
+      if content.present?
+        @trip.update(content: content)
+        respond_to do |format|
+          format.html { redirect_to root_path, notice: 'Trip was successfully created.' }
+          format.json { render :show, status: :created, location: @trip }
+          format.js
+        end
+      else
+        # Handle error from service or API call
+        render json: { error: "Failed to retrieve suggestions" }, status: :unprocessable_entity
+      end
+    else
+      render :new
+    end
+  end
+
+    def update
+      # Update an existing trip
+      @trip = Trip.find(params[:id])
+      if @trip.update(trip_params)
+        render json: @trip
+      else
+        render json: @trip.errors, status: :unprocessable_entity
+      end
+    end
+
+    def destroy
+      @trip = Trip.find(params[:id])
+      @trip.destroy
+
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: 'Trip was successfully deleted.' }
+        format.json { head :no_content }
+        format.js
+      end
+    end
+
+    private
+
+    def get_trip_suggestions(destination, start_date, end_date)
+      # Load the service account key JSON file.
+      service_account_key_file = File.open("/home/kaprans/code/Kaprans22/WiseVoyage/WiseVoyage/app/controllers/potent.json")
+      # Define the required scopes.
+      scopes = ['https://www.googleapis.com/auth/cloud-platform']
+
+      # Create an authorization object from the service account key file and the scopes.
+      authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
+        json_key_io: service_account_key_file,
+        scope: scopes
+      )
+
+      # Request an access token.
+      authorizer.fetch_access_token!
+
+      # Use the access token in the Authorization header.
+      access_token = authorizer.access_token
+
+      # Construct API request using the retrieved access token
       url = ENV['searchAI']
       uri = URI(url)
 
@@ -61,10 +82,11 @@ class TripsController < ApplicationController
 
       request = Net::HTTP::Post.new(uri.path)
       request['Content-Type'] = 'application/json'
+      request['Authorization'] = "Bearer #{access_token}"
 
       body = {
         "instances": [
-          { "prompt": "what can i do in #{@trip.destination} from #{@trip.start_date} to #{@trip.end_date}?"}
+          { "prompt": "what can i do in #{destination} from #{start_date} to #{end_date}?"}
         ]
       }
 
@@ -74,39 +96,14 @@ class TripsController < ApplicationController
 
       if response.code == '200'
         result = JSON.parse(response.body)
-        # Add the result to the trip data
-        @trip_data = @trip.attributes
-        @trip_data[:api_data] = result
-        render json: @trip_data, status: :created
+        return result['predictions'][0]['content']
       else
-        # Handle the error here
-        render json: @trip.errors, status: :unprocessable_entity
+        Rails.logger.error("API request failed with code #{response.code}")
+        return nil
       end
-    else
-      render json: @trip.errors, status: :unprocessable_entity
     end
-  end
 
-  def update
-    # Update an existing trip
-    @trip = Trip.find(params[:id])
-    if @trip.update(trip_params)
-      render json: @trip
-    else
-      render json: @trip.errors, status: :unprocessable_entity
+    def trip_params
+      params.permit(:destination, :start_date, :end_date, :content)
     end
-  end
-
-  def destroy
-    # Delete a trip
-    @trip = Trip.find(params[:id])
-    @trip.destroy
-    head :no_content
-  end
-
-  private
-
-  def trip_params
-    params.permit(:destination, :start_date, :end_date)
-  end
 end
