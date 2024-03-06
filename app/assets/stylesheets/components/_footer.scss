@@ -1,0 +1,18 @@
+.footer-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #111111;
+  padding: 20px 0;
+  margin-top: 20px;
+  height: 300px;
+  color: white;
+}
+.footer-logo img{
+  width: 40px;
+  height: 40px;
+}
+
+.footer-social-media {
+  margin-right: 30px;
+}
