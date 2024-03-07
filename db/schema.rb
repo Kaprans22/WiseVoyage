@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_06_111302) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_04_153440) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,21 +19,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_06_111302) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "suggestions", force: :cascade do |t|
-    t.string "title"
-    t.text "quote"
-    t.text "paragraph1"
-    t.text "paragraph2"
-    t.text "paragraph3"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "author"
-    t.text "subtitle"
-  end
-
   create_table "trips", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "destination"
+    t.date "start_date"
+    t.date "end_date"
+    t.string "content"
   end
 
   create_table "user_trips", force: :cascade do |t|
