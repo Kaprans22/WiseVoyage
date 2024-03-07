@@ -11,7 +11,7 @@ var countriesLayer = L.geoJSON(countriesGeoJSON, {
       fillColor: "white",
       color: "white",
       weight: 1,
-      fillOpacity: 1,
+      fillOpacity: 0.6,
     };
   },
   onEachFeature: function (feature, layer) {
@@ -31,4 +31,26 @@ function onCountryClick(e) {
   });
   var countryName = layer.feature.properties.name;
   alert("Clicked on " + countryName);
+}
+function onCountryClick(e) {
+  var layer = e.target;
+  layer.setStyle({
+    fillColor: "#FE5F55",
+    color: "white",
+    weight: 2,
+    fillOpacity: 0.5,
+  });
+  var countryName = layer.feature.properties.name;
+  alert("Clicked on " + countryName);
+
+  // Get the hidden field
+  var destinationField = document.getElementById('destination-field');
+
+  // If the hidden field already has a value, append the new country name with a comma
+  if (destinationField.value) {
+    destinationField.value += ', ' + countryName;
+  } else {
+    // If the hidden field doesn't have a value, set it to the clicked country name
+    destinationField.value = countryName;
+  }
 }

@@ -1,0 +1,30 @@
+<div class="container mt-3">
+  <div class="user-card d-flex align-items-end border-bottom pb-3">
+    <div class="user-avatar">
+      <%= image_tag("user_def.png", class: "rounded-circle img-fluid mb-3", alt: "User Picture") %>
+    </div>
+    <div class="user-info">
+      <div>
+        <h5 class="card-title"></h5>
+      </div>
+      <div>
+        <p class="card-text"><i class="fa-solid fa-envelope" style="color: #2b2330;"></i>   <%= @user.email %></p>
+        <p class="card-text"><i class="fa-solid fa-location-dot fa-lg" style="color: #2b2330;"></i></p>
+      </div>
+    </div>
+    <div>
+      <div class="d-flex justify-content-center">
+        <div class="buttoms d-flex flex-column justify-content-between ">
+          <div data-controller="toggle" class="mb-3 ml-5 profile-edit-container">
+            <button data-action="click->toggle#fire" class="btn btn-secondary-color mx-2 my-2 my-sm-0">Edit Profile</button>
+            <div data-toggle-target="togglableElement" class="d-none mx-5 my-5" class="form">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3 class="my-4 mx-5">Your bookmarked trips:</h3>
+  <div class="product-list mr-5">
+  </div>
+</div>

@@ -40,3 +40,4 @@
 *.swp
 .DS_Store
 .env*
+/apps/controller/map/potent.json

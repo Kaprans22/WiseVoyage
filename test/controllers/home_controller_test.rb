@@ -6,5 +6,6 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
   # end
   def index
     @suggestions = Suggestion.all
+    @countries_geojson = File.read(Rails.root.join('app/assets', 'map.geojson'))
   end
 end

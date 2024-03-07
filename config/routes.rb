@@ -9,8 +9,17 @@ Rails.application.routes.draw do
 
   get "test", to: "pages#test"
 
+  get 'dashboard', to: 'pages#dashboard'
+
+
   # Defines the root path route ("/")
   # root "posts#index"
+  resources :trips do
+    delete 'delete_specific', on: :member
+  end
+  resources :trips, only: [:index, :show, :create, :destroy]
+  delete '/trips', to: 'trips#destroy_all', as: 'destroy_all_trips'
+  post 'token', to: 'trips#refresh_access_token'
   get 'map', to: 'map#index'
   resources :suggestions, only: [ :index, :show ]
 end

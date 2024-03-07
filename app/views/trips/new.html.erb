@@ -1,0 +1,17 @@
+<%= form_with model: @trip, local: true do |form| %>
+  <div>
+    <%= form.label :destination %>
+    <%= form.text_field :destination %>
+  </div>
+  <div>
+    <%= form.label :start_date %>
+    <%= form.date_field :start_date %>
+  </div>
+  <div>
+    <%= form.label :end_date %>
+    <%= form.date_field :end_date %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
