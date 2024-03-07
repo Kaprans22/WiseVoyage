@@ -374,10 +374,7 @@ DEPENDENCIES
   googleauth
   importmap-rails
   jbuilder
-<<<<<<< HEAD
-=======
   jquery-rails
->>>>>>> master
   leaflet-rails
   oauth2
   pg (~> 1.1)
