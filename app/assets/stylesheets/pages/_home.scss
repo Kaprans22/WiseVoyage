@@ -12,6 +12,7 @@
   font-weight: bold;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   border-radius: 0px;
+  padding-left: 16px;
 }
 .curacao {
   display: grid;
@@ -26,4 +27,14 @@
   font-weight: bold;
   padding-top: 16px;
   padding-left: 16px;
+}
+.carousel-item.active {
+  justify-content: center;
+}
+
+.carousel-inner {
+  margin: auto;
+}
+.link {
+  text-decoration: none!important;
 }
