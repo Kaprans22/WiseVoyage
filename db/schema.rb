@@ -19,15 +19,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_07_112617) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "oauth_tokens", force: :cascade do |t|
-    t.string "access_token"
-    t.string "refresh_token"
-    t.datetime "expires_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "singleton_guard"
-  end
-
   create_table "suggestions", force: :cascade do |t|
     t.string "title"
     t.text "quote"
@@ -46,7 +37,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_07_112617) do
     t.string "destination"
     t.date "start_date"
     t.date "end_date"
-    t.string "content"
     t.bigint "user_id", null: false
     t.text "additional_suggestions"
     t.index ["user_id"], name: "index_trips_on_user_id"
