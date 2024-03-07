@@ -1,8 +1,79 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-<%= image_tag "TSWIFT.jpg" %>
-<main class="flex flex-col justify-items-stretch grow shrink">
-  <header>
-  </header>
-  <%= image_tag "TSWIFT.jpg" %>
-</main>
+
+  <div class="container">
+    <div class="h2">
+  <h2>Where to travel?</h2>
+  </div>
+
+
+    <div class="segment">
+        <h3>Discover the most popular European destinations</h3>
+  <div class="carousel">
+      <div class="nav nav-left">
+          <img class="arrow" src="<%= asset_path('icons/arrow-left.svg') %>" alt="arrow-right"/>
+      </div>
+        <div class="carousel-content">
+          <% n = 1 %>
+          <% @suggestions.each do |suggestion| %>
+              <% if suggestion.id < 12 %>
+                <div class="card-suggestion slide slide-<%= n %>" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                    <h4><%= suggestion.title %></h4>
+                </div>
+              <% end %>
+              <% n += 1 %>
+            <% end %>
+        </div>
+      <div class="nav nav-right">
+        <img class="arrow" src="<%= asset_path('icons/arrow-rightt.svg') %>" alt="arrow-right"/>
+      </div>
+    </div>
+</div>
+
+
+<div class="segment">
+        <h3>Need an active holiday? Choose one of Latino destinations</h3>
+  <div class="carousel" data-controller="curacao">
+      <div class="nav nav-left">
+          <img class="arrow" src="<%= asset_path('icons/arrow-left.svg') %>" alt="arrow-left"/>
+      </div>
+        <div class="carousel-content">
+          <% x = 1 %>
+          <% @suggestions.each do |suggestion| %>
+              <% if suggestion.id >= 20 %>
+                <div class="card-suggestion slide slide-<%= x %>" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                    <h4><%= suggestion.title %></h4>
+                </div>
+              <% end %>
+              <% x += 1 %>
+            <% end %>
+        </div>
+      <div class="nav nav-right">
+        <img class="arrow" src="<%= asset_path('icons/arrow-rightt.svg') %>" alt="arrow-right"/>
+      </div>
+    </div>
+</div>
+
+      <div class="segment">
+         <h3>Explore whole new world in Asia</h3>
+  <div class="carousel" data-controller="curacao">
+      <div class="nav nav-left">
+          <img class="arrow" src="<%= asset_path('icons/arrow-left.svg') %>" alt="arrow-left"/>
+      </div>
+        <div class="carousel-content">
+          <% y = 1 %>
+          <% @suggestions.each do |suggestion| %>
+              <% if suggestion.id > 12 && suggestion.id < 20 %>
+                <div class="card-suggestion slide slide-<%= y %>" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                    <h4><%= suggestion.title %></h4>
+                </div>
+              <% end %>
+              <% y += 1 %>
+            <% end %>
+        </div>
+      <div class="nav nav-right">
+        <img class="arrow" src="<%= asset_path('icons/arrow-rightt.svg') %>" alt="arrow-right"/>
+      </div>
+    </div>
+</div>
+
+
+</div>
