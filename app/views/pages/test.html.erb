@@ -1,0 +1,27 @@
+<div class="container" data-controller="curacao">
+
+<div class="carousel">
+      <div class="nav nav-left">
+        <div class="ion-chevron-left carousel-arrow-icon-left"></div>
+      </div>
+
+        <div class="carousel-content">
+
+          <% n = 1 %>
+          <% @suggestions.each do |suggestion| %>
+              <% if suggestion.id >= 20 %>
+                <div class="card-suggestion slide slide-<%= n %>" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                    <h4><%= suggestion.title %></h4>
+                </div>
+              <% end %>
+              <% n += 1 %>
+            <% end %>
+
+        </div>
+
+      <div class="nav nav-right">
+        <div class="ion-chevron-right carousel-arrow-icon-right"></div>
+      </div>
+    </div>
+
+</div>
