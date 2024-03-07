@@ -1,4 +1,21 @@
 
+  <div class="container pt-5 mt-5">
+    <div class="h2">
+  <h2>Where to travel?</h2>
+  </div>
+<h2>Europe</h2>
+ <div id="carouselExampleControls1" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="d-flex" style="width: 100%; justify-content: center;">
+          <% @suggestions_europe[0..3].each do |suggestion| %>
+            <%= link_to suggestion_path(suggestion), class: "link" do %>
+              <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                <h4><%= suggestion.title %></h4>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
   <br style="height: 500px;">
   <!-- MAP #######-->
   <div id="map" class="w-100" style="height: 500px; z-index: 1"></div>
@@ -18,69 +35,189 @@
       <div class="nav nav-left">
           <img class="arrow" src="<%= asset_path('icons/arrow-left.svg') %>" alt="arrow-right"/>
       </div>
-        <div class="carousel-content">
-          <% n = 1 %>
-          <% @suggestions.each do |suggestion| %>
-              <% if suggestion.id < 12 %>
-                <div class="card-suggestion slide slide-<%= n %>" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
-                    <h4><%= suggestion.title %></h4>
+
+      <% @suggestions_europe[4..11].each_slice(4) do |suggestions| %>
+        <div class="carousel-item">
+          <div class="d-flex" style="width: 100%; justify-content: center;">
+            <% unless suggestions[0].nil? %>
+              <%= link_to suggestion_path(suggestions[0]), class: "link" do %>
+                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                  <h4><%= suggestions[0].title %></h4>
                 </div>
               <% end %>
-              <% n += 1 %>
             <% end %>
-        </div>
-      <div class="nav nav-right">
-        <img class="arrow" src="<%= asset_path('icons/arrow-rightt.svg') %>" alt="arrow-right"/>
-      </div>
-    </div>
-</div>
 
-
-<div class="segment">
-        <h3>Need an active holiday? Choose one of Latino destinations</h3>
-  <div class="carousel" data-controller="curacao">
-      <div class="nav nav-left">
-          <img class="arrow" src="<%= asset_path('icons/arrow-left.svg') %>" alt="arrow-left"/>
-      </div>
-        <div class="carousel-content">
-          <% x = 1 %>
-          <% @suggestions.each do |suggestion| %>
-              <% if suggestion.id >= 20 %>
-                <div class="card-suggestion slide slide-<%= x %>" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
-                    <h4><%= suggestion.title %></h4>
+            <% unless suggestions[1].nil? %>
+              <%= link_to suggestion_path(suggestions[1]), class: "link" do %>
+                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                  <h4><%= suggestions[1].title %></h4>
                 </div>
               <% end %>
-              <% x += 1 %>
             <% end %>
-        </div>
-      <div class="nav nav-right">
-        <img class="arrow" src="<%= asset_path('icons/arrow-rightt.svg') %>" alt="arrow-right"/>
-      </div>
-    </div>
-</div>
 
-      <div class="segment">
-         <h3>Explore whole new world in Asia</h3>
-  <div class="carousel" data-controller="curacao">
-      <div class="nav nav-left">
-          <img class="arrow" src="<%= asset_path('icons/arrow-left.svg') %>" alt="arrow-left"/>
-      </div>
-        <div class="carousel-content">
-          <% y = 1 %>
-          <% @suggestions.each do |suggestion| %>
-              <% if suggestion.id > 12 && suggestion.id < 20 %>
-                <div class="card-suggestion slide slide-<%= y %>" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
-                    <h4><%= suggestion.title %></h4>
+            <% unless suggestions[2].nil? %>
+              <%= link_to suggestion_path(suggestions[2]), class: "link" do %>
+                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                  <h4><%= suggestions[2].title %></h4>
                 </div>
               <% end %>
-              <% y += 1 %>
             <% end %>
+
+            <% unless suggestions[3].nil? %>
+              <%= link_to suggestion_path(suggestions[3]), class: "link" do %>
+                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                  <h4><%= suggestions[3].title %></h4>
+                </div>
+              <% end %>
+            <% end %>
+
+          </div>
         </div>
-      <div class="nav nav-right">
-        <img class="arrow" src="<%= asset_path('icons/arrow-rightt.svg') %>" alt="arrow-right"/>
-      </div>
+      <% end %>
     </div>
-</div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls1" data-bs-slide="prev">
+      <img class="arrow" src="<%= asset_path('icons/arrow-left.svg') %>" alt="arrow-right"/>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls1" data-bs-slide="next">
+      <img class="arrow" src="<%= asset_path('icons/arrow-rightt.svg') %>" alt="arrow-right"/>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+<h2>Asia</h2>
+    <%#  %>
+<div id="carouselExampleControls2" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="d-flex" style="width: 100%; justify-content: center;">
+          <% @suggestions_asia[0..3].each do |suggestion| %>
+            <%= link_to suggestion_path(suggestion), class: "link" do %>
+              <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                <h4><%= suggestion.title %></h4>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <% @suggestions_asia[4..7].each_slice(4) do |suggestions| %>
+        <div class="carousel-item">
+          <div class="d-flex" style="width: 100%; justify-content: center;">
+
+            <% unless suggestions[0].nil? %>
+              <%= link_to suggestion_path(suggestions[0]), class: "link" do %>
+                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                  <h4><%= suggestions[0].title %></h4>
+                </div>
+              <% end %>
+            <% end %>
+
+            <% unless suggestions[1].nil? %>
+              <%= link_to suggestion_path(suggestions[1]), class: "link" do %>
+                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                  <h4><%= suggestions[1].title %></h4>
+                </div>
+              <% end %>
+            <% end %>
+
+            <% unless suggestions[2].nil? %>
+              <%= link_to suggestion_path(suggestions[2]), class: "link" do %>
+                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                  <h4><%= suggestions[2].title %></h4>
+                </div>
+              <% end %>
+            <% end %>
+
+            <% unless suggestions[3].nil? %>
+              <%= link_to suggestion_path(suggestions[3]), class: "link" do %>
+                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                  <h4><%= suggestions[3].title %></h4>
+                </div>
+              <% end %>
+            <% end %>
+
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls2" data-bs-slide="prev">
+      <img class="arrow" src="<%= asset_path('icons/arrow-left.svg') %>" alt="arrow-right"/>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls2" data-bs-slide="next">
+      <img class="arrow" src="<%= asset_path('icons/arrow-rightt.svg') %>" alt="arrow-right"/>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+<h2>South America</h2>
+
+<div id="carouselExampleControls" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="d-flex" style="width: 100%; justify-content: center;">
+          <% @suggestions_latin_america[0..3].each do |suggestion| %>
+            <%= link_to suggestion_path(suggestion), class: "link" do %>
+              <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                <h4><%= suggestion.title %></h4>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <% @suggestions_latin_america[4..7].each_slice(4) do |suggestions| %>
+        <div class="carousel-item">
+          <div class="d-flex" style="width: 100%; justify-content: center;">
+
+            <% unless suggestions[0].nil? %>
+              <%= link_to suggestion_path(suggestions[0]), class: "link" do %>
+                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                  <h4><%= suggestions[0].title %></h4>
+                </div>
+              <% end %>
+            <% end %>
+
+            <% unless suggestions[1].nil? %>
+              <%= link_to suggestion_path(suggestions[1]), class: "link" do %>
+                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                  <h4><%= suggestions[1].title %></h4>
+                </div>
+              <% end %>
+            <% end %>
+
+            <% unless suggestions[2].nil? %>
+              <%= link_to suggestion_path(suggestions[2]), class: "link" do %>
+                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                  <h4><%= suggestions[2].title %></h4>
+                </div>
+              <% end %>
+            <% end %>
+
+            <% unless suggestions[3].nil? %>
+              <%= link_to suggestion_path(suggestions[3]), class: "link" do %>
+                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                  <h4><%= suggestions[3].title %></h4>
+                </div>
+              <% end %>
+            <% end %>
+
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <img class="arrow" src="<%= asset_path('icons/arrow-left.svg') %>" alt="arrow-right"/>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <img class="arrow" src="<%= asset_path('icons/arrow-rightt.svg') %>" alt="arrow-right"/>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
 
 
 </div>
