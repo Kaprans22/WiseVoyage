@@ -1,0 +1,17 @@
+<!-- app/views/trips/index.html.erb -->
+<br>
+<h1>All Trips</h1>
+
+<% @trips.each do |trip| %>
+  <div>
+    <h2><%= link_to trip.destination, trip_path(trip) %></h2>
+    <p>Start date: <%= trip.start_date %></p>
+    <p>End date: <%= trip.end_date %></p>
+    <p>Content: <%= trip.content %></p>
+     <%= button_to 'Delete', delete_specific_trip_path(trip), method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
+<% end %>
+
+<br>
+<%= button_to 'Delete All', destroy_all_trips_path, method: :delete, data: { confirm: 'Are you sure?' } %>
+<br>

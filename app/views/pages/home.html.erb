@@ -1,6 +1,7 @@
 
+  <br style="height: 500px;">
   <!-- MAP #######-->
-  <div id="map" class="w-100" style="height: 500px;"></div>
+  <div id="map" class="w-100" style="height: 500px; z-index: 1"></div>
 
     <script>
       var countriesGeoJSON = <%= @countries_geojson.html_safe %>;
@@ -83,3 +84,26 @@
 
 
 </div>
+<h1>Pages#home</h1>
+<p>Find me in app/views/pages/home.html.erb</p>
+<%= form_tag("/trips", method: "post", remote: true) do %>
+  <div>
+    <%= label_tag(:destination, "Country:") %>
+    <%= text_field_tag(:destination) %>
+  </div>
+  <div>
+    <%= label_tag(:start_date, "Start Date:") %>
+    <%= text_field_tag(:start_date, nil, type: "date") %>
+  </div>
+  <div>
+    <%= label_tag(:end_date, "End Date:") %>
+    <%= text_field_tag(:end_date, nil, type: "date") %>
+  </div>
+  <%= submit_tag("Submit") %>
+<% end %>
+<main class="flex flex-col justify-items-stretch grow shrink">
+  <header>
+  </header>
+  <%= image_tag "TSWIFT.jpg" %>
+</main>
+<br>
