@@ -75,7 +75,7 @@ class TripsController < ApplicationController
     def get_additional_suggestions(destinations, start_date, end_date, limit_words)
       destinations = [destinations] unless destinations.is_a?(Array)
       results = {}
-      service_account_key_file = File.open("/home/kaprans/code/Kaprans22/WiseVoyage/WiseVoyage/app/controllers/potent.json")
+      service_account_key_file = File.open(Rails.root.join('app/controllers/potent.json'))
       scopes = ['https://www.googleapis.com/auth/cloud-platform']
       authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
         json_key_io: service_account_key_file,
@@ -95,7 +95,7 @@ class TripsController < ApplicationController
 
         body = {
           "instances": [
-            { "prompt": "Please suggest additional activities in #{destination} from #{start_date} to #{end_date}." + (limit_words ? " Word limit: 100" : "")}
+            { "prompt": "Please suggest additional activities in #{destination} from #{start_date} to #{end_date}." }
           ]
         }
 
@@ -115,7 +115,7 @@ class TripsController < ApplicationController
     def get_trip_suggestions(destinations, start_date, end_date, limit_words)
       destinations = [destinations] unless destinations.is_a?(Array)
       results = {}
-      service_account_key_file = File.open("/home/kaprans/code/Kaprans22/WiseVoyage/WiseVoyage/app/controllers/potent.json")
+      service_account_key_file = File.open(Rails.root.join('app/controllers/potent.json'))
       scopes = ['https://www.googleapis.com/auth/cloud-platform']
       authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
         json_key_io: service_account_key_file,
@@ -135,7 +135,7 @@ class TripsController < ApplicationController
 
         body = {
           "instances": [
-            { "prompt": "Please describe me the country #{destination} for tourism" + (limit_words ? " Word limit: 50" : "")}
+            { "prompt": "Please describe the country - #{destination} in a few words" }
           ]
         }
 
