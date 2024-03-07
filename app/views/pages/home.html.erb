@@ -90,6 +90,7 @@
   <div>
     <%= label_tag(:destination, "Country:") %>
     <%= text_field_tag(:destination) %>
+    <%= hidden_field_tag :destination, nil, id: "destination-field" %>
   </div>
   <div>
     <%= label_tag(:start_date, "Start Date:") %>
