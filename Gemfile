@@ -78,3 +78,4 @@ end
 
 gem 'leaflet-rails'
 gem 'countries'
+gem "cloudinary"
