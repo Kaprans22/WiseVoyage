@@ -1,0 +1,12 @@
+<!-- app/views/trips/show.html.erb -->
+
+<br>
+<h1>Show Page</h1>
+<h1><%= @trip.destination %></h1>
+<p>Start date: <%= @trip.start_date %></p>
+<p>End date: <%= @trip.end_date %></p>
+<p><%= @trip.content %></p>
+<h2>Additional Suggestions:</h2>
+<p><%= @trip.additional_suggestions %></p>
+<br>
+<%= button_to 'Back', trips_path, method: :get %>
