@@ -9,6 +9,9 @@ Rails.application.routes.draw do
 
   get "test", to: "pages#test"
 
+  get 'dashboard', to: 'pages#dashboard'
+
+
   # Defines the root path route ("/")
   # root "posts#index"
   get 'map', to: 'map#index'

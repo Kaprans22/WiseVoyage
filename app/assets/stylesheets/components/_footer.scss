@@ -1,0 +1,21 @@
+.footer-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #111111;
+  margin-top: 20px;
+  height: 300px;
+  color: white;
+}
+.footer-logo img{
+  width: 40px;
+  height: 40px;
+}
+
+.footer-social-media {
+  margin-right: 30px;
+}

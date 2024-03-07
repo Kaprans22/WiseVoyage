@@ -6,7 +6,6 @@ export default class extends Controller {
   connect() {}
 
   scroll() {
-    console.log(window.scrollY)
     if (window.scrollY > 20) {
       this.element.classList.add("solid")
       this.element.classList.remove("faded")
