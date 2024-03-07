@@ -1,9 +1,15 @@
 
+  <!-- MAP #######-->
+  <div id="map" class="w-100" style="height: 500px;"></div>
+
+    <script>
+      var countriesGeoJSON = <%= @countries_geojson.html_safe %>;
+    </script>
+    <script src="/assets/map.js"></script>
   <div class="container">
     <div class="h2">
   <h2>Where to travel?</h2>
   </div>
-
 
     <div class="segment">
         <h3>Discover the most popular European destinations</h3>

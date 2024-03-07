@@ -1,7 +1,7 @@
 <div class="navbar navbar-expand-sm navbar-light" data-controller="navbar" data-action="scroll@window->navbar#scroll">
   <div class="container-fluid">
     <div>
-      <%= link_to "#", class: "navbar-logo" do %>
+      <%= link_to "/", class: "navbar-logo" do %>
         <%= image_tag "TSWIFT.jpg" %>
       <% end %>
     </div>
@@ -14,12 +14,12 @@
         </li>
         <!-- Home -->
         <li class="nav-item">
-          <span class="hyperlink"><%= link_to "Home", "#", class: "nav-link" %></span>
+          <span class="hyperlink"><%= link_to "Home", "/", class: "nav-link" %></span>
           <a class="icon" href="#" id="home"><%= image_tag "icons/home64.png" %></a>
         </li>
         <!-- Dashboard -->
         <li class="nav-item">
-          <span class="hyperlink"><%= link_to "Dashboard", "#", class: "nav-link" %></span>
+          <span class="hyperlink"><%= link_to "Dashboard", dashboard_path(current_user), class: "nav-link" %></span>
           <a class="icon" href="#" id="dashboard"><%= image_tag "icons/user48.png"  %></a>
         </li>
       </ul>
