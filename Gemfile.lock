@@ -147,6 +147,8 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jquery-slick-rails (1.10.0)
+      railties (>= 3.1)
     leaflet-rails (1.9.4)
       actionpack (>= 4.2.0)
       railties (>= 4.2.0)
@@ -313,6 +315,7 @@ DEPENDENCIES
   font-awesome-sass (~> 6.1)
   importmap-rails
   jbuilder
+  jquery-slick-rails
   leaflet-rails
   pg (~> 1.1)
   puma (>= 5.0)
