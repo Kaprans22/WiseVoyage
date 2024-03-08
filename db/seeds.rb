@@ -231,7 +231,7 @@ vietnam=Suggestion.create!(
    paragraph2: "Indulge in the flavors of Vietnamese cuisine, where fresh herbs, aromatic spices, and bold flavors are the hallmarks of traditional dishes. Sample a steaming bowl of pho at a bustling street stall, feast on crispy banh mi sandwiches in a local market, or enjoy a traditional seafood feast on the banks of the Mekong River.",
    paragraph3: "Immerse yourself in Vietnam's rich cultural heritage as you explore ancient temples, vibrant markets, and traditional villages. Whether you're trekking through the mountainous landscapes of Sapa, cruising along the Perfume River in Hue, or cycling through the picturesque countryside of Hoi An, each destination offers a glimpse into the heart and soul of this captivating country."
 )
-urlsvietnam=['https://res.cloudinary.com/dsqsghydb/image/upload/v1709818780/photo-1528127269322-539801943592_ixydo3.avif', 'https://res.cloudinary.com/dsqsghydb/image/upload/v1709818783/sunrise-1014712_1280_nsixbh.jpg', 'https://res.cloudinary.com/dsqsghydb/image/upload/v1709818779/hoi-an-6520902_960_720_ndphyn.jpg']
+urlsvietnam=['https://res.cloudinary.com/dsqsghydb/image/upload/v1709818780/photo-1528127269322-539801943592_ixydo3.avif', 'https://res.cloudinary.com/dsqsghydb/image/upload/v1709818756/long-boat-blue-water-maya-bay-phi-phi-island-krabi-thailand_335224-895_dhc04p.avif', 'https://res.cloudinary.com/dsqsghydb/image/upload/v1709829877/cropped-cb3db4b94cdc8a8fff74e2fac7cd6cb8-chiang-mai_fxnfgq.jpg']
 urlsvietnam.each do |url|
   file = URI.open(url)
   vietnam.photos.attach(io: file, filename: File.basename(URI.parse(url).path), content_type: 'image/jpg')
@@ -398,7 +398,7 @@ urlsperu.each do |url|
   peru.photos.attach(io: file, filename: File.basename(URI.parse(url).path), content_type: 'image/jpg')
 end
 peru.save
-Suggestion.create!(
+argentina=Suggestion.create!(
   title: "Argentina",
   region: "Latin America",
   quote: "Argentina is a land of passion and beauty, where tango rhythms fill the air and the spirit of the gauchos roams free.",
@@ -408,6 +408,12 @@ Suggestion.create!(
   paragraph2: "Indulge in the flavors of Argentine cuisine, where juicy steaks, flavorful empanadas, and dulce de leche delights await. Sample grilled meats in a traditional parrilla, enjoy a mate tea ceremony with locals, or sip on a glass of Malbec wine as you watch the sunset over the vineyards of Mendoza.",
   paragraph3: "Immerse yourself in Argentina's rich cultural heritage as you explore historic neighborhoods, ancient ruins, and lively festivals. Whether you're trekking through the Andes, tango dancing in Buenos Aires, or marveling at the Iguazu Falls, each destination offers a glimpse into the soul of this captivating country."
 )
+urlsargentina=['https://res.cloudinary.com/dsqsghydb/image/upload/v1709830034/argport.jpg_vzbtca.jpg', 'https://res.cloudinary.com/dsqsghydb/image/upload/v1709830021/ArgentinaLead_square_ohgaxv.jpg', 'https://res.cloudinary.com/dsqsghydb/image/upload/v1709830002/mendoza-80-1-2_u0i3sr.jpg']
+urlsargentina.each do |url|
+  file = URI.open(url)
+  argentina.photos.attach(io: file, filename: File.basename(URI.parse(url).path), content_type: 'image/jpg')
+end
+argentina.save
 bolivia=Suggestion.new(
   title: "Bolivia",
   region: "Latin America",

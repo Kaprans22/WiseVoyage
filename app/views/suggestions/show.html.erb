@@ -1,18 +1,22 @@
 <div class="container mt-5 pt-5">
 <div>
-  <h1>Explore <%= @suggestion.title %> </h1>
+  <h1 class="h1">Explore <%= @suggestion.title %> </h1>
 </div>
-<div>
+<div class="d-flex justify-content-between">
   <% @suggestion.photos.each do |photo| %>
   <%= cl_image_tag photo.key, height: 300, width: 400 %>
 <% end %>
 </div>
 <div>
-  <h2> <%= @suggestion.subtitle %></h2>
+  <h2 class="h2"> <%= @suggestion.subtitle %></h2>
   <p> <%= @suggestion.paragraph1 %> </p>
-  <h4><%= @suggestion.author %></h4>
+  <p class="italic"><%= @suggestion.author %></p>
   <h5><%= @suggestion.quote %></h5>
   <p> <%= @suggestion.paragraph2 %> </p>
   <p> <%= @suggestion.paragraph3 %> </p>
+</div>
+<div class="text-center mb-3">
+<h4>Want to visit <%= @suggestion.title %>? Lets's search for trips</h4>
+<%= link_to "Search", root_path, class: "btn btn-outline-black" %>
 </div>
 </div>

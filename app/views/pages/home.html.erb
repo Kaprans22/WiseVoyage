@@ -6,8 +6,40 @@
     var countriesGeoJSON = <%= @countries_geojson.html_safe %>;
   </script>
   <script src="/assets/map.js"></script>
+      <div class="container pt-5 mt-5">
+  <br style="height: 500px;">
+  <!-- MAP #######-->
+  <div id="map" class="w-100" style="height: 500px; z-index: 1"></div>
 
-  <div class="container pt-5 mt-5">
+    <script>
+      var countriesGeoJSON = <%= @countries_geojson.html_safe %>;
+    </script>
+    <script src="/assets/map.js"></script>
+<div class="d-flex justify-content-center" >
+<%= form_tag("/trips", method: "post", remote: true) do %>
+  <div>
+    <%= label_tag(:destination, "Country:") %>
+    <%= text_field_tag(:destination) %>
+    <%= hidden_field_tag :destination, nil, id: "destination-field" %>
+  </div>
+  <div>
+    <%= label_tag(:start_date, "Start Date:") %>
+    <%= text_field_tag(:start_date, nil, type: "date") %>
+  </div>
+  <div>
+    <%= label_tag(:end_date, "End Date:") %>
+    <%= text_field_tag(:end_date, nil, type: "date") %>
+  </div>
+  <%= submit_tag("Submit") %>
+<% end %>
+<main class="flex flex-col justify-items-stretch grow shrink">
+  <header>
+  </header>
+
+</main>
+</div>
+<br>
+
     <div class="h2">
   <h2>Where to travel?</h2>
   </div>
@@ -18,7 +50,7 @@
         <div class="d-flex" style="width: 100%; justify-content: center;">
           <% @suggestions_europe[0..3].each do |suggestion| %>
             <%= link_to suggestion_path(suggestion), class: "link" do %>
-              <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+              <div class="card-suggestion" style="background-image: url(<%= url_for(suggestion.photos.first)%>)">
                 <h4><%= suggestion.title %></h4>
               </div>
             <% end %>
@@ -36,12 +68,13 @@
           <img class="arrow" src="<%= asset_path('icons/arrow-left.svg') %>" alt="arrow-right"/>
       </div>
 
+</div>
       <% @suggestions_europe[4..11].each_slice(4) do |suggestions| %>
         <div class="carousel-item">
           <div class="d-flex" style="width: 100%; justify-content: center;">
             <% unless suggestions[0].nil? %>
               <%= link_to suggestion_path(suggestions[0]), class: "link" do %>
-                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                <div class="card-suggestion" style="background-image: url(<%= url_for(suggestions[0].photos.first)%>">
                   <h4><%= suggestions[0].title %></h4>
                 </div>
               <% end %>
@@ -49,7 +82,7 @@
 
             <% unless suggestions[1].nil? %>
               <%= link_to suggestion_path(suggestions[1]), class: "link" do %>
-                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                <div class="card-suggestion" style="background-image: url(<%= url_for(suggestions[1].photos.first)%>">
                   <h4><%= suggestions[1].title %></h4>
                 </div>
               <% end %>
@@ -57,7 +90,7 @@
 
             <% unless suggestions[2].nil? %>
               <%= link_to suggestion_path(suggestions[2]), class: "link" do %>
-                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                <div class="card-suggestion" style="background-image: url(<%= url_for(suggestions[2].photos.first)%>">
                   <h4><%= suggestions[2].title %></h4>
                 </div>
               <% end %>
@@ -65,7 +98,7 @@
 
             <% unless suggestions[3].nil? %>
               <%= link_to suggestion_path(suggestions[3]), class: "link" do %>
-                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                <div class="card-suggestion" style="background-image: url(<%= url_for(suggestions[3].photos.first)%>)">
                   <h4><%= suggestions[3].title %></h4>
                 </div>
               <% end %>
@@ -77,7 +110,7 @@
     </div>
 
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls1" data-bs-slide="prev">
-      <img class="arrow" src="<%= asset_path('icons/arrow-left.svg') %>" alt="arrow-right"/>
+      <img class="arrow" src="<%= asset_path('icons/arrow-left.svg') %>" alt="arrow-left"/>
       <span class="visually-hidden">Previous</span>
     </button>
     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls1" data-bs-slide="next">
@@ -93,7 +126,7 @@
         <div class="d-flex" style="width: 100%; justify-content: center;">
           <% @suggestions_asia[0..3].each do |suggestion| %>
             <%= link_to suggestion_path(suggestion), class: "link" do %>
-              <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+              <div class="card-suggestion" style="background-image: url(<%= url_for(suggestion.photos.first)%>)">
                 <h4><%= suggestion.title %></h4>
               </div>
             <% end %>
@@ -107,7 +140,7 @@
 
             <% unless suggestions[0].nil? %>
               <%= link_to suggestion_path(suggestions[0]), class: "link" do %>
-                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                <div class="card-suggestion" style="background-image: url(<%= url_for(suggestions[0].photos.first)%>)">
                   <h4><%= suggestions[0].title %></h4>
                 </div>
               <% end %>
@@ -115,7 +148,7 @@
 
             <% unless suggestions[1].nil? %>
               <%= link_to suggestion_path(suggestions[1]), class: "link" do %>
-                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                <div class="card-suggestion" style="background-image: url(<%= url_for(suggestions[1].photos.first)%>)">
                   <h4><%= suggestions[1].title %></h4>
                 </div>
               <% end %>
@@ -123,7 +156,7 @@
 
             <% unless suggestions[2].nil? %>
               <%= link_to suggestion_path(suggestions[2]), class: "link" do %>
-                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                <div class="card-suggestion" style="background-image: url(<%= url_for(suggestions[2].photos.first)%>)">
                   <h4><%= suggestions[2].title %></h4>
                 </div>
               <% end %>
@@ -131,7 +164,7 @@
 
             <% unless suggestions[3].nil? %>
               <%= link_to suggestion_path(suggestions[3]), class: "link" do %>
-                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                <div class="card-suggestion" style="background-image: url(<%= url_for(suggestions[3].photos.first)%>)">
                   <h4><%= suggestions[3].title %></h4>
                 </div>
               <% end %>
@@ -160,7 +193,7 @@
         <div class="d-flex" style="width: 100%; justify-content: center;">
           <% @suggestions_latin_america[0..3].each do |suggestion| %>
             <%= link_to suggestion_path(suggestion), class: "link" do %>
-              <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+              <div class="card-suggestion" style="background-image: url(<%= url_for(suggestion.photos.first)%>)">
                 <h4><%= suggestion.title %></h4>
               </div>
             <% end %>
@@ -174,7 +207,7 @@
 
             <% unless suggestions[0].nil? %>
               <%= link_to suggestion_path(suggestions[0]), class: "link" do %>
-                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                <div class="card-suggestion" style="background-image: url(<%= url_for(suggestions[0].photos.first)%>)">
                   <h4><%= suggestions[0].title %></h4>
                 </div>
               <% end %>
@@ -182,7 +215,7 @@
 
             <% unless suggestions[1].nil? %>
               <%= link_to suggestion_path(suggestions[1]), class: "link" do %>
-                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                <div class="card-suggestion" style="background-image: url(<%= url_for(suggestions[1].photos.first)%>)">
                   <h4><%= suggestions[1].title %></h4>
                 </div>
               <% end %>
@@ -190,7 +223,7 @@
 
             <% unless suggestions[2].nil? %>
               <%= link_to suggestion_path(suggestions[2]), class: "link" do %>
-                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                <div class="card-suggestion" style="background-image: url(<%= url_for(suggestions[2].photos.first)%>)">
                   <h4><%= suggestions[2].title %></h4>
                 </div>
               <% end %>
@@ -198,7 +231,7 @@
 
             <% unless suggestions[3].nil? %>
               <%= link_to suggestion_path(suggestions[3]), class: "link" do %>
-                <div class="card-suggestion" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
+                <div class="card-suggestion" style="background-image: url(<%= url_for(suggestions[3].photos.first)%>)">
                   <h4><%= suggestions[3].title %></h4>
                 </div>
               <% end %>
@@ -221,27 +254,3 @@
 
 
 </div>
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-<%= form_tag("/trips", method: "post", remote: true) do %>
-  <div>
-    <%= label_tag(:destination, "Country:") %>
-    <%= text_field_tag(:destination) %>
-    <%= hidden_field_tag :destination, nil, id: "destination-field" %>
-  </div>
-  <div>
-    <%= label_tag(:start_date, "Start Date:") %>
-    <%= text_field_tag(:start_date, nil, type: "date") %>
-  </div>
-  <div>
-    <%= label_tag(:end_date, "End Date:") %>
-    <%= text_field_tag(:end_date, nil, type: "date") %>
-  </div>
-  <%= submit_tag("Submit") %>
-<% end %>
-<main class="flex flex-col justify-items-stretch grow shrink">
-  <header>
-  </header>
-  <%= image_tag "TSWIFT.jpg" %>
-</main>
-<br>
