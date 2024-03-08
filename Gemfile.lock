@@ -143,9 +143,6 @@ GEM
       sassc (~> 2.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    http-accept (1.7.0)
-    http-cookie (1.0.5)
-      domain_name (~> 0.5)
     google-cloud-env (2.1.1)
       faraday (>= 1.0, < 3.a)
     googleauth (1.11.0)
@@ -156,6 +153,9 @@ GEM
       os (>= 0.9, < 2.0)
       signet (>= 0.16, < 2.a)
     hashie (5.0.0)
+    http-accept (1.7.0)
+    http-cookie (1.0.5)
+      domain_name (~> 0.5)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.1)
@@ -374,10 +374,7 @@ DEPENDENCIES
   googleauth
   importmap-rails
   jbuilder
-<<<<<<< HEAD
-=======
   jquery-rails
->>>>>>> master
   leaflet-rails
   oauth2
   pg (~> 1.1)

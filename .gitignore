@@ -40,4 +40,5 @@
 *.swp
 .DS_Store
 .env*
-/apps/controller/map/potent.json
+# Ignore potent.json file in app/controllers directory
+/app/controllers/potent.json
