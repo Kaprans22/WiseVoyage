@@ -4,4 +4,24 @@
 @import "form_legend_clear";
 @import "navbar";
 @import "footer";
-@import "glider";
+// @import "glider";
+@import '_black_button.scss';
+@import '_white_button.scss';
+@import '_red_button.scss';
+@import "components/_red_button";
+
+.container {
+  margin-top: 125px!important;
+}
+.card {
+  border-color: black!important;
+  height: 100%;
+  .card-body {
+    display: flex!important;
+    flex-direction: column!important;
+  }
+  .btn {
+    align-self: end!important;
+  }
+
+}
