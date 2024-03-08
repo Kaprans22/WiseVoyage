@@ -85,10 +85,11 @@ class TripsController < ApplicationController
   def get_additional_suggestions(destinations, start_date, end_date, _limit_words)
     destinations = [destinations] unless destinations.is_a?(Array)
     results = {}
-    service_account_key_file = File.open(Rails.root.join('app/controllers/potent.json'))
+    require 'stringio'
+    json_key_io = StringIO.new(ENV['GOOGLE_JSON_KEY'])
     scopes = ['https://www.googleapis.com/auth/cloud-platform']
     authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
-      json_key_io: service_account_key_file,
+      json_key_io: json_key_io,
       scope: scopes
     )
     destinations.each do |destination|
@@ -126,10 +127,10 @@ class TripsController < ApplicationController
   def get_trip_suggestions(destinations, _start_date, _end_date, _limit_words)
     destinations = [destinations] unless destinations.is_a?(Array)
     results = {}
-    service_account_key_file = File.open(Rails.root.join('app/controllers/potent.json'))
+    json_key_io = StringIO.new(ENV['GOOGLE_JSON_KEY'])
     scopes = ['https://www.googleapis.com/auth/cloud-platform']
     authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
-      json_key_io: service_account_key_file,
+      json_key_io: json_key_io,
       scope: scopes
     )
     destinations.each do |destination|
