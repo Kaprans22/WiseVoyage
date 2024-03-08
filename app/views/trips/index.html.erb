@@ -1,9 +1,12 @@
 <!-- app/views/trips/index.html.erb -->
 <br>
+<br>
+<br>
+<br>
 <h1>All Trips</h1>
 
 <% @trips.each do |trip| %>
-  <div>
+  <div class="trip-card">
     <h2><%= link_to trip.destination, trip_path(trip) %></h2>
     <p>Start date: <%= trip.start_date %></p>
     <p>End date: <%= trip.end_date %></p>
