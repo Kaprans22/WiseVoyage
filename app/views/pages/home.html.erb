@@ -1,17 +1,17 @@
-    <div class="container pt-5 mt-5">
-  <br style="height: 500px;">
+ <br style="height: 500px;">
   <!-- MAP #######-->
-  <div id="map" class="w-100" style="height: 500px; z-index: 1"></div>
+<div id="map" class="w-100" style="height: 500px; z-index: 1"></div>
 
-    <script>
-      var countriesGeoJSON = <%= @countries_geojson.html_safe %>;
-    </script>
-    <script src="/assets/map.js"></script>
+  <script>
+    var countriesGeoJSON = <%= @countries_geojson.html_safe %>;
+  </script>
+  <script src="/assets/map.js"></script>
+<div class="container pt-5 mt-5">
 <div class="d-flex justify-content-center" >
 <%= form_tag("/trips", method: "post", remote: true) do %>
   <div>
     <%= label_tag(:destination, "Country:") %>
-    <%= text_field_tag(:destination) %>
+    <%= text_field_tag(:destination, nil, id: "destination-text-field") %>
     <%= hidden_field_tag :destination, nil, id: "destination-field" %>
   </div>
   <div>
