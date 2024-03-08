@@ -44,22 +44,6 @@ urlsfrance.each do |url|
   france.photos.attach(io: file, filename: File.basename(URI.parse(url).path), content_type: 'image/jpg')
 end
 france.save
-italy=Suggestion.create!(
-  title: "Italy",
-  region: "Europe",
-  quote: "Italy is a dream that keeps returning for the rest of your life.",
-  author: "Anna Akhmatova",
-  subtitle: "La Dolce Vita: Exploring the Heart of Italy",
-  paragraph1: "Journey to Italy, where every moment is infused with the passion and romance of la dolce vita. From the rolling hills of Tuscany to the ancient streets of Rome, this country captivates the imagination with its timeless beauty and vibrant culture.",
-  paragraph2: "Savor the flavors of Italy, where food is more than sustenance; it's a celebration of life itself. Indulge in freshly made pasta, artisanal cheeses, and velvety gelato, each dish a testament to the culinary mastery and love for good food that defines Italian cuisine.",
-  paragraph3: "Immerse yourself in Italy's rich tapestry of art and history, where every corner holds a treasure waiting to be discovered. Marvel at the masterpieces of Michelangelo in Florence, wander through the ancient ruins of Pompeii, or simply lose yourself in the maze-like streets of Venice, where every bridge leads to a new adventure."
-)
-urlsitaly=['https://res.cloudinary.com/dsqsghydb/image/upload/v1709818599/Siena-Italy.jpg.optimal_g2jjqr.jpg', 'https://res.cloudinary.com/dsqsghydb/image/upload/v1709818598/Castelmezzano-Italy.jpg.optimal_qzdd5m.jpg', 'https://res.cloudinary.com/dsqsghydb/image/upload/v1709818597/12_700fc4f3-467b-4005-bedd-75e23558ed35_x3zbnj.webp']
-urlsitaly.each do |url|
-  file = URI.open(url)
-  italy.photos.attach(io: file, filename: File.basename(URI.parse(url).path), content_type: 'image/jpg')
-end
-italy.save
 spain=Suggestion.create!(
   title: "Spain",
   region: "Europe",
@@ -140,6 +124,22 @@ urlsnetherlands.each do |url|
   netherlands.photos.attach(io: file, filename: File.basename(URI.parse(url).path), content_type: 'image/jpg')
 end
 netherlands.save
+italy=Suggestion.create!(
+  title: "Italy",
+  region: "Europe",
+  quote: "Italy is a dream that keeps returning for the rest of your life.",
+  author: "Anna Akhmatova",
+  subtitle: "La Dolce Vita: Exploring the Heart of Italy",
+  paragraph1: "Journey to Italy, where every moment is infused with the passion and romance of la dolce vita. From the rolling hills of Tuscany to the ancient streets of Rome, this country captivates the imagination with its timeless beauty and vibrant culture.",
+  paragraph2: "Savor the flavors of Italy, where food is more than sustenance; it's a celebration of life itself. Indulge in freshly made pasta, artisanal cheeses, and velvety gelato, each dish a testament to the culinary mastery and love for good food that defines Italian cuisine.",
+  paragraph3: "Immerse yourself in Italy's rich tapestry of art and history, where every corner holds a treasure waiting to be discovered. Marvel at the masterpieces of Michelangelo in Florence, wander through the ancient ruins of Pompeii, or simply lose yourself in the maze-like streets of Venice, where every bridge leads to a new adventure."
+)
+urlsitaly=['https://res.cloudinary.com/dsqsghydb/image/upload/v1709818599/Siena-Italy.jpg.optimal_g2jjqr.jpg', 'https://res.cloudinary.com/dsqsghydb/image/upload/v1709818598/Castelmezzano-Italy.jpg.optimal_qzdd5m.jpg', 'https://res.cloudinary.com/dsqsghydb/image/upload/v1709818597/12_700fc4f3-467b-4005-bedd-75e23558ed35_x3zbnj.webp']
+urlsitaly.each do |url|
+  file = URI.open(url)
+  italy.photos.attach(io: file, filename: File.basename(URI.parse(url).path), content_type: 'image/jpg')
+end
+italy.save
 belgium = Suggestion.new(
   title: "Belgium",
   region: "Europe",
@@ -231,7 +231,7 @@ vietnam=Suggestion.create!(
    paragraph2: "Indulge in the flavors of Vietnamese cuisine, where fresh herbs, aromatic spices, and bold flavors are the hallmarks of traditional dishes. Sample a steaming bowl of pho at a bustling street stall, feast on crispy banh mi sandwiches in a local market, or enjoy a traditional seafood feast on the banks of the Mekong River.",
    paragraph3: "Immerse yourself in Vietnam's rich cultural heritage as you explore ancient temples, vibrant markets, and traditional villages. Whether you're trekking through the mountainous landscapes of Sapa, cruising along the Perfume River in Hue, or cycling through the picturesque countryside of Hoi An, each destination offers a glimpse into the heart and soul of this captivating country."
 )
-urlsvietnam=['https://res.cloudinary.com/dsqsghydb/image/upload/v1709818780/photo-1528127269322-539801943592_ixydo3.avif', 'https://res.cloudinary.com/dsqsghydb/image/upload/v1709818756/long-boat-blue-water-maya-bay-phi-phi-island-krabi-thailand_335224-895_dhc04p.avif', 'https://res.cloudinary.com/dsqsghydb/image/upload/v1709829877/cropped-cb3db4b94cdc8a8fff74e2fac7cd6cb8-chiang-mai_fxnfgq.jpg']
+urlsvietnam=['https://res.cloudinary.com/dsqsghydb/image/upload/v1709905893/aa60115c-bdfc-479f-88ba-5cb0f15a5af8_v4wcrt.jpg', 'https://res.cloudinary.com/dsqsghydb/image/upload/v1709818756/long-boat-blue-water-maya-bay-phi-phi-island-krabi-thailand_335224-895_dhc04p.avif', 'https://res.cloudinary.com/dsqsghydb/image/upload/v1709829877/cropped-cb3db4b94cdc8a8fff74e2fac7cd6cb8-chiang-mai_fxnfgq.jpg']
 urlsvietnam.each do |url|
   file = URI.open(url)
   vietnam.photos.attach(io: file, filename: File.basename(URI.parse(url).path), content_type: 'image/jpg')
@@ -432,13 +432,13 @@ end
 bolivia.save
 # Seed data for users
 
-User.destroy_all
-puts 'Destroying users...'
-Trip.destroy_all
-puts 'Destroying trips...'
-DailySchedule.destroy_all
-puts 'Destroying schedules...'
-puts 'Creating users...'
+# User.destroy_all
+# puts 'Destroying users...'
+# Trip.destroy_all
+# puts 'Destroying trips...'
+# DailySchedule.destroy_all
+# puts 'Destroying schedules...'
+# puts 'Creating users...'
 # user1 = User.create!(
 #   email: 'john.doe@example.com',
 #   password: 'password123',
@@ -456,7 +456,7 @@ puts 'Creating users...'
 #   password: 'password789',
 #   nickname: 'Alice'
 # )
-puts 'Creating trips...'
+# puts 'Creating trips...'
 # Seed data for trips
 # trip1 = Trip.create!(
 #   flights: 123.45,
@@ -475,7 +475,7 @@ puts 'Creating trips...'
 #   start_date: Date.today + 14,
 #   end_date: Date.today + 21
 # )
-puts 'Creating schedules...'
+# puts 'Creating schedules...'
 # Seed data for daily_schedules
 # schedule1 = DailySchedule.create!(
 #   date: Date.today,
