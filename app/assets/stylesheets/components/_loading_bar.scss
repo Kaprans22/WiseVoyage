@@ -1,58 +1,47 @@
-@import url("https://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700");
-@import url("https://fonts.googleapis.com/css?family=Indie+Flower");
+$f-primary: "Josefin Sans", sans-serif;
+$f-secondary: "Indie Flower", cursive;
+$c-front: #fe5f55;
+$c-back: #1d1f20;
+$c-back-light: #383838;
+$c-hilight: #fe5f55;
+$s-footer-height: 3rem;
 
-/* Define box-shadow styles directly */
-.boxShadow {
+%boxShadow {
   box-shadow: 0 0 10rem 0 #000000;
 }
-.boxShadow--in {
+%boxShadow--in {
   box-shadow: 0 0 10rem 0 #000000 inset;
-}
-
-html,
-body {
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 3rem;
-  background-color: #1d1f20;
-  color: #ffffff;
-  font-family: "Josefin Sans", sans-serif;
-  font-size: 10px;
-  font-weight: 100;
-  /* Apply box-shadow style */
-  box-shadow: 0 0 10rem 0 #000000 inset;
-}
-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100vw;
-  height: 3rem;
-  background-color: #1d1f20;
-  text-align: center;
-  font-family: "Indie Flower", cursive;
-  font-size: 1.2rem;
-  letter-spacing: 0.1rem;
-}
-footer span {
-  font-family: "Josefin Sans", sans-serif;
-  font-size: 1rem;
-  font-weight: 100;
-}
-a {
-  text-decoration: none;
-  color: #ffa500;
-}
-a:hover {
-  text-decoration: underline;
 }
 
 .svg-calLoader {
   width: 230px;
   height: 230px;
   transform-origin: 115px 115px;
+  animation: 1.4s linear infinite loader-spin;
+}
+
+.cal-loader__plane {
+  fill: $c-hilight;
+  opacity: 0.7;
+}
+.cal-loader__path {
+  stroke: $c-front;
+  animation: 1.4s ease-in-out infinite loader-path;
+}
+
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loader-path {
+  0% {
+    stroke-dasharray: 0, 580, 0, 0, 0, 0, 0, 0, 0;
+  }
+  50% {
+    stroke-dasharray: 0, 450, 10, 30, 10, 30, 10, 30, 10;
+  }
+  100% {
+    stroke-dasharray: 0, 580, 0, 0, 0, 0, 0, 0, 0;
+  }
 }

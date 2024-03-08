@@ -36,7 +36,7 @@
           <img class="arrow" src="<%= asset_path('icons/arrow-left.svg') %>" alt="arrow-right"/>
       </div>
 
-      <% @suggestions_europe[4..11].each_slice(4) do |suggestions| %>
+      <% @suggestions_europe[4..11] do |suggestions| %>
         <div class="carousel-item">
           <div class="d-flex" style="width: 100%; justify-content: center;">
             <% unless suggestions[0].nil? %>
@@ -101,7 +101,7 @@
         </div>
       </div>
 
-      <% @suggestions_asia[4..7].each_slice(4) do |suggestions| %>
+      <% @suggestions_asia[4..7] do |suggestions| %>
         <div class="carousel-item">
           <div class="d-flex" style="width: 100%; justify-content: center;">
 
@@ -168,7 +168,7 @@
         </div>
       </div>
 
-      <% @suggestions_latin_america[4..7].each_slice(4) do |suggestions| %>
+      <% @suggestions_latin_america[4..7] do |suggestions| %>
         <div class="carousel-item">
           <div class="d-flex" style="width: 100%; justify-content: center;">
 
