@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "wisevoyage",
+  "private_key_id": "c9b6207d889c48774e84a6e59d02e8f90fc7fbf0",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDGknAKBEz6MeD4\n7mRkZA/pBQU976TT9+AkQrJCXr0KAgbfLW9TKCe5L2r8jTyIzxqNqON42OHkvJbp\nvi+Cmsx3TV96DPh5ATkXZg3uAPhScERMot3U7PzrqJeWNN6VHHvccwq9ILTxWM/X\n8fCKJu58KDdTC14Nir8CzdW4VYYzJErR5dvnGuqRPYuNkbdl1HrM2t/DEiS/tnuR\nXWLkc7lFvm8EYcNSMiQNJZoQLpaCYlNiJTSuuMG9Hx6gy/G4os2fJqUvr1YHFIsV\n3bjsOmNZib2L7RvDp6+hTxGvt021Cv3A7xYjsE14bpMP9XbJeO4ByMbzBzgobGFD\nPsxfQW5tAgMBAAECggEABsFcqOaT6WYQ7jXmQxIyhoJ6dtpWfDSSm/gLnKagpvOd\nfHJEAGIdXmmcYJzFAUDpAoZddCVXR/5ZvdO9fKy3IRN1z3Obuage0OrJfpmPWRt5\n/seU7k6SppJxd76XoXo2RTlmjCkW7+f7rLkyQF83wmucioBPZEXC5/2xb5Xqrxhw\n+7gV/aUkwS/aQxQiT4wbZHk7tr9oRje7VE5JmUBO3hKwRzIYTepTGBemrxhIpShC\nKXaxcf5O4zPPQu1eCQ44U8kBg9aRJoopNLwf1eG7WKVl2iADEnzbxKyGgCNg12RR\nXLJD+pQ3w4Jbs+yS0UBREd0xYBvfAPq739DIkvsEMQKBgQD/UKi2VX0vnKSavvPc\n+PA1HfUrNVox2GoWSOYDlueAdc7/57hFTjSlFvOhMgNijTZfzyN/JHtk+X7lnh32\nQKLMAcun7VU7kB1+/9XB+/OPMDnoJ5XChtwZkoYh9bJZyzsQ72eayZ3fbGdeqNuc\nJVlYze/F1GdiUKI6NCVBNqkDHQKBgQDHGs9BGX8srXHSJSriRiHcVTX8RTgVbQ6q\nR1VXtC02qBXoiIHFoW71qQ9VdtH8wWsh8OPwjbVk0zossoLDp09qR02YLimd76LR\nRrsnIFJusn8JuDGAEFSE4DYZlL2dGwHr49t+v63lhaO0EaRAqg3a63ishtWCik1z\nucwrlX5nkQKBgCm3MBm6lh21Zl+yW337XqQPJQPOT9JdHdhOSObFPUYL+apuXflU\n8d0Xhu8LkOoFUKEO4yne+BpjeYxi7VpS7UaP9IqXiJmWznr1qiNr2zvGEXARJ7ME\n/elfu3LJBj8NqbT2qOLtllHvEGSzCk7U+2g7HbYhIlM6AYepBX1GRQ8xAoGBAMXj\ntpRcdBMCvHsCJ/JHhEYKhyKZ5ZkeEJJbXc5SrRGC1GuOqXS086TEiBIIi8Lstr9A\nPj0Li3uPmWVtcxxlQUA/aDbVwtVPpQLdiwvjSyrsy+jsIn7HPEno0rxwIllwy2MZ\n0EHU31Cdl8xUMG1411Z77S+Ev9cEAOEBjJTQ+5aRAoGAQhzRrrmzXl1ptCfHlM4o\njzdW44QtAcTVqFudQUG9/MI9OKkgYA2GhF7VG4NP1Wsf25UayAGDcA1K+UZRAao6\ni4CzYp6MDKmt4N2OuqSGw+D0I8Sk6I9zZ1jlpVV1z9SIAPh7jQz1U6wkPzNcweLh\n6gyh8ml5cmGAYAHUKT47aSg=\n-----END PRIVATE KEY-----\n",
+  "client_email": "wiseaccount@wisevoyage.iam.gserviceaccount.com",
+  "client_id": "110734241354607708145",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/wiseaccount%40wisevoyage.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
