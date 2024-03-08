@@ -1,15 +1,39 @@
 <!-- app/views/trips/show.html.erb -->
-
 <br>
 <br>
 <br>
 <br>
-<h1>Show Page</h1>
-<h1><%= @trip.destination %></h1>
-<p>Start date: <%= @trip.start_date %></p>
-<p>End date: <%= @trip.end_date %></p>
-<p><%= @trip.content %></p>
-<h2>Additional Suggestions:</h2>
-<p><%= @trip.additional_suggestions %></p>
-<br>
-<%= button_to 'Back', trips_path, method: :get %>
+<div class="container">
+  <div>
+    <h1><%= @trip.destination %></h1>
+  </div>
+  <div>
+    <p>Start date: <%= @trip.start_date %></p>
+    <p>End date: <%= @trip.end_date %></p>
+    <%= button_to 'Add to favourites', trips_path, method: :get %>
+  </div>
+  <div class="show-gallery">
+    <div class="images-show-big">
+      <%= image_tag 'Italy.jpg' %>
+    </div>
+    <div class="images-show-small">
+      <div class="smaller-images-show">
+       <%= image_tag 'italy(1).jpg' %>
+      </div>
+      <div class="smaller-images-show">
+       <%= image_tag 'italy(2).jpg' %>
+      </div>
+      <div class="smaller-images-show">
+        <%= image_tag 'italy(3).jpg' %>
+      </div>
+      <div class="smaller-images-show">
+       <%= image_tag 'italy(5).jpg' %>
+      </div>
+    </div>
+  </div>
+  <p><%= @trip.content %></p>
+  <h2>Additional Suggestions:</h2>
+  <p><%= @trip.additional_suggestions %></p>
+  <br>
+  <%= button_to 'Back', trips_path, method: :get %>
+</div>
