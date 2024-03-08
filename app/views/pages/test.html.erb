@@ -1,27 +1,33 @@
-<div class="container" data-controller="curacao">
+  <br style="height: 500px;">
+  <!-- MAP #######-->
+  <%# <div id="map" class="w-100" style="height: 500px; z-index: 1"></div> %>
 
-<div class="carousel">
-      <div class="nav nav-left">
-        <div class="ion-chevron-left carousel-arrow-icon-left"></div>
-      </div>
+      <%# var countriesGeoJSON = <%= @countries_geojson.html_safe %>; %>=
+    <%# <script> %>
+    <%# </script> %>
+    <%# <script src="/assets/map.js"></script> %>
 
-        <div class="carousel-content">
+<div class="d-flex justify-content-center" >
+<%= form_tag("/trips", method: "post", remote: true) do %>
+  <div>
+    <%= label_tag(:destination, "Country:") %>
+    <%= text_field_tag(:destination) %>
+    <%= hidden_field_tag :destination, nil, id: "destination-field" %>
+  </div>
+  <div>
+    <%= label_tag(:start_date, "Start Date:") %>
+    <%= text_field_tag(:start_date, nil, type: "date") %>
+  </div>
+  <div>
+    <%= label_tag(:end_date, "End Date:") %>
+    <%= text_field_tag(:end_date, nil, type: "date") %>
+  </div>
+  <%= submit_tag("Submit") %>
+<% end %>
+<main class="flex flex-col justify-items-stretch grow shrink">
+  <header>
+  </header>
 
-          <% n = 1 %>
-          <% @suggestions.each do |suggestion| %>
-              <% if suggestion.id >= 20 %>
-                <div class="card-suggestion slide slide-<%= n %>" style="background-image: url(<%= asset_path('TSWIFT.jpg')%>)">
-                    <h4><%= suggestion.title %></h4>
-                </div>
-              <% end %>
-              <% n += 1 %>
-            <% end %>
-
-        </div>
-
-      <div class="nav nav-right">
-        <div class="ion-chevron-right carousel-arrow-icon-right"></div>
-      </div>
-    </div>
-
+</main>
 </div>
+<br>

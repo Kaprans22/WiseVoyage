@@ -14,4 +14,11 @@ class PagesController < ApplicationController
     @user_trips = UserTrip.where(user_id: @user.id)
     @trips = Trip.all
   end
+
+  def test
+    @suggestions = Suggestion.all
+    @suggestions_asia = Suggestion.where(region: "Asia")
+    @suggestions_europe = Suggestion.where(region: "Europe")
+    @suggestions_latin_america = Suggestion.where(region: "Latin America")
+  end
 end
