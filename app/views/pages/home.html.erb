@@ -11,7 +11,7 @@
 <%= form_tag("/trips", method: "post", remote: true) do %>
   <div>
     <%= label_tag(:destination, "Country:") %>
-    <%= text_field_tag(:destination) %>
+    <%= text_field_tag(:destination, nil, id: "destination-text-field") %>
     <%= hidden_field_tag :destination, nil, id: "destination-field" %>
   </div>
   <div>
