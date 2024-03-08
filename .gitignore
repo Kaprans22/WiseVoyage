@@ -39,3 +39,6 @@
 # Ignore Mac and Linux file system files
 *.swp
 .DS_Store
+.env*
+# Ignore potent.json file in app/controllers directory
+/app/controllers/potent.json
