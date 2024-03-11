@@ -1,0 +1,14 @@
+.container {
+  margin-top: 30px!important;
+}
+.card {
+  border-color: black!important;
+  height: 100%;
+  .card-body {
+    display: flex!important;
+    flex-direction: column!important;
+  }
+  .btn {
+    align-self: end!important;
+  }
+}

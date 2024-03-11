@@ -8,9 +8,12 @@
     <div class="dates">
       <p>Start date: <%= @trip.start_date %></p>
       <p>End date: <%= @trip.end_date %></p>
+
     </div>
-      <div>
-        <%= button_to 'Add to favourites', trips_path, class: "btn btn-outline-white", method: :get %>
+
+      <%= render "user_trips/new"  %>
+
+
       </div>
   </div>
   <div class="show-gallery">
