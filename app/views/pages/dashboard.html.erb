@@ -18,6 +18,11 @@
           <div data-controller="toggle" class="mb-3 ml-5 profile-edit-container">
             <button data-action="click->toggle#fire" class="btn btn-outline-white mx-2 my-2 my-sm-0">Edit Profile</button>
             <div data-toggle-target="togglableElement" class="d-none mx-5 my-5" class="form">
+              <%= simple_form_for(@user, local: true, multipart: true, remote: true) do |form| %>
+                        <div class="field my-2">
+                          <%= form.label :first_name %>
+                          <%= form.text_field :first_name, class: 'form-field' %>
+                        </div>
 
                         </div>
                       </div>

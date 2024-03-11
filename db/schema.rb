@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_11_153652) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_11_151301) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -69,6 +69,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_11_153652) do
     t.bigint "user_id", null: false
     t.text "additional_suggestions"
     t.string "content"
+    t.string "average_cost"
+    t.string "photo_url"
+    t.text "image_urls"
     t.index ["user_id"], name: "index_trips_on_user_id"
   end
 
