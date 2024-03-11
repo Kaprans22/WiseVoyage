@@ -78,6 +78,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_11_151301) do
   create_table "user_trips", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "trip_id"
+    t.index ["trip_id"], name: "index_user_trips_on_trip_id"
+    t.index ["user_id"], name: "index_user_trips_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -88,6 +92,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_11_151301) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "address"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -95,4 +100,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_11_151301) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "trips", "users"
+  add_foreign_key "user_trips", "trips"
+  add_foreign_key "user_trips", "users"
 end

@@ -4,15 +4,16 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   get "up" => "rails/health#show", as: :rails_health_check
-
   get "test", to: "pages#test"
-
   get 'dashboard', to: 'pages#dashboard'
 
+  # Defines the root path route ("/")
+  # root "posts#index"
   resources :trips do
     delete 'delete_specific', on: :member
   end
 
+  resources :user_trips, only: [:new, :create, :destroy]
   resources :trips, only: [:index, :show, :create, :destroy]
 
   delete '/trips', to: 'trips#destroy_all', as: 'destroy_all_trips'
