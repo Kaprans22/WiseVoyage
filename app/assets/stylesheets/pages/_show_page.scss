@@ -1,5 +1,6 @@
 @import 'components/_white_button.scss';
 @import "components/_black_button.scss";
+@import 'components/_suggestion_card.scss';
 
 .show-gallery {
   display: flex;
@@ -37,4 +38,3 @@
   width: 100%;
   object-fit: cover;
 }
-
