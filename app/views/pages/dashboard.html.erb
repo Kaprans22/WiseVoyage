@@ -13,18 +13,69 @@
       </div>
     </div>
     <div>
-      <div class="d-flex justify-content-center">
-        <div class="buttoms d-flex flex-column justify-content-between ">
+      <div class="d-flex justify-content-center" data-controller="update">
+        <div class="buttoms d-flex flex-column justify-content-between" >
           <div data-controller="toggle" class="mb-3 ml-5 profile-edit-container">
-            <button data-action="click->toggle#fire" class="btn btn-secondary-color mx-2 my-2 my-sm-0">Edit Profile</button>
+            <button data-action="click->toggle#fire" class="btn btn-outline-white mx-2 my-2 my-sm-0">Edit Profile</button>
             <div data-toggle-target="togglableElement" class="d-none mx-5 my-5" class="form">
+              <%= simple_form_for(@user, local: true, multipart: true, remote: true) do |form| %>
+                        <div class="field my-2">
+                          <%= form.label :first_name %>
+                          <%= form.text_field :first_name, class: 'form-field' %>
+                        </div>
+
+                          <div class="field my-2">
+                          <%= form.label :last_name %>
+                          <%= form.text_field :last_name, class: 'form-field' %>
+                        </div>
+
+                        <div class="field my-2">
+                          <%= form.label :address %>
+                          <%= form.text_field :address, class: 'form-field' %>
+                        </div>
+
+                          <div class="form-group row my-2">
+                            <%= form.label :photo %>
+                            <div class="col-sm-8">
+                              <%= form.file_field :photo, class: 'form-field' %>
+                            </div>
+                          </div>
+                        <div class="actions">
+                          <%= form.submit "Update profile", class: "form-field btn btn-outline-white my-3 my-sm-0", data: { disable_with: "Uploading..." } %>
+                        </div>
+                      <% end %>
+                        </div>
+                      </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <h3 class="my-4 mx-5">Your bookmarked trips:</h3>
-  <div class="product-list mr-5">
-  </div>
+  <h3 class="my-4 mx-5">Your favorite trips</h3>
+    <div class="d-flex flex-wrap justify-content-center" style="min-height: 100vh; position: relative;">
+          <% @user_trips.each do |user_trip| %>
+              <div class="card mb-2 mx-1" style="width: 18rem; height: 38,.0px;">
+              <%= link_to trip_path(user_trip), class: "text-decoration-none text-reset" do %>
+                <%= image_tag("logo.png", alt: "Card image cap", class: "card-img-top") %>
+                <div class="card-body d-flex flex-column justify-content-between">
+                  <h5 class="card-title"><strong><%= user_trip.trip.destination %></strong></h5>
+                  <p class="card-text" ><i><%= user_trip.trip.start_date %> - <%= user_trip.trip.end_date %></i></p>
+                  <% require 'json' %>
+                  <% begin %>
+                    <% hash = JSON.parse(user_trip.trip.content.gsub('=>', ':')) %>
+                    <% first_sentence = hash.values.first.split('.').first.strip %>
+                  <% rescue JSON::ParserError %>
+                    <% first_sentence = "Content not available" %>
+                  <% end %>
+                  <p class="card-text"><%= first_sentence %></p>
+                  <% end %>
+                  <%= button_to user_trip_path(user_trip), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link ml-auto p-2", style: "background: none; border: none; padding-left: 231px!important;" do %>
+                    <i class="fa-solid fa-xmark fa-xl" style="color: #fe5f55;"></i>
+                  <% end %>
+                </div>
+            </div>
+          <% end %>
+        </div>
+
 </div>

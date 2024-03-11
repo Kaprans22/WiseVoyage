@@ -11,8 +11,8 @@ class PagesController < ApplicationController
 
   def dashboard
     @user = current_user
+    # @user_trips = Trip.where(user_id: @user.id)
     @user_trips = UserTrip.where(user_id: @user.id)
-    @trips = Trip.all
   end
 
   def test

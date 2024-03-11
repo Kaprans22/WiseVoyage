@@ -9,27 +9,19 @@
       <p>Start date: <%= @trip.start_date %></p>
       <p>End date: <%= @trip.end_date %></p>
     </div>
-      <div>
-        <%= button_to 'Add to favourites', trips_path, class: "btn btn-outline-white", method: :get %>
-      </div>
+
+    <%= render "user_trips/new"  %>
   </div>
   <div class="show-gallery">
     <div class="images-show-big">
-      <%= image_tag 'Italy.jpg' %>
+      <%= image_tag @trip.image_urls[0] if @trip.image_urls[0] %>
     </div>
     <div class="images-show-small">
-      <div class="smaller-images-show">
-       <%= image_tag 'italy(1).jpg' %>
-      </div>
-      <div class="smaller-images-show">
-       <%= image_tag 'italy(2).jpg' %>
-      </div>
-      <div class="smaller-images-show">
-        <%= image_tag 'italy(3).jpg' %>
-      </div>
-      <div class="smaller-images-show">
-       <%= image_tag 'italy(5).jpg' %>
-      </div>
+      <% @trip.image_urls.drop(1).each do |url| %>
+        <div class="smaller-images-show">
+          <%= image_tag url if url %>
+        </div>
+      <% end %>
     </div>
   </div>
   <br>
@@ -42,26 +34,23 @@
 
   <!-- Itinerary -->
   <h2>Additional Suggestions:</h2>
-
-  <% end %>
-
   <p><%= @trip.content %></p>
-  <h1>Additional Suggestions:</h2>
   <% suggestions = JSON.parse(@trip.additional_suggestions) %>
-    <div class="suggestion-card">
-      <% suggestions.each do |suggestion| %>
-        <h5><%= suggestion["date"]%></h5>
-        <% suggestion["suggestions"].each do |sug|%>
-          <p><%= sug %></p>
-        <% end %>
-    </div>
+  <div class="suggestion-card">
+    <% suggestions.each do |suggestion| %>
+      <h5><%= suggestion["date"]%></h5>
+      <% suggestion["suggestions"].each do |sug|%>
+        <p><%= sug %></p>
+      <% end %>
+    <% end %>
+  </div>
   <br>
   <%= form_with url: { action: "calculate_average", id: @trip.id }, method: :get do %>
     <%= text_field_tag :city_name, nil, placeholder: "Enter city name" %>
     <%= submit_tag 'Calculate Average Cost' %>
   <% end %>
   <br>
-  <h2>Calculated Average</h1>
+  <h2>Calculated Average</h2>
   <p>The average cost for the trip to <%= @trip.destination %> is <%= @trip.average_cost %></p>
   <%= button_to 'Back', trips_path, class: "btn btn-outline-black", method: :get %>
 </div>

@@ -45,7 +45,24 @@ class TripsController < ApplicationController
   end
   def show
     @trip = Trip.find(params[:id])
+    @user_trip = UserTrip.new
     @trip.content = eval(@trip.content)
+
+    # Make a request to the Pixabay API
+    response = RestClient.get "https://pixabay.com/api/", {
+      params: {
+        key: ENV['PIXABAY_API_KEY'],
+        q: @trip.destination,
+        image_type: 'photo',
+        safesearch: true,
+        per_page: 5
+      }
+    }
+    result = JSON.parse(response.body)
+
+    # Store the URLs of the images in the trip's image_urls attribute
+    @trip.update_attribute(:image_urls, result['hits'].map { |hit| hit['webformatURL'] })
+
     return unless @trip.additional_suggestions.nil? || @trip.additional_suggestions.empty?
 
     additional_suggestions = get_additional_suggestions(@trip.destination, @trip.start_date, @trip.end_date, false)
@@ -167,7 +184,6 @@ class TripsController < ApplicationController
         response.body.gsub!(/(```|json)/, '')
         result = JSON.parse(response.body)
         suggestions = result['predictions'][0]['content']
-        suggestions.gsub!("\n*", '').gsub!('*', '')
         results[destination] = suggestions
         Rails.logger.error(results[destination])
       else
