@@ -6,3 +6,4 @@
 //= link bootstrap.min.js
 //= require leaflet
 //= link map.js
+//= link loading_bar.js
