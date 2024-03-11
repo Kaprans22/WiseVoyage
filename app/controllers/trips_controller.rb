@@ -200,9 +200,17 @@ class TripsController < ApplicationController
       if response.code == '200'
         result = JSON.parse(response.body)
         results[destination] = result['predictions'][0]['content']
-        photo = Unsplash::Photo.search(destination).first
-        if photo
-          cloudinary_result = Cloudinary::Uploader.upload(photo.urls.full)
+
+        url = "https://pixabay.com/api/?key=#{ENV['PIXABAY_API_KEY']}&q=#{destination}&image_type=photo&per_page=3"
+        puts "Request URL: #{url}"
+
+        response = RestClient.get(url)
+        resultPic = JSON.parse(response.body)
+
+
+        if resultPic['hits'].any?
+          photo_url = resultPic['hits'].first['largeImageURL']
+          cloudinary_result = Cloudinary::Uploader.upload(photo_url)
           @trip.update(photo_url: cloudinary_result['secure_url'])
         end
       else

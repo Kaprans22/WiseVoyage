@@ -31,7 +31,7 @@ function onCountryClick(e) {
   var destinationTextField = document.getElementById("destination-text-field");
 
   // Check if the country is already selected
-  var selectedCountries = destinationField.value.split(", ");
+  var selectedCountries = destinationField.value.trim().split(/\s*,\s*/);
   var index = selectedCountries.indexOf(countryName);
 
   // If the country is already selected, remove it
@@ -54,8 +54,7 @@ function onCountryClick(e) {
     });
   }
 
-  // Update the hidden field value with the updated list of selected countries
-  destinationField.value = selectedCountries.join(", ");
+  destinationField.value = selectedCountries.filter(Boolean).join(", ");
 
   // Enable/disable the text field based on the number of selected countries
   if (selectedCountries.length > 0) {
