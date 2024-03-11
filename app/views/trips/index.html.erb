@@ -29,7 +29,9 @@
               <% end %>
               <p class="card-text"><%= first_sentence %></p>
               <% end %>
-              <%= button_to 'Delete', delete_specific_trip_path(trip), class:"btn btn-outline-black", method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%= button_to delete_specific_trip_path(trip), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link ml-auto p-2", style: "background: none; border: none; padding-left: 231px!important;" do %>
+  <i class="fa-solid fa-xmark fa-xl" style="color: #fe5f55;"></i>
+<% end %>
             </div>
           </div>
         </div>

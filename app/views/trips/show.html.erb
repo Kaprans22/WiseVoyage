@@ -9,8 +9,11 @@
       <p>Start date: <%= @trip.start_date %></p>
       <p>End date: <%= @trip.end_date %></p>
     </div>
-      <div>
-        <%= button_to 'Add to favourites', trips_path, class: "btn btn-outline-white", method: :get %>
+      <%= link_to trips_path, method: :get do %>
+          <%= button_tag type: 'button', class: "btn btn-outline-white" do %> Add to 
+            <i class="fa-solid fa-heart fa-xl" style="color: #fe5f55;"></i>
+          <% end %>
+        <% end %>
       </div>
   </div>
   <div class="show-gallery">
