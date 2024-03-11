@@ -15,14 +15,16 @@
     <%# <link rel="preconnect" href="https://fonts.googleapis.com"> %>
     <%# <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> %>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@318&display=swap" rel="stylesheet">
+
+
   </head>
 
   <body>
-    <%= render 'shared/loading_bar' %>
+
     <%= render "shared/navbar" %>
     <%= render "shared/flashes" %>
     <%= yield %>
     <%= render "shared/footer" %>
-
+    <%= render 'shared/loading_bar' %>
   </body>
 </html>
