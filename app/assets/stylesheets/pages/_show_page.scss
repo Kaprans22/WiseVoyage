@@ -1,3 +1,6 @@
+@import 'components/_white_button.scss';
+@import "components/_black_button.scss";
+
 .show-gallery {
   display: flex;
   flex-direction: row;
@@ -34,3 +37,4 @@
   width: 100%;
   object-fit: cover;
 }
+
