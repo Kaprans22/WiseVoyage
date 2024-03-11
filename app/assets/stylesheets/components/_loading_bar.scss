@@ -1,0 +1,47 @@
+$f-primary: "Josefin Sans", sans-serif;
+$f-secondary: "Indie Flower", cursive;
+$c-front: #fe5f55;
+$c-back: #1d1f20;
+$c-back-light: #383838;
+$c-hilight: #fe5f55;
+$s-footer-height: 3rem;
+
+%boxShadow {
+  box-shadow: 0 0 10rem 0 #000000;
+}
+%boxShadow--in {
+  box-shadow: 0 0 10rem 0 #000000 inset;
+}
+
+.svg-calLoader {
+  width: 230px;
+  height: 230px;
+  transform-origin: 115px 115px;
+  animation: 1.4s linear infinite loader-spin;
+}
+
+.cal-loader__plane {
+  fill: $c-hilight;
+  opacity: 0.7;
+}
+.cal-loader__path {
+  stroke: $c-front;
+  animation: 1.4s ease-in-out infinite loader-path;
+}
+
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loader-path {
+  0% {
+    stroke-dasharray: 0, 580, 0, 0, 0, 0, 0, 0, 0;
+  }
+  50% {
+    stroke-dasharray: 0, 450, 10, 30, 10, 30, 10, 30, 10;
+  }
+  100% {
+    stroke-dasharray: 0, 580, 0, 0, 0, 0, 0, 0, 0;
+  }
+}
