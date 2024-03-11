@@ -6,6 +6,7 @@ class TripsController < ApplicationController
 
   def show
     @trip = Trip.find(params[:id])
+    @user_trip = UserTrip.new
     @trip.content = eval(@trip.content)
     return unless @trip.additional_suggestions.nil? || @trip.additional_suggestions.empty?
 
