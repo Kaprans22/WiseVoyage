@@ -1,4 +1,6 @@
 <!-- app/views/trips/show.html.erb -->
+<br>
+<br>
 <div class="container">
   <div>
     <h1><%= @trip.destination %>✨</h1>
@@ -13,6 +15,9 @@
         <%= button_to 'Add to favourites', trips_path, class: "btn btn-outline-white", method: :get %>
       </div>
   </div>
+
+  <!-- Photo gallery -->
+
   <div class="show-gallery">
     <div class="images-show-big">
       <%= image_tag 'Italy.jpg' %>
@@ -34,9 +39,27 @@
   </div>
   <br>
   <br>
-  <p><%= @trip.content %></p>
+
+  <!-- Short description -->
+  <p><%= @trip.content.split("=>").last %></p>
+
+  <!-- Itinerary -->
   <h2>Additional Suggestions:</h2>
-  <p><%= @trip.additional_suggestions %></p>
+
+  <% itinerary = @trip.additional_suggestions %>
+
+  <% dates_and_activities = itinerary.split(/\*\*(\d{4}-\d{2}-\d{2})\*\*/).reject(&:empty?) %>
+
+  <% itinerary_hash = Hash[dates_and_activities.each_slice(2).to_a] %>
+
+  <% itinerary_hash.each do |date, activities| %>
+  <h2><%= date %>:</h2>
+  <ul>
+    <% (activities.to_s.split('*')|| []).reject(&:empty?).each do |activity| %>
+      <li><p><%= activity.strip %></p></li>
+    <% end %>
+  </ul>
+  <% end %>
   <br>
   <%= button_to 'Back', trips_path, class: "btn btn-outline-black", method: :get %>
 </div>
