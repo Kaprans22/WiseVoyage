@@ -50,13 +50,15 @@
 
   <!-- Itinerary -->
   <h2>Additional Suggestions:</h2>
-  <%= @trip.additional_suggestions %>
-  <% @trip.additional_suggestions.each do |suggestion| %>
-    <div class="suggestion">
-      <h5><%= suggestion.date %></h5>
-      <h5><%= suggestion.suggestions %></h5>
+  <% suggestions = JSON.parse(@trip.additional_suggestions) %>
+    <div class="suggestion-card">
+    <% suggestions.each do |suggestion| %>
+      <h5><%= suggestion["date"]%></h5>
+      <% suggestion["suggestions"].each do |sug|%>
+        <p><%= sug %></p>
+      <% end %>
     </div>
-  <% end %>
+    <% end %>
   <br>
   <%= button_to 'Back', trips_path, class: "btn btn-outline-black", method: :get %>
 </div>
