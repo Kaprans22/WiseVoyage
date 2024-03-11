@@ -13,6 +13,8 @@ gem 'googleauth'
 
 gem 'memory_profiler'
 
+gem "cloudinary"
+
 gem 'rest-client'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
@@ -90,5 +92,3 @@ end
 
 gem 'leaflet-rails'
 gem 'countries'
-gem "cloudinary"
-gem 'rest-client'
