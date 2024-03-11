@@ -12,7 +12,7 @@
       <p>End date: <%= @trip.end_date %></p>
     </div>
       <%= link_to trips_path, method: :get do %>
-          <%= button_tag type: 'button', class: "btn btn-outline-white" do %> Add to 
+          <%= button_tag type: 'button', class: "btn btn-outline-white" do %> Add to
             <i class="fa-solid fa-heart fa-xl" style="color: #fe5f55;"></i>
           <% end %>
         <% end %>
@@ -55,7 +55,7 @@
 
   <% itinerary_hash = Hash[dates_and_activities.each_slice(2).to_a] %>
 
-  <% itinerary_hash.each do |date, activities| %>
+  <% itinerary_hash.each do |activities, date| %>
   <h2><%= date %>:</h2>
   <ul>
     <% (activities.to_s.split('*')|| []).reject(&:empty?).each do |activity| %>
