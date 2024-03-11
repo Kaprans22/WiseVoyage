@@ -15,7 +15,11 @@
         <div class="col-md-4">
           <div class="card" style="width: 18rem;">
           <%= link_to trip_path(trip), class: "text-decoration-none text-reset" do %>
-            <%= image_tag("logo.png", alt: "Card image cap", class: "card-img-top") %>
+            <% if trip.photo_url.present? %>
+              <%= image_tag(trip.photo_url, alt: "Card image cap", class: "card-img-top") %>
+            <% else %>
+              <%= image_tag("logo.png", alt: "Card image cap", class: "card-img-top") %>
+            <% end %>
             <div class="card-body d-flex flex-column justify-content-between">
               <h5 class="card-title"><strong><%= trip.destination %></strong></h5>
               <p class="card-text" ><%= trip.start_date %> - <%= trip.end_date %></p>

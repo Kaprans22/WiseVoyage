@@ -23,40 +23,43 @@ var countriesLayer = L.geoJSON(countriesGeoJSON, {
 
 function onCountryClick(e) {
   var layer = e.target;
-  layer.setStyle({
-    fillColor: "#FE5F55",
-    color: "white",
-    weight: 2,
-    fillOpacity: 0.5,
-  });
   var countryName = layer.feature.properties.name;
-  alert("Clicked on " + countryName);
-}
-function onCountryClick(e) {
-  var layer = e.target;
-  layer.setStyle({
-    fillColor: "#FE5F55",
-    color: "white",
-    weight: 2,
-    fillOpacity: 0.5,
-  });
-  var countryName = layer.feature.properties.name;
-  alert("Clicked on " + countryName);
 
   // Get the hidden field
-  var destinationField = document.getElementById('destination-field');
+  var destinationField = document.getElementById("destination-field");
+  // Get the text field
+  var destinationTextField = document.getElementById("destination-text-field");
 
-  // If the hidden field already has a value, append the new country name with a comma
-  if (destinationField.value) {
-    destinationField.value += ', ' + countryName;
+  // Check if the country is already selected
+  var selectedCountries = destinationField.value.trim().split(/\s*,\s*/);
+  var index = selectedCountries.indexOf(countryName);
+
+  // If the country is already selected, remove it
+  if (index !== -1) {
+    selectedCountries.splice(index, 1);
+    layer.setStyle({
+      fillColor: "white",
+      color: "white",
+      weight: 1,
+      fillOpacity: 0.6,
+    });
   } else {
-    // If the hidden field doesn't have a value, set it to the clicked country name
-    destinationField.value = countryName;
+    // If the country is not selected, add it to the list
+    selectedCountries.push(countryName);
+    layer.setStyle({
+      fillColor: "#FE5F55",
+      color: "white",
+      weight: 2,
+      fillOpacity: 0.5,
+    });
   }
 
-  // Get the text field
-  var destinationTextField = document.getElementById('destination-text-field');
+  destinationField.value = selectedCountries.filter(Boolean).join(", ");
 
-  // Disable the text field
-  destinationTextField.disabled = true;
+  // Enable/disable the text field based on the number of selected countries
+  if (selectedCountries.length > 0) {
+    destinationTextField.disabled = true;
+  } else {
+    destinationTextField.disabled = false;
+  }
 }

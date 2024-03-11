@@ -1,9 +1,48 @@
 class TripsController < ApplicationController
-
   def index
     @trips = current_user.trips
   end
 
+  def calculate_average
+    @trip = Trip.find(params[:id])
+    cityFrom = params[:city_name]
+      json_key_io = StringIO.new(ENV['GOOGLE_JSON_KEY'])
+      scopes = ['https://www.googleapis.com/auth/cloud-platform']
+      authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
+        json_key_io: json_key_io,
+        scope: scopes
+      )
+      authorizer.fetch_access_token!
+      access_token = authorizer.access_token
+      url = ENV.fetch('searchAI', nil)
+      uri = URI(url)
+
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      request = Net::HTTP::Post.new(uri.path)
+      request['Content-Type'] = 'application/json'
+      request['Authorization'] = "Bearer #{access_token}"
+
+      body = {
+        instances: [
+          { prompt: "Please calculate the trip cost to #{@trip.destination} from #{cityFrom}
+                      if I want to visit: #{@trip.additional_suggestions}" }
+        ]
+      }
+      request.body = body.to_json
+      response = http.request(request)
+
+      if response.code == '200'
+        result = JSON.parse(response.body)
+        # Extract content from the predictions
+        content_data = result['predictions'].first['content']
+        Rails.logger.error(content_data)
+        @trip.update(average_cost: content_data)
+      else
+        Rails.logger.error("API request failed with code #{response.code} for destination #{@trip.destination}")
+      end
+    redirect_to trip_path(@trip)
+  end
   def show
     @trip = Trip.find(params[:id])
     @trip.content = eval(@trip.content)
@@ -127,7 +166,10 @@ class TripsController < ApplicationController
       if response.code == '200'
         response.body.gsub!(/(```|json)/, '')
         result = JSON.parse(response.body)
-        results[destination] = result['predictions'][0]['content']
+        suggestions = result['predictions'][0]['content']
+        suggestions.gsub!("\n*", '').gsub!('*', '')
+        results[destination] = suggestions
+        Rails.logger.error(results[destination])
       else
         Rails.logger.error("API request failed with code #{response.code} for destination #{destination}")
       end
@@ -136,6 +178,60 @@ class TripsController < ApplicationController
   end
 
   def get_trip_suggestions(destinations, _start_date, _end_date, _limit_words)
+    destinations = [destinations] unless destinations.is_a?(Array)
+    results = {}
+    json_key_io = StringIO.new(ENV['GOOGLE_JSON_KEY'])
+    scopes = ['https://www.googleapis.com/auth/cloud-platform']
+    authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
+      json_key_io: json_key_io,
+      scope: scopes
+    )
+    destinations.each do |destination|
+      authorizer.fetch_access_token!
+      access_token = authorizer.access_token
+      url = ENV.fetch('searchAI', nil)
+      uri = URI(url)
+
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      request = Net::HTTP::Post.new(uri.path)
+      request['Content-Type'] = 'application/json'
+      request['Authorization'] = "Bearer #{access_token}"
+
+      body = {
+        instances: [
+          { prompt: "Please describe the country - #{destination} in a few words" }
+        ]
+      }
+
+      request.body = body.to_json
+
+      response = http.request(request)
+
+      if response.code == '200'
+        result = JSON.parse(response.body)
+        results[destination] = result['predictions'][0]['content']
+
+        url = "https://pixabay.com/api/?key=#{ENV['PIXABAY_API_KEY']}&q=#{destination}&image_type=photo&per_page=3"
+        puts "Request URL: #{url}"
+
+        response = RestClient.get(url)
+        resultPic = JSON.parse(response.body)
+
+
+        if resultPic['hits'].any?
+          photo_url = resultPic['hits'].first['largeImageURL']
+          cloudinary_result = Cloudinary::Uploader.upload(photo_url)
+          @trip.update(photo_url: cloudinary_result['secure_url'])
+        end
+      else
+        Rails.logger.error("API request failed with code #{response.code} for destination #{destination}")
+      end
+    end
+    results
+  end
+
+  def get_trip_cost(content, homeplace)
     destinations = [destinations] unless destinations.is_a?(Array)
     results = {}
     json_key_io = StringIO.new(ENV['GOOGLE_JSON_KEY'])
@@ -178,6 +274,6 @@ class TripsController < ApplicationController
   end
 
   def trip_params
-    params.permit(:destination, :start_date, :end_date)
+    params.permit(:destination, :start_date, :end_date, :photo_url)
   end
 end

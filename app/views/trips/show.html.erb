@@ -1,6 +1,4 @@
 <!-- app/views/trips/show.html.erb -->
-<br>
-<br>
 <div class="container">
   <div>
     <h1><%= @trip.destination %>✨</h1>
@@ -11,16 +9,10 @@
       <p>Start date: <%= @trip.start_date %></p>
       <p>End date: <%= @trip.end_date %></p>
     </div>
-      <%= link_to trips_path, method: :get do %>
-          <%= button_tag type: 'button', class: "btn btn-outline-white" do %> Add to
-            <i class="fa-solid fa-heart fa-xl" style="color: #fe5f55;"></i>
-          <% end %>
-        <% end %>
+      <div>
+        <%= button_to 'Add to favourites', trips_path, class: "btn btn-outline-white", method: :get %>
       </div>
   </div>
-
-  <!-- Photo gallery -->
-
   <div class="show-gallery">
     <div class="images-show-big">
       <%= image_tag 'Italy.jpg' %>
@@ -50,15 +42,26 @@
 
   <!-- Itinerary -->
   <h2>Additional Suggestions:</h2>
+
+    <% end %>
+
+  <p><%= @trip.content %></p>
+  <h1>Additional Suggestions:</h2>
   <% suggestions = JSON.parse(@trip.additional_suggestions) %>
     <div class="suggestion-card">
-    <% suggestions.each do |suggestion| %>
-      <h5><%= suggestion["date"]%></h5>
-      <% suggestion["suggestions"].each do |sug|%>
-        <p><%= sug %></p>
-      <% end %>
+      <% suggestions.each do |suggestion| %>
+        <h5><%= suggestion["date"]%></h5>
+        <% suggestion["suggestions"].each do |sug|%>
+          <p><%= sug %></p>
+        <% end %>
     </div>
-    <% end %>
   <br>
+  <%= form_with url: { action: "calculate_average", id: @trip.id }, method: :get do %>
+    <%= text_field_tag :city_name, nil, placeholder: "Enter city name" %>
+    <%= submit_tag 'Calculate Average Cost' %>
+  <% end %>
+  <br>
+  <h2>Calculated Average</h1>
+  <p>The average cost for the trip to <%= @trip.destination %> is <%= @trip.average_cost %></p>
   <%= button_to 'Back', trips_path, class: "btn btn-outline-black", method: :get %>
 </div>
