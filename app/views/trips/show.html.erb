@@ -34,9 +34,27 @@
   </div>
   <br>
   <br>
+
+  <!-- Short description -->
+  <h5><i class="fa-solid fa-quote-left" style="color: #e95653;"></i></h5>
+  <h5><%= @trip.content.split("=>").last[1..-3] %></h5>
+  <br>
+
+  <!-- Itinerary -->
+  <h2>Additional Suggestions:</h2>
+
+    <% end %>
+
   <p><%= @trip.content %></p>
   <h1>Additional Suggestions:</h2>
-  <p><%= @trip.additional_suggestions %></p>
+  <% suggestions = JSON.parse(@trip.additional_suggestions) %>
+    <div class="suggestion-card">
+      <% suggestions.each do |suggestion| %>
+        <h5><%= suggestion["date"]%></h5>
+        <% suggestion["suggestions"].each do |sug|%>
+          <p><%= sug %></p>
+        <% end %>
+    </div>
   <br>
   <%= form_with url: { action: "calculate_average", id: @trip.id }, method: :get do %>
     <%= text_field_tag :city_name, nil, placeholder: "Enter city name" %>
