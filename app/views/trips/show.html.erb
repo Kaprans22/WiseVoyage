@@ -15,21 +15,14 @@
   </div>
   <div class="show-gallery">
     <div class="images-show-big">
-      <%= image_tag 'Italy.jpg' %>
+      <%= image_tag @trip.image_urls[0] if @trip.image_urls[0] %>
     </div>
     <div class="images-show-small">
-      <div class="smaller-images-show">
-       <%= image_tag 'italy(1).jpg' %>
-      </div>
-      <div class="smaller-images-show">
-       <%= image_tag 'italy(2).jpg' %>
-      </div>
-      <div class="smaller-images-show">
-        <%= image_tag 'italy(3).jpg' %>
-      </div>
-      <div class="smaller-images-show">
-       <%= image_tag 'italy(5).jpg' %>
-      </div>
+      <% @trip.image_urls.drop(1).each do |url| %>
+        <div class="smaller-images-show">
+          <%= image_tag url if url %>
+        </div>
+      <% end %>
     </div>
   </div>
   <br>
