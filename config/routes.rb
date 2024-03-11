@@ -21,4 +21,9 @@ Rails.application.routes.draw do
   post 'token', to: 'trips#refresh_access_token'
   get 'map', to: 'map#index'
   resources :suggestions, only: [ :index, :show ]
+
+  resources :users, only: [:show, :edit, :update, :create, :new] do
+    get 'dashboard', on: :member
+  end
+
 end
