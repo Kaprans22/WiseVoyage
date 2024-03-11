@@ -184,7 +184,6 @@ class TripsController < ApplicationController
         response.body.gsub!(/(```|json)/, '')
         result = JSON.parse(response.body)
         suggestions = result['predictions'][0]['content']
-        suggestions.gsub!("\n*", '').gsub!('*', '')
         results[destination] = suggestions
         Rails.logger.error(results[destination])
       else
