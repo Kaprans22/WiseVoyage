@@ -11,6 +11,10 @@ gem 'oauth2'
 
 gem 'googleauth'
 
+gem 'memory_profiler'
+
+gem 'rest-client'
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
