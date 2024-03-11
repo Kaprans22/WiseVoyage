@@ -200,11 +200,15 @@ class TripsController < ApplicationController
       if response.code == '200'
         result = JSON.parse(response.body)
         results[destination] = result['predictions'][0]['content']
+        photo = Unsplash::Photo.search(destination).first
+        if photo
+          cloudinary_result = Cloudinary::Uploader.upload(photo.urls.full)
+          @trip.update(photo_url: cloudinary_result['secure_url'])
+        end
       else
         Rails.logger.error("API request failed with code #{response.code} for destination #{destination}")
       end
     end
-
     results
   end
 
@@ -251,6 +255,6 @@ class TripsController < ApplicationController
   end
 
   def trip_params
-    params.permit(:destination, :start_date, :end_date)
+    params.permit(:destination, :start_date, :end_date, :photo_url)
   end
 end
