@@ -20,6 +20,8 @@ gem 'rest-client'
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
+gem "rest-client"
+
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 

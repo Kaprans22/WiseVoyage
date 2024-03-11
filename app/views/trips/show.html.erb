@@ -36,14 +36,14 @@
   <h2>Additional Suggestions:</h2>
   <p><%= @trip.content %></p>
   <% suggestions = JSON.parse(@trip.additional_suggestions) %>
-  <div class="suggestion-card">
-    <% suggestions.each do |suggestion| %>
+  <% suggestions.each do |suggestion| %>
+    <div class="suggestion-card">
       <h5><%= suggestion["date"]%></h5>
       <% suggestion["suggestions"].each do |sug|%>
         <p><%= sug %></p>
       <% end %>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
   <br>
   <%= form_with url: { action: "calculate_average", id: @trip.id }, method: :get do %>
     <%= text_field_tag :city_name, nil, placeholder: "Enter city name" %>
