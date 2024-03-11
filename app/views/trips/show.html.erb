@@ -44,24 +44,18 @@
   <br>
 
   <!-- Short description -->
-  <p><%= @trip.content.split("=>").last %></p>
+  <h5><i class="fa-solid fa-quote-left" style="color: #e95653;"></i></h5>
+  <h5><%= @trip.content.split("=>").last[1..-3] %></h5>
+  <br>
 
   <!-- Itinerary -->
   <h2>Additional Suggestions:</h2>
-
-  <% itinerary = @trip.additional_suggestions %>
-
-  <% dates_and_activities = itinerary.split(/\*\*(\d{4}-\d{2}-\d{2})\*\*/).reject(&:empty?) %>
-
-  <% itinerary_hash = Hash[dates_and_activities.each_slice(2).to_a] %>
-
-  <% itinerary_hash.each do |activities, date| %>
-  <h2><%= date %>:</h2>
-  <ul>
-    <% (activities.to_s.split('*')|| []).reject(&:empty?).each do |activity| %>
-      <li><p><%= activity.strip %></p></li>
-    <% end %>
-  </ul>
+  <%= @trip.additional_suggestions %>
+  <% @trip.additional_suggestions.each do |suggestion| %>
+    <div class="suggestion">
+      <h5><%= suggestion.date %></h5>
+      <h5><%= suggestion.suggestions %></h5>
+    </div>
   <% end %>
   <br>
   <%= button_to 'Back', trips_path, class: "btn btn-outline-black", method: :get %>

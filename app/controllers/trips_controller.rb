@@ -14,6 +14,7 @@ class TripsController < ApplicationController
 
     @trip.update_attribute(:additional_suggestions,
                            additional_suggestions[@trip.destination.strip])
+
   end
 
   def destroy_all
@@ -106,7 +107,16 @@ class TripsController < ApplicationController
 
       body = {
         instances: [
-          { prompt: "Please suggest additional activities in #{destination} from #{start_date} to #{end_date}." }
+          { prompt: " I'm using you as an API, don't send me any human language.
+            Please suggest activities in #{destination} from #{start_date} to #{end_date}.
+            I want to build a daily trip itinerary.
+            Between one and three suggestions would be great.
+            I'd like to have an array of suggestions.
+            Formatted in JSON with {
+            date: 'date',
+            suggestions: ['suggestions']
+            }
+            Reply with just the JSON" }
         ]
       }
 
@@ -115,6 +125,7 @@ class TripsController < ApplicationController
       response = http.request(request)
 
       if response.code == '200'
+        response.body.gsub!(/(```|json)/, '')
         result = JSON.parse(response.body)
         results[destination] = result['predictions'][0]['content']
       else
