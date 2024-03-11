@@ -24,26 +24,6 @@
                           <%= form.text_field :first_name, class: 'form-field' %>
                         </div>
 
-                          <div class="field my-2">
-                          <%= form.label :last_name %>
-                          <%= form.text_field :last_name, class: 'form-field' %>
-                        </div>
-
-                        <div class="field my-2">
-                          <%= form.label :address %>
-                          <%= form.text_field :address, class: 'form-field' %>
-                        </div>
-
-                          <div class="form-group row my-2">
-                            <%= form.label :photo %>
-                            <div class="col-sm-8">
-                              <%= form.file_field :photo, class: 'form-field' %>
-                            </div>
-                          </div>
-                        <div class="actions">
-                          <%= form.submit "Update profile", class: "form-field btn btn-outline-white my-3 my-sm-0", data: { disable_with: "Uploading..." } %>
-                        </div>
-                      <% end %>
                         </div>
                       </div>
             </div>
@@ -55,7 +35,7 @@
   <h3 class="my-4 mx-5">Your favorite trips</h3>
     <div class="d-flex flex-wrap justify-content-center" style="min-height: 100vh; position: relative;">
           <% @user_trips.each do |user_trip| %>
-              <div class="card mb-2 mx-1" style="width: 18rem; height: 38,.0px;">
+              <div class="card mb-2 mx-1" style="width: 18rem; height: 380px;">
               <%= link_to trip_path(user_trip), class: "text-decoration-none text-reset" do %>
                 <%= image_tag("logo.png", alt: "Card image cap", class: "card-img-top") %>
                 <div class="card-body d-flex flex-column justify-content-between">

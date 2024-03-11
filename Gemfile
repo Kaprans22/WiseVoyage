@@ -89,3 +89,4 @@ end
 gem 'leaflet-rails'
 gem 'countries'
 gem "cloudinary"
+gem 'rest-client'
