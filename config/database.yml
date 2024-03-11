@@ -79,6 +79,4 @@ test:
 #
 production:
   <<: *default
-  database: change_this_to_your_rails_app_name_production
-  username: change_this_to_your_rails_app_name
-  password: <%= ENV["CHANGE_THIS_TO_YOUR_RAILS_APP_NAME_DATABASE_PASSWORD"] %>
+  database: change_this_to_your_rails_app_name_test

@@ -53,4 +53,10 @@ function onCountryClick(e) {
     // If the hidden field doesn't have a value, set it to the clicked country name
     destinationField.value = countryName;
   }
+
+  // Get the text field
+  var destinationTextField = document.getElementById('destination-text-field');
+
+  // Disable the text field
+  destinationTextField.disabled = true;
 }

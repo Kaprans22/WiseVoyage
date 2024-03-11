@@ -11,7 +11,9 @@
   transition: background-color 0.7s ease;
   height: 80px;
 }
-
+// .container-fluid {
+//   padding-left: 39px!important;
+// }
 .icon {
   transform: translateY(-200px);
 }
@@ -27,7 +29,9 @@
 .navbar-logo img {
   width: 100px;
 }
-
+.container-fluid {
+  padding-left: 40px!important;
+}
 .nav-item {
   display: flex;
   margin: 0 10px;
@@ -73,6 +77,10 @@
   .navbar {
     height: 20px !important;
   }
+  .container-fluid {
+    padding-left: 80px!important;
+    transition: 0.5s;
+  }
 }
 
 .faded {
@@ -83,6 +91,10 @@
   .icon {
     transform: translateY(-200px);
     transition: 0.5s;
+  }
+  .container-fluid {
+  padding-left: 40px!important;
+  transition: 0.5s;
   }
 }
 ///* nav-item sizes *///////////////////////////////

@@ -3,6 +3,5 @@ import "@hotwired/turbo-rails";
 import "controllers";
 import "@popperjs/core";
 import "bootstrap";
-//import "jquery/src/jquery"  // Add this line
-import "@rails/ujs"; // Add this line
-import "loading_bar";
+// import "jquery/src/jquery"  // SHOLD BE DELETED
+// import "@rails/ujs"  // SHOLD BE DELETED

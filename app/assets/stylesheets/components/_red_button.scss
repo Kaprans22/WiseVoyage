@@ -1,0 +1,10 @@
+.btn-outline-red {
+    background-color: $red;
+    color: $white;
+    border-color: $white;
+  &:hover {
+    background-color: $white;
+    color: $red;
+    border-color: $red;
+  }
+}

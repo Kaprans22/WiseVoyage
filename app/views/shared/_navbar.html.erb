@@ -2,25 +2,25 @@
   <div class="container-fluid">
     <div>
       <%= link_to "/", class: "navbar-logo" do %>
-        <%= image_tag "wisevoyage-logo-vector.svg" %>
-      <% end %>
+        <%= image_tag ("logo.png")%>
+<% end %>
     </div>
     <div class="" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <!-- About us -->
         <li class="nav-item">
           <span class="hyperlink"><%= link_to "About us", "#", class: "nav-link" %></span>
-          <a class="icon" href="#" id="about-us"><%= image_tag "icons/group128.png" %></a>
+          <a class="icon" href="#" id="about-us"><i class="fa-solid fa-users-rectangle fa-xl" style="color: #ffffff;"></i></a>
         </li>
         <!-- Home -->
         <li class="nav-item">
           <span class="hyperlink"><%= link_to "Home", "/", class: "nav-link" %></span>
-          <a class="icon" href="#" id="home"><%= image_tag "icons/home64.png" %></a>
+          <a class="icon" href="#" id="home"><i class="fa-solid fa-house fa-xl" style="color: #ffffff;"></i></a>
         </li>
         <!-- Dashboard -->
         <li class="nav-item">
           <span class="hyperlink"><%= link_to "Dashboard", dashboard_path(current_user), class: "nav-link" %></span>
-          <a class="icon" href="#" id="dashboard"><%= image_tag "icons/user48.png"  %></a>
+          <a class="icon" href="#" id="dashboard"><i class="fa-solid fa-user fa-xl" style="color: #ffffff;"></i></a>
         </li>
       </ul>
     </div>

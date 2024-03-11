@@ -1,17 +1,48 @@
 <!-- app/views/trips/index.html.erb -->
-<br>
-<h1>All Trips</h1>
 
-<% @trips.each do |trip| %>
-  <div>
-    <h2><%= link_to trip.destination, trip_path(trip) %></h2>
-    <p>Start date: <%= trip.start_date %></p>
-    <p>End date: <%= trip.end_date %></p>
-    <p>Content: <%= trip.content %></p>
-     <%= button_to 'Delete', delete_specific_trip_path(trip), method: :delete, data: { confirm: 'Are you sure?' } %>
+<div class="container mt-5 pt-5">
+
+<%# <br> %>
+<h1></h1>
+<div class="row" style="min-height: 100vh; position: relative;">
+  <div class="col-md-8">
+    <div class="cards row justify-content-center mb-2">
+      <% @trips.each_with_index do |trip, index| %>
+        <% if index % 3 == 0 && index != 0 %>
+          </div>
+          <div class="row justify-content-center mb-2">
+        <% end %>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+          <%= link_to trip_path(trip), class: "text-decoration-none text-reset" do %>
+            <%= image_tag("logo.png", alt: "Card image cap", class: "card-img-top") %>
+            <div class="card-body d-flex flex-column justify-content-between">
+              <h5 class="card-title"><strong><%= trip.destination %></strong></h5>
+              <p class="card-text" ><%= trip.start_date %> - <%= trip.end_date %></p>
+
+              <% require 'json' %>
+              <% begin %>
+                <% hash = JSON.parse(trip.content.gsub('=>', ':')) %>
+                <% first_sentence = hash.values.first.split('.').first.strip %>
+              <% rescue JSON::ParserError %>
+                <% first_sentence = "Content not available" %>
+              <% end %>
+              <p class="card-text"><%= first_sentence %></p>
+              <% end %>
+              <%= button_to 'Delete', delete_specific_trip_path(trip), class:"btn btn-outline-black", method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
-
-<br>
-<%= button_to 'Delete All', destroy_all_trips_path, method: :delete, data: { confirm: 'Are you sure?' } %>
-<br>
+  <div class="col-md-4"  style="height: 100%; overflow: auto; position: relative;">
+    <%= image_tag(asset_path('sea.png'), alt: "Southeast Asia", class: "img-fluid", style: "position: sticky; top: 20;") %>
+  </div>
+<%= button_to 'Delete All', destroy_all_trips_path, class:"btn btn-outline-red", method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>
+<div class="text-center mb-3">
+<h4>Still not enough? Lets search again </h4>
+<%= link_to "Search", root_path, class: "btn btn-outline-white" %>
+</div>
+</div>
