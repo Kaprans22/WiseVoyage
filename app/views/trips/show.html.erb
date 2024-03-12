@@ -29,13 +29,10 @@
   </div>
   <br>
   <br>
-
-  <!-- Short description -->
   <h5><i class="fa-solid fa-quote-left" style="color: #e95653;"></i></h5>
   <h5><%= @trip.content.split("=>").last[1..-3] %></h5>
   <br>
 
-  <!-- Itinerary -->
   <h2>Additional Suggestions:</h2>
   <% suggestions = JSON.parse(@trip.additional_suggestions) %>
   <% suggestions.each do |suggestion| %>
@@ -47,6 +44,7 @@
       <div class="collapsible-content">
         <% suggestion["suggestions"].each do |sug|%>
           <p><%= sug %></p>
+          <%= button_to 'Cancel', cancel_suggestion_trip_path(id: @trip.id, suggestion: sug, destination: @trip.destination, date: suggestion['date']), method: :patch, data: { confirm: 'Are you sure?' } %>
         <% end %>
       </div>
     </div>

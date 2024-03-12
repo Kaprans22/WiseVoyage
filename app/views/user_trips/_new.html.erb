@@ -2,8 +2,14 @@
   <%= f.hidden_field :user_id, value: current_user.id %>
   <%= f.hidden_field :trip_id, value: @trip.id %>
 
-  <%= button_tag(type: 'submit', class: "btn btn-outline-white") do %>
-  Add to <i class="fa-solid fa-heart fa-xl" style="color: #fe5f55;"></i>
-<% end %>
+  <% if current_user.user_trips.pluck(:trip_id).include?(@trip.id) %>
+    <%= button_tag(type: 'submit', class: "btn btn-outline-white", disabled: true) do %>
+      Add to <i class="fa-solid fa-heart fa-xl" style="color: #fe5f55;"></i>
+    <% end %>
+  <% else %>
+    <%= button_tag(type: 'submit', class: "btn btn-outline-white") do %>
+      Add to <i class="fa-solid fa-heart fa-xl" style="color: #fe5f55;"></i>
+    <% end %>
+  <% end %>
 
 <% end %>
