@@ -9,7 +9,6 @@
   padding: 18px;
   width: 100%;
   border: none;
-  text-align: left !important;
   outline: none;
   font-size: 15px;
 }
@@ -35,5 +34,13 @@
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
-  background-color: #f1f1f1;
+  background-color: #fdfdfd;
+}
+
+.cancel-suggestion-trip {
+  color: $red;
+  background-color: #ffffff;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
 }
