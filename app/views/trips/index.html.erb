@@ -35,8 +35,14 @@
               <% end %>
               <p class="card-text"><%= first_sentence %></p>
               <% end %>
-              <%= button_to delete_specific_trip_path(trip), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link ml-auto p-2", style: "background: none; border: none; padding-left: 231px!important;" do %>
-                <i class="fa-solid fa-xmark fa-xl" style="color: #fe5f55;"></i>
+              <% if current_user.user_trips.pluck(:trip_id).include?(trip.id) %>
+                <%= button_to delete_specific_trip_path(trip), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link ml-auto p-2", style: "background: none; border: none; padding-left: 231px!important;", disabled: true do %>
+                  <i class="fa-solid fa-xmark fa-xl" style="color: #fabebb;"></i>
+                <% end %>
+              <% else %>
+                <%= button_to delete_specific_trip_path(trip), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link ml-auto p-2", style: "background: none; border: none; padding-left: 231px!important;" do %>
+                  <i class="fa-solid fa-xmark fa-xl" style="color: #fe5f55;"></i>
+                <% end %>
               <% end %>
             </div>
           </div>

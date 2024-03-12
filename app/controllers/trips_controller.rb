@@ -63,7 +63,6 @@ class TripsController < ApplicationController
     }
     result = JSON.parse(response.body)
 
-    # Store the URLs of the images in the trip's image_urls attribute
     @trip.update_attribute(:image_urls, result['hits'].map { |hit| hit['webformatURL'] })
 
     return unless @trip.additional_suggestions.nil? || @trip.additional_suggestions.empty?
@@ -77,7 +76,8 @@ class TripsController < ApplicationController
   end
 
   def destroy_all
-    current_user.trips.destroy_all
+    trips_to_keep = current_user.user_trips.pluck(:trip_id)
+    current_user.trips.where.not(id: trips_to_keep).destroy_all
     redirect_to root_path
   end
 
@@ -140,6 +140,62 @@ class TripsController < ApplicationController
     redirect_to trips_path, notice: 'Trip was successfully deleted.'
   end
 
+  def cancel_suggestion
+    @trip = Trip.find(params[:id])
+    suggestions = JSON.parse(@trip.additional_suggestions)
+    json_key_io = StringIO.new(ENV['GOOGLE_JSON_KEY'])
+    scopes = ['https://www.googleapis.com/auth/cloud-platform']
+    authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
+      json_key_io: json_key_io,
+      scope: scopes
+    )
+    authorizer.fetch_access_token!
+    access_token = authorizer.access_token
+    url = ENV.fetch('searchAI', nil)
+    uri = URI(url)
+
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    request = Net::HTTP::Post.new(uri.path)
+    request['Content-Type'] = 'application/json'
+    request['Authorization'] = "Bearer #{access_token}"
+    date_object = suggestions.find { |obj| obj['suggestions'].include?(params[:suggestion]) && obj['date'] == params[:date] }
+
+    if date_object
+      index = date_object['suggestions'].index(params[:suggestion])
+      body =  {
+    "instances": [
+        {
+            "content": "I'm using you as an API, don't send me any human language  Please suggest a single activity in  #{params[:destination]} on the date:#{params[:dateForSug]} that you havent recommended me yet, without mentioning the date}.
+            I'd like to have a single suggestion formatted In a JSON like this:
+            activity: 'activity',
+            "
+        }
+    ],
+    "parameters": {
+        "candidateCount": 1,
+        "maxOutputTokens": 1024,
+        "temperature": 0.9,
+        "topP": 1
+    }
+}
+      request.body = body.to_json
+      response = http.request(request)
+      Rails.logger.error(response.body)
+      if response.code == '200'
+        response.body.gsub!(/(```|json)/, '')
+        result = JSON.parse(response.body)
+        new_suggestion = JSON.parse(result['predictions'][0]['content'])
+        date_object['suggestions'][index] = new_suggestion['activity']
+      else
+        Rails.logger.error("API request failed with code #{response.code} for destination #{params[:destination]}")
+      end
+    end
+
+    @trip.update(additional_suggestions: suggestions.to_json)
+    redirect_to @trip
+  end
+
   private
 
   def get_additional_suggestions(destinations, start_date, end_date, _limit_words)
@@ -169,7 +225,7 @@ class TripsController < ApplicationController
           { prompt: " I'm using you as an API, don't send me any human language.
             Please suggest activities in #{destination} from #{start_date} to #{end_date}.
             I want to build a daily trip itinerary.
-            Three suggestions would be great with some description for each.
+            Three suggestions would be great for with some description for each.
             I'd like to have an array of suggestions.
             Formatted in JSON with {
             date: 'date',
@@ -188,7 +244,6 @@ class TripsController < ApplicationController
         result = JSON.parse(response.body)
         suggestions = result['predictions'][0]['content']
         results[destination] = suggestions
-        Rails.logger.error(results[destination])
       else
         Rails.logger.error("API request failed with code #{response.code} for destination #{destination}")
       end
@@ -250,47 +305,6 @@ class TripsController < ApplicationController
     results
   end
 
-  def get_trip_cost(content, homeplace)
-    destinations = [destinations] unless destinations.is_a?(Array)
-    results = {}
-    json_key_io = StringIO.new(ENV['GOOGLE_JSON_KEY'])
-    scopes = ['https://www.googleapis.com/auth/cloud-platform']
-    authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
-      json_key_io: json_key_io,
-      scope: scopes
-    )
-    destinations.each do |destination|
-      authorizer.fetch_access_token!
-      access_token = authorizer.access_token
-      url = ENV.fetch('searchAI', nil)
-      uri = URI(url)
-
-      http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = true
-      request = Net::HTTP::Post.new(uri.path)
-      request['Content-Type'] = 'application/json'
-      request['Authorization'] = "Bearer #{access_token}"
-
-      body = {
-        instances: [
-          { prompt: "Please describe the country - #{destination} in a few words" }
-        ]
-      }
-
-      request.body = body.to_json
-
-      response = http.request(request)
-
-      if response.code == '200'
-        result = JSON.parse(response.body)
-        results[destination] = result['predictions'][0]['content']
-      else
-        Rails.logger.error("API request failed with code #{response.code} for destination #{destination}")
-      end
-    end
-
-    results
-  end
 
   def trip_params
     params.permit(:destination, :start_date, :end_date, :photo_url)

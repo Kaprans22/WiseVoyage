@@ -7,8 +7,8 @@
   </script>
   <script src="/assets/map.js"></script>
 <div class="container ">
-<div class="d-flex justify-content-center" >
-<%= form_tag("/trips", method: "post", remote: true) do %>
+<div class="d-flex justify-content-center" id="form-container" >
+<%= form_tag("/trips", method: "post", remote: true, id: "trip-form") do %>
   <div>
     <%= label_tag(:destination, "Country:") %>
     <%= text_field_tag(:destination, nil, id: "destination-text-field") %>
@@ -22,7 +22,7 @@
     <%= label_tag(:end_date, "End Date:") %>
     <%= text_field_tag(:end_date, nil, type: "date") %>
   </div>
-  <%= submit_tag("Submit") %>
+  <%= submit_tag("Submit", id: "submit-btn") %>
 <% end %>
 <main class="flex flex-col justify-items-stretch grow shrink">
   <header>
@@ -49,7 +49,7 @@
           <% end %>
         </div>
       </div>
-      <% @suggestions_europe[4..11].each_slice(4) do |suggestions| %>
+      <% @suggestions_europe[4..11] do |suggestions| %>
         <div class="carousel-item">
           <div class="d-flex" style="width: 100%; justify-content: center;">
             <% unless suggestions[0].nil? %>
@@ -231,5 +231,22 @@
     </button>
   </div>
 
+<%= render 'shared/loading_bar' %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('trip-form').addEventListener('submit', function() {
+      // Show loading overlay and bar when form is submitted
+      document.getElementById('loading-overlay').style.display = 'block';
+      document.getElementById('loading-bar-container').style.display = 'block';
+    });
+
+    // Hide loading overlay and bar after a delay (simulate loading completion)
+    window.addEventListener('load', function() {
+      document.getElementById('loading-overlay').style.display = 'none';
+      document.getElementById('loading-bar-container').style.display = 'none';
+    });
+  });
+</script>
 
 </div>
