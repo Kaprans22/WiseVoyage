@@ -74,7 +74,47 @@ class TripsController < ApplicationController
                            additional_suggestions[@trip.destination.strip])
 
   end
+  def get_trip_cost(content, homeplace)
+    destinations = [destinations] unless destinations.is_a?(Array)
+    results = {}
+    json_key_io = StringIO.new(ENV['GOOGLE_JSON_KEY'])
+    scopes = ['https://www.googleapis.com/auth/cloud-platform']
+    authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
+      json_key_io: json_key_io,
+      scope: scopes
+    )
+    destinations.each do |destination|
+      authorizer.fetch_access_token!
+      access_token = authorizer.access_token
+      url = ENV.fetch('searchAI', nil)
+      uri = URI(url)
 
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      request = Net::HTTP::Post.new(uri.path)
+      request['Content-Type'] = 'application/json'
+      request['Authorization'] = "Bearer #{access_token}"
+
+      body = {
+        instances: [
+          { prompt: "Please describe the country - #{destination} in a few words" }
+        ]
+      }
+
+      request.body = body.to_json
+
+      response = http.request(request)
+
+      if response.code == '200'
+        result = JSON.parse(response.body)
+        results[destination] = result['predictions'][0]['content']
+      else
+        Rails.logger.error("API request failed with code #{response.code} for destination #{destination}")
+      end
+    end
+
+    results
+  end
   def destroy_all
     trips_to_keep = current_user.user_trips.pluck(:trip_id)
     current_user.trips.where.not(id: trips_to_keep).destroy_all

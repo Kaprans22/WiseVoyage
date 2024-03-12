@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   resources :trips do
     delete 'delete_specific', on: :member
+    patch :cancel_suggestion, on: :member
   end
 
   resources :user_trips, only: [:new, :create, :destroy]
