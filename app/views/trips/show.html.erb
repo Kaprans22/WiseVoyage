@@ -1,4 +1,3 @@
-<!-- app/views/trips/show.html.erb -->
 <div class="container">
   <div>
     <h1><%= @trip.destination %>✨</h1>
@@ -26,13 +25,10 @@
   </div>
   <br>
   <br>
-
-  <!-- Short description -->
   <h5><i class="fa-solid fa-quote-left" style="color: #e95653;"></i></h5>
   <h5><%= @trip.content.split("=>").last[1..-3] %></h5>
   <br>
 
-  <!-- Itinerary -->
   <h2>Additional Suggestions:</h2>
   <p><%= @trip.content %></p>
   <% suggestions = JSON.parse(@trip.additional_suggestions) %>
@@ -44,7 +40,7 @@
         <%= button_to 'Cancel', cancel_suggestion_trip_path(id: @trip.id, suggestion: sug, destination: @trip.destination, date: suggestion['date']), method: :patch, data: { confirm: 'Are you sure?' } %>
       <% end %>
     </div>
-    <% end %> <!-- This is the missing end -->
+    <% end %>
   <br>
   <%= form_with url: { action: "calculate_average", id: @trip.id }, method: :get do %>
     <%= text_field_tag :city_name, nil, placeholder: "Enter city name" %>

@@ -76,7 +76,8 @@ class TripsController < ApplicationController
   end
 
   def destroy_all
-    current_user.trips.destroy_all
+    trips_to_keep = current_user.user_trips.pluck(:trip_id)
+    current_user.trips.where.not(id: trips_to_keep).destroy_all
     redirect_to root_path
   end
 
