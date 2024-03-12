@@ -158,17 +158,10 @@ class TripsController < ApplicationController
     request = Net::HTTP::Post.new(uri.path)
     request['Content-Type'] = 'application/json'
     request['Authorization'] = "Bearer #{access_token}"
-
-    Rails.logger.error(suggestions)
-    Rails.logger.error('111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111')
-    Rails.logger.error(params[:suggestion])
-    Rails.logger.error(params[:date])
     date_object = suggestions.find { |obj| obj['suggestions'].include?(params[:suggestion]) && obj['date'] == params[:date] }
 
     if date_object
-      Rails.logger.error('22222222222222222222222222222222222222')
       index = date_object['suggestions'].index(params[:suggestion])
-      Rails.logger.error(index)
       body =  {
     "instances": [
         {
@@ -192,8 +185,6 @@ class TripsController < ApplicationController
         response.body.gsub!(/(```|json)/, '')
         result = JSON.parse(response.body)
         new_suggestion = JSON.parse(result['predictions'][0]['content'])
-        Rails.logger.error(new_suggestion)
-        Rails.logger.error('111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111')
         date_object['suggestions'][index] = new_suggestion['activity']
       else
         Rails.logger.error("API request failed with code #{response.code} for destination #{params[:destination]}")
@@ -252,7 +243,6 @@ class TripsController < ApplicationController
         result = JSON.parse(response.body)
         suggestions = result['predictions'][0]['content']
         results[destination] = suggestions
-        Rails.logger.error(results[destination])
       else
         Rails.logger.error("API request failed with code #{response.code} for destination #{destination}")
       end
