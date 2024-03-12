@@ -1,0 +1,4 @@
+<div class="sug d-flex justify-content-between mt-2 align-middle" data-controller="reload-suggestion">
+  <p class="p-2"><%= suggestion %></p>
+  <button data-action="click->reload-suggestion#fire" data-path="<%= cancel_suggestion_trip_path(id: trip.id, suggestion: suggestion, destination: trip.destination, date: date)%>" class="cancel-suggestion-trip"><h4><i class="fa-solid fa-rotate-right"></i></h4></button>
+</div >
