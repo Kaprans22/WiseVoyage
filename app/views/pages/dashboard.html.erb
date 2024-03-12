@@ -1,4 +1,4 @@
-<div class="container row justify-content-center">
+<div class="dashboardcontainer row justify-content-center">
 
   <div class="user-card col-4">
     <div class="positions" style="position: relative;">
@@ -63,12 +63,12 @@
         <div class="d-flex flex-wrap" style="min-height: 100vh;">
               <% @user_trips.each do |user_trip| %>
                   <div class="card mb-2 mx-1" style="width: 18rem; height: 420px;">
-                  <%= link_to trip_path(user_trip), class: "text-decoration-none text-reset" do %>
-                     <% if user_trip.trip.photo_url.present? %>
-                      <%= image_tag(user_trip.trip.photo_url, alt: "Card image cap", class: "card-img-top", style: "object-fit: cover;") %>
-                    <% else %>
-                      <%= image_tag("logo.png", alt: "Card image cap", class: "card-img-top", style: "object-fit: cover;") %>
-                    <% end %>
+                    <%= link_to trip_path(user_trip), class: "text-decoration-none text-reset" do %>
+                        <% if user_trip.trip.photo_url.present? %>
+                          <%= image_tag(user_trip.trip.photo_url, alt: "Card image cap", class: "card-img-top", style: "object-fit: cover;") %>
+                        <% else %>
+                          <%= image_tag("logo.png", alt: "Card image cap", class: "card-img-top", style: "object-fit: cover;") %>
+                        <% end %>
                     <div class="card-body d-flex flex-column justify-content-between">
                       <h5 class="card-title"><strong><%= user_trip.trip.destination %></strong></h5>
                       <p class="card-text" ><i><%= user_trip.trip.start_date %> - <%= user_trip.trip.end_date %></i></p>

@@ -4,9 +4,22 @@
 
   <script>
     var countriesGeoJSON = <%= @countries_geojson.html_safe %>;
+    document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('trip-form').addEventListener('submit', function() {
+      // Show loading overlay and bar when form is submitted
+      document.getElementById('loading-overlay').style.display = 'block';
+      document.getElementById('loading-bar-container').style.display = 'block';
+    });
+
+    // Hide loading overlay and bar after a delay (simulate loading completion)
+    window.addEventListener('load', function() {
+      document.getElementById('loading-overlay').style.display = 'none';
+      document.getElementById('loading-bar-container').style.display = 'none';
+    });
+  });
   </script>
   <script src="/assets/map.js"></script>
-<div class="container ">
+<div class="container">
 <div class="d-flex justify-content-center" id="form-container" >
 <%= form_tag("/trips", method: "post", remote: true, id: "trip-form") do %>
   <div>
@@ -233,20 +246,6 @@
 
 <%= render 'shared/loading_bar' %>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('trip-form').addEventListener('submit', function() {
-      // Show loading overlay and bar when form is submitted
-      document.getElementById('loading-overlay').style.display = 'block';
-      document.getElementById('loading-bar-container').style.display = 'block';
-    });
 
-    // Hide loading overlay and bar after a delay (simulate loading completion)
-    window.addEventListener('load', function() {
-      document.getElementById('loading-overlay').style.display = 'none';
-      document.getElementById('loading-bar-container').style.display = 'none';
-    });
-  });
-</script>
 
 </div>
