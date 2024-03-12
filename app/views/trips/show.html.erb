@@ -36,14 +36,15 @@
   <h2>Additional Suggestions:</h2>
   <p><%= @trip.content %></p>
   <% suggestions = JSON.parse(@trip.additional_suggestions) %>
-  <% suggestions.each do |suggestion| %>
-    <div class="suggestion-card">
+    <% suggestions.each do |suggestion| %>
+   <div class="suggestion-card">
       <h5><%= suggestion["date"]%></h5>
       <% suggestion["suggestions"].each do |sug|%>
         <p><%= sug %></p>
-      <% end %>
+        <%= button_to 'Cancel', cancel_suggestion_trip_path(id: @trip.id, suggestion: sug, destination: @trip.destination, date: suggestion['date']), method: :patch, data: { confirm: 'Are you sure?' } %>
       <% end %>
     </div>
+    <% end %> <!-- This is the missing end -->
   <br>
   <%= form_with url: { action: "calculate_average", id: @trip.id }, method: :get do %>
     <%= text_field_tag :city_name, nil, placeholder: "Enter city name" %>
@@ -53,4 +54,4 @@
   <h2>Calculated Average</h2>
   <p>The average cost for the trip to <%= @trip.destination %> is <%= @trip.average_cost %></p>
   <%= button_to 'Back', trips_path, class: "btn btn-outline-black", method: :get %>
-</div>
+  </div>
