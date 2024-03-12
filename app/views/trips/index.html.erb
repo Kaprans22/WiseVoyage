@@ -13,14 +13,14 @@
           <%= link_to trip_path(trip), class: "text-decoration-none text-reset" do %>
           <div class="card-image">
             <% if trip.photo_url.present? %>
-              <%= image_tag(trip.photo_url, alt: "Card image cap", class: "card-img-top", style: "object-fit:cover;") %>
+              <%= image_tag(trip.photo_url, alt: "Card image cap", class: "card-img-top", style: "object-fit:cover; width:100%; height:190px;") %>
             <% else %>
-              <%= image_tag("logo.png", alt: "Card image cap", class: "card-img-top") %>
+              <%= image_tag("logo.png", alt: "Card image cap", class: "card-img-top", style: "object-fit:cover; width:100%; height:190px;") %>
             <% end %>
             </div>
             <div class="card-body d-flex flex-column justify-content-between">
               <h5 class="card-title"><strong> <%= trip.destination %></strong></h5>
-              <p class="card-text" ><i><%= trip.start_date %> - <%= trip.end_date %></i></p>
+              <p class="card-text" style="font-size:14px; opacity: .7; margin: 0;" ><i><%= trip.start_date %> - <%= trip.end_date %></i></p>
 
               <% require 'json' %>
               <% begin %>
@@ -29,7 +29,7 @@
               <% rescue JSON::ParserError %>
                 <% first_sentence = "Content not available" %>
               <% end %>
-              <p class="card-text"><%= first_sentence %></p>
+              <p class="card-text" style="font-size:14px; opacity: .7; margin: 0;"><%= first_sentence %></p>
               <% end %>
               <% if current_user.user_trips.pluck(:trip_id).include?(trip.id) %>
                 <%= button_to delete_specific_trip_path(trip), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link ml-auto p-2", style: "background: none; border: none; padding-left: 231px!important;", disabled: true do %>
