@@ -1,5 +1,39 @@
 .suggestion-card {
-  outline-style: solid;
-  outline-color: #000000;
-  outline-width: 1px;
+  border-top: #000000;
+  border-radius: 2px;
+}
+
+.collapsible {
+  background-color: #ffffff;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left !important;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #f1f0f0;
+}
+
+.collapsible:after {
+  // content: '\002B';
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  // content: "\2212";
+}
+
+.collapsible-content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
 }

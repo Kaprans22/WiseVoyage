@@ -225,7 +225,8 @@ class TripsController < ApplicationController
           { prompt: " I'm using you as an API, don't send me any human language.
             Please suggest activities in #{destination} from #{start_date} to #{end_date}.
             I want to build a daily trip itinerary.
-            Three suggestions would be great for with some description for each.
+            Between and three suggestions would be great with some description for each.
+            No repitition please.
             I'd like to have an array of suggestions.
             Formatted in JSON with {
             date: 'date',
