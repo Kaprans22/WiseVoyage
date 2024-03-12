@@ -31,15 +31,15 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', (e) => {
-    // Display loading overlay and bar when page starts loading
+  document.addEventListener('DOMContentLoaded', (e) => {
+
     document.getElementById('loading-overlay').style.display = 'block';
     document.getElementById('loading-bar-container').style.display = 'block';
 
-    // Hide loading overlay and bar after a delay (simulate loading completion)
+
     window.addEventListener('load', () => {
         document.getElementById('loading-overlay').style.display = 'none';
         document.getElementById('loading-bar-container').style.display = 'none';
     });
-});
+  });
 </script>
