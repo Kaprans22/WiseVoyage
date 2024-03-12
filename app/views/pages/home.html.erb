@@ -22,11 +22,11 @@
 <div class="container">
 <div class="d-flex justify-content-center" id="form-container" >
 <%= form_tag("/trips", method: "post", remote: true, id: "trip-form") do %>
-  <div>
-    <%= label_tag(:destination, "Country:") %>
-    <%= text_field_tag(:destination, nil, id: "destination-text-field") %>
-    <%= hidden_field_tag :destination, nil, id: "destination-field" %>
-  </div>
+<div>
+  <%= label_tag(:destination, "Country:") %>
+  <%= text_field_tag(:destination, nil, id: "destination-text-field") %>
+  <%= hidden_field_tag :hidden_destination, nil, id: "destination-field" %>
+</div>
   <div>
     <%= label_tag(:start_date, "Start Date:") %>
     <%= text_field_tag(:start_date, nil, type: "date") %>

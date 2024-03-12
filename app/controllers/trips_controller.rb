@@ -128,12 +128,13 @@ class TripsController < ApplicationController
   end
 
   def create
-    destinations = trip_params[:destination].split(',').map(&:strip)
+    destination = trip_params[:destination].presence || params[:hidden_destination]
+    return render json: { error: 'Destination is required' }, status: :unprocessable_entity unless destination
+    destinations = destination.split(',').map(&:strip)
     @trips = []
     errors = []
-
     destinations.each do |destination|
-      @trip = current_user.trips.new(trip_params.except(:destination).merge(destination:))
+      @trip = current_user.trips.new(trip_params.except(:destination).merge(destination: destination))
       content = get_trip_suggestions(@trip.destination, @trip.start_date, @trip.end_date, destinations.size > 1)
       if content.present?
         pretty_content = pretty_content(content)
@@ -141,10 +142,10 @@ class TripsController < ApplicationController
         if @trip.save
           @trips << @trip
         else
-          errors << { destination:, error: @trip.errors.full_messages }
+          errors << { destination: destination, error: @trip.errors.full_messages }
         end
       else
-        errors << { destination:, error: "Failed to retrieve suggestions" }
+        errors << { destination: destination, error: "Failed to retrieve suggestions" }
       end
     end
 
@@ -160,7 +161,7 @@ class TripsController < ApplicationController
         format.js
       end
     else
-      render json: { errors: }, status: :unprocessable_entity
+      render json: { errors: errors }, status: :unprocessable_entity
     end
   end
 
