@@ -1,5 +1,4 @@
 <div class="dashboardcontainer row justify-content-center">
-
   <div class="user-card col-4">
     <div class="positions" style="position: relative;">
     <div class="user-avatar">
@@ -20,26 +19,26 @@
             </div>
             <div class="modal-body">
               <%= simple_form_for(@user, local: true, multipart: true, remote: true) do |form| %>
-                              <div class="field my-2 d-flex justify-content-between">
-                                <%= form.label :first_name %>
-                                <%= form.text_field :first_name, class: 'form-field' %>
-                              </div>
-                              <div class="field my-2 d-flex justify-content-between">
-                                <%= form.label :last_name %>
-                                <%= form.text_field :last_name, class: 'form-field' %>
-                              </div>
-                              <div class="field my-2 d-flex justify-content-between">
-                                <%= form.label :email %>
-                                <%= form.text_field :email, class: 'form-field' %>
-                              </div>
-                              <div class="field my-2 d-flex justify-content-between">
-                                <%= form.label :address %>
-                                <%= form.text_field :address, class: 'form-field' %>
-                              </div>
-                              <div class="form-group row my-2 d-flex justify-content-between">
-                                <%= form.label :photo %>
-                                <%= form.file_field :photo, class: 'form-field' %>
-                              </div>
+                <div class="field my-2 d-flex justify-content-between">
+                  <%= form.label :first_name %>
+                  <%= form.text_field :first_name, class: 'form-field' %>
+                </div>
+                <div class="field my-2 d-flex justify-content-between">
+                  <%= form.label :last_name %>
+                  <%= form.text_field :last_name, class: 'form-field' %>
+                </div>
+                <div class="field my-2 d-flex justify-content-between">
+                  <%= form.label :email %>
+                  <%= form.text_field :email, class: 'form-field' %>
+                </div>
+                <div class="field my-2 d-flex justify-content-between">
+                  <%= form.label :address %>
+                  <%= form.text_field :address, class: 'form-field' %>
+                </div>
+                <div class="form-group row my-2 d-flex justify-content-between">
+                  <%= form.label :photo %>
+                  <%= form.file_field :photo, class: 'form-field' %>
+                </div>
             </div>
             <div class="modal-footer">
               <div class="actions">

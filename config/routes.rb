@@ -30,6 +30,6 @@ Rails.application.routes.draw do
 
 
   get 'trips/:id/calculate_average', to: 'trips#calculate_average', as: 'calculate_average'
+  get 'about', to: 'pages#about', as: 'about'
 
-  resources :suggestions, only: [:index, :show]
 end
