@@ -9,7 +9,7 @@
         <% end %>
     </div>
     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style="position: absolute; bottom: -5%; right: 4px; outline: none;">
-      <i class="fa-solid fa-user-pen" style="color: #000000;"></i>
+      <i class="fa-solid fa-user-pen" style="color: #000000;font-size:18px;"></i>
     </button>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -42,7 +42,7 @@
             </div>
             <div class="modal-footer">
               <div class="actions">
-                <%= form.submit "Update profile", class: "form-field btn btn-outline-white my-3 my-sm-0", data: { disable_with: "Uploading..." } %>
+                <%= form.submit "Update profile", class: "form-field btn btn-outline-white my-3 my-sm-0"%>
               </div>
                     <% end %>
             </div>
@@ -59,9 +59,9 @@
 
   <div class="favorite trips col-8" style="border-left: 1px solid #000000; padding-left:40px;">
       <h3 class="mb-4">Hi <%= @user.first_name %>! These are your favorite trips</h3>
-        <div class="d-flex flex-wrap" style="min-height: 100vh;">
+        <div class="d-flex flex-wrap" style="min-height: 55vh;">
               <% @user_trips.each do |user_trip| %>
-                  <div class="card mb-2 mx-1" style="width: 18rem;">
+                  <div class="card mb-2 mx-1" style="width: 18rem; height:450px;">
                     <%= link_to trip_path(user_trip), class: "text-decoration-none text-reset" do %>
                         <% if user_trip.trip.photo_url.present? %>
                           <%= image_tag(user_trip.trip.photo_url, alt: "Card image cap", class: "card-img-top", style: "height: 200px

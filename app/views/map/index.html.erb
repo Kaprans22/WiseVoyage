@@ -16,7 +16,7 @@
                   <%= image_tag("logo.png", alt: "Card image cap", class: "card-img-top", style: "height: 100%; width: 100%; object-fit: cover;") %>
                 <% end %>
                 <div class="card-body d-flex flex-column justify-content-between">
-                  <h5 class="card-title"><strong><%= trip.destination %></strong></h5>
+                  <h5 class="card-title"><strong><%= trip.destination.capitalize %></strong></h5>
                   <p class="card-text" ><i><%= trip.start_date %> - <%= trip.end_date %></i></p>
 
                   <% require 'json' %>
@@ -51,8 +51,8 @@
 </script>
     <%= button_to 'Delete All', destroy_all_trips_path, class:"btn btn-outline-red", method: :delete, data: { confirm: 'Are you sure?' } %>
   </div>
-  <div class="text-center mb-3">
+  <div class="text-center mb-3" style="margin-top: 41px!important;">
     <h4>Still not enough? Lets search again </h4>
-    <%= link_to "Search", root_path, class: "btn btn-outline-white" %>
+    <%= link_to "Search", root_path, class: "btn btn-outline-white", style:"margin-top:20px;" %>
   </div>
 </div>

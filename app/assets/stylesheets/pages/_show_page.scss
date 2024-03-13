@@ -1,6 +1,12 @@
 @import 'components/_white_button.scss';
 @import "components/_black_button.scss";
 @import 'components/_suggestion_card.scss';
+.pshowtrip {
+  font-size: 18px!important;
+  margin-top: 43px;
+  margin-left: 43px;
+  margin-right: 43px;
+}
 
 .show-gallery {
   display: flex;
@@ -37,4 +43,9 @@
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
+.dates {
+  margin-left: 0px!important;
+  margin-right: 0px!important;
+  margin-top: 0px!important;
 }
