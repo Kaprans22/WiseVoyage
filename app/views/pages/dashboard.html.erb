@@ -61,10 +61,8 @@
       <h3 class="mb-4">Hi <%= @user.first_name %>! These are your favorite trips</h3>
         <div class="d-flex flex-wrap" style="min-height: 55vh;">
               <% @user_trips.each do |user_trip| %>
-                  <div class="card mb-2 mx-1" style="width: 18rem; height: 420px;">
-                    <%= link_to trip_path(user_trip.trip), class: "text-decoration-none text-reset" do %>
                   <div class="card mb-2 mx-1" style="width: 18rem; height:450px;">
-                    <%= link_to trip_path(user_trip), class: "text-decoration-none text-reset" do %>
+                    <%= link_to trip_path(user_trip.trip), class: "text-decoration-none text-reset" do %>
                         <% if user_trip.trip.photo_url.present? %>
                           <%= image_tag(user_trip.trip.photo_url, alt: "Card image cap", class: "card-img-top", style: "height: 200px
                           ; width: 100%; object-fit: cover;") %>
