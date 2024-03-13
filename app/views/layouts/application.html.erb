@@ -9,9 +9,11 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css' %>
     <%= javascript_include_tag 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js'%>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= javascript_importmap_tags %>
+    <link rel="icon" type="image/png" href="<%= asset_path('icon.png') %>">
     <%# <link rel="preconnect" href="https://fonts.googleapis.com"> %>
     <%# <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> %>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@318&display=swap" rel="stylesheet">
@@ -24,6 +26,7 @@
     <%= render "shared/navbar" %>
     <%= render "shared/flashes" %>
     <%= yield %>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <%= render "shared/footer" %>
     <%= render 'shared/loading_bar' %>
   </body>
