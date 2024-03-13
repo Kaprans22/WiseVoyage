@@ -10,7 +10,7 @@ class TripsController < ApplicationController
 
   def calculate_average
     @trip = Trip.find(params[:id])
-    cityFrom = params[:city_name]
+    city_from = params[:city_name]
     json_key_io = StringIO.new(ENV.fetch('GOOGLE_JSON_KEY', nil))
     scopes = ['https://www.googleapis.com/auth/cloud-platform']
     authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
@@ -30,8 +30,22 @@ class TripsController < ApplicationController
 
     body = {
       instances: [
-        { prompt: "Please calculate the trip cost to #{@trip.destination} from #{cityFrom}
-                      if I want to visit: #{@trip.additional_suggestions}" }
+        { prompt: "Please calculate the trip cost to #{@trip.destination} from #{city_from}
+                      if I want to visit: #{@trip.additional_suggestions}.
+                        I'm using you as an API, don't send me any human language.
+                        Give me a JSON with the following structure:
+                        breakdown: {
+                          accomodation: { { budget: price, midrange: price, luxury: price }, totalPrice: rangeOfPrice },
+                          transportation: { { publicTransports: price, taxis: price }, totalPrice: price * numberOfDays },
+                          activities: [ {title: title, price: price }, totalPrice: price * numberOfDays ],
+                          total: rangeOfPrice,
+                          flights: [ { link: link, price: price }]
+                          //give more than one if you can find more than one flight :)
+                        }
+                        price should be a string with the currency symbol in euros like : '€23'.
+                        rangeOfPrice should be a string with the currency symbol in euros like : '€23-€45'.
+                        " },
+
       ]
     }
     request.body = body.to_json
@@ -215,7 +229,7 @@ class TripsController < ApplicationController
           {
             content: "I'm using you as an API, don't send me any human language. Please suggest a single activity in  #{params[:destination]} on the date:#{params[:dateForSug]} that you havent recommended me yet, without mentioning the date}.
             I'd like to have a single suggestion formatted In a JSON like this:
-            activity: 'activity',
+            activity: 'activity'
             "
           }
         ],
@@ -248,7 +262,7 @@ class TripsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to @trip }
-      format.text { render partial: 'trip_suggestion', locals: { suggestion: @suggestion, trip: @trip, date: params[:dateForSug] }, formats: [:html] }
+      format.text { render partial: 'trip_suggestion', locals: { suggestion: @suggestion, trip: @trip, date: params[:date] }, formats: [:html] }
       format.json
     end
   end
@@ -291,8 +305,8 @@ class TripsController < ApplicationController
             }
             Reply with just the JSON" }
         ],
-        "parameters": {
-          "maxOutputTokens": 2048
+        parameters: {
+          maxOutputTokens: 2048
         }
       }
 
