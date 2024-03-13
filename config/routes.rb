@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   resources :trips, only: [:index, :show, :create, :destroy]
 
   delete '/trips', to: 'trips#destroy_all', as: 'destroy_all_trips'
-  patch 'trips/:id/cancel_suggestion', to: 'trips#cancel_suggestion', as: 'cancel_suggestion_trip'
+  # patch 'trips/:id/cancel_suggestion', to: 'trips#cancel_suggestion', as: 'cancel_suggestion_trip'
   post 'token', to: 'trips#refresh_access_token'
 
   get 'map', to: 'map#index'

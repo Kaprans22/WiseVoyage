@@ -215,7 +215,7 @@ class TripsController < ApplicationController
           {
             content: "I'm using you as an API, don't send me any human language. Please suggest a single activity in  #{params[:destination]} on the date:#{params[:dateForSug]} that you havent recommended me yet, without mentioning the date}.
             I'd like to have a single suggestion formatted In a JSON like this:
-            activity: 'activity',
+            activity: 'activity'
             "
           }
         ],
@@ -248,7 +248,7 @@ class TripsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to @trip }
-      format.text { render partial: 'trip_suggestion', locals: { suggestion: @suggestion, trip: @trip, date: params[:dateForSug] }, formats: [:html] }
+      format.text { render partial: 'trip_suggestion', locals: { suggestion: @suggestion, trip: @trip, date: params[:date] }, formats: [:html] }
       format.json
     end
   end
