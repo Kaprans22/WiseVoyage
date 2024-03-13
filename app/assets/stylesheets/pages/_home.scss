@@ -53,8 +53,9 @@ background-color: white!important;
 }
 .searchbar {
   position: absolute;
-  width: 80%;
-  top: 90%; // Adjust these values as needed
+  width: 64%;
+  height: 95px;
+  top: 82%; // Adjust these values as needed
   left: 49%;
   transform: translateX(-50%);
   z-index: 1000;
@@ -112,4 +113,13 @@ background-color: white!important;
   color: #000;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.10);
   margin-top: 4px;
+}
+#destination-text-field {
+  border:none;
+}
+#start_date {
+  border:none;
+}
+#end_date {
+  border:none;
 }

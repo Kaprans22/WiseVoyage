@@ -7,26 +7,7 @@
           <h2>travel advisor</h2>
           <p>Let's plan a trip quickly and smart together!</p>
           </div>
-      <div class='searchbar'>
-    <%= form_tag("/trips", method: "post", remote: true, id: "trip-form", class: "d-flex") do %>
-      <div id="fieldSB" class="mr-2">
-        <%= text_field_tag(:destination, nil, id: "destination-text-field", class: "full-width-input") %>
-        <p class="field-description">Destination <i class="fa-solid fa-mountain-sun"></i></p>
-        <%= hidden_field_tag :hidden_destination, nil, id: "destination-field" %>
-      </div>
-      <div id="fieldSB" class="mr-2">
-        <%= text_field_tag(:start_date, nil, type: "date", required: true, class: "full-width-input") %>
-        <p class="field-description">Trip's start date <i class="fa-solid fa-plane-departure"></i></i></p>
-      </div>
-      <div id="fieldSB" class="mr-2">
-        <%= text_field_tag(:end_date, nil, type: "date", required: true, class: "full-width-input") %>
-        <p class="field-description">Trip's end date <i class="fa-solid fa-plane-arrival"></i></p>
-      </div>
-      <%= button_tag(type: 'submit', id: 'submit-btn') do %>
-        <i class="fa fa-search"></i>
-      <% end %>
-    <% end %>
-    </div>
+
       </div>
   </div>
 </div>
@@ -56,7 +37,26 @@
 </main>
 </div>
 <br>
-
+<div class='searchbar'>
+    <%= form_tag("/trips", method: "post", remote: true, id: "trip-form", class: "d-flex") do %>
+      <div id="fieldSB" class="mr-2">
+        <%= text_field_tag(:destination, nil, id: "destination-text-field", class: "full-width-input", placeholder: "") %>
+        <p class="field-description">Destination <i class="fa-solid fa-mountain-sun"></i></p>
+        <%= hidden_field_tag :hidden_destination, nil, id: "destination-field" %>
+      </div>
+      <div id="fieldSB" class="mr-2">
+        <%= text_field_tag(:start_date, nil, type: "date", required: true, class: "full-width-input") %>
+        <p class="field-description">Trip's start date <i class="fa-solid fa-plane-departure"></i></i></p>
+      </div>
+      <div id="fieldSB" class="mr-2">
+        <%= text_field_tag(:end_date, nil, type: "date", required: true, class: "full-width-input") %>
+        <p class="field-description">Trip's end date <i class="fa-solid fa-plane-arrival"></i></p>
+      </div>
+      <%= button_tag(type: 'submit', id: 'submit-btn') do %>
+        <i class="fa fa-search"></i>
+      <% end %>
+    <% end %>
+    </div>
     <div class="h2">
   <h2>Where to travel?</h2>
   </div>
