@@ -3,6 +3,9 @@ require 'rest-client'
 class TripsController < ApplicationController
   def index
     @trips = current_user.trips
+    @countries_geojson = File.read(Rails.root.join('app/assets', 'map.geojson'))
+
+    render 'map/index', countries_geojson: @countries_geojson
   end
 
   def calculate_average

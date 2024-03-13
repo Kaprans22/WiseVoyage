@@ -57,8 +57,8 @@
     </div>
   </div>
 
-  <div class="favorite trips col-8 pl-3" style="border-left: 1px solid #000000;">
-      <h3 class="my-4 mx-5">Hello <%= @user.first_name %>! These are your favorited trips</h3>
+  <div class="favorite trips col-8" style="border-left: 1px solid #000000; padding-left:40px;">
+      <h3 class="mb-4">Hi <%= @user.first_name %>! These are your favorite trips</h3>
         <div class="d-flex flex-wrap" style="min-height: 100vh;">
               <% @user_trips.each do |user_trip| %>
                   <div class="card mb-2 mx-1" style="width: 18rem; height: 420px;">
