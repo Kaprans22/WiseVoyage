@@ -34,15 +34,18 @@ class TripsController < ApplicationController
                       if I want to visit: #{@trip.additional_suggestions}.
                         I'm using you as an API, don't send me any human language.
                         Give me a JSON with the following structure:
-                        prices {
-                          accomodation: { budget: price, midrange: price, luxury: price },
-                          transportation: { publicTransports: price, taxis: price, },
-                          activities: [ {title: title, price: price } ],
-                          total: price,
-                          flights: [ { link: link, price: price } ]
+                        breakdown: {
+                          accomodation: { { budget: price, midrange: price, luxury: price }, totalPrice: rangeOfPrice },
+                          transportation: { { publicTransports: price, taxis: price }, totalPrice: price * numberOfDays },
+                          activities: [ {title: title, price: price }, totalPrice: price * numberOfDays ],
+                          total: rangeOfPrice,
+                          flights: [ { link: link, price: price }]
+                          //give more than one if you can find more than one flight :)
                         }
                         price should be a string with the currency symbol in euros like : '€23'.
-                        " }
+                        rangeOfPrice should be a string with the currency symbol in euros like : '€23-€45'.
+                        " },
+
       ]
     }
     request.body = body.to_json
