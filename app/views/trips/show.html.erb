@@ -61,13 +61,6 @@
     <% end %>
   </div>
   <br>
-<<<<<<< HEAD
-=======
-  <%= form_with url: { action: "calculate_average", id: @trip.id }, method: :get do %>
-    <%= text_field_tag :city_name, nil, placeholder: "#{current_user.address}" %>
-    <%= submit_tag 'Calculate Average Cost' %>
-  <% end %>
->>>>>>> master
   <br>
   <h2>Calculated Average</h2>
   <div class="average-cost" data-controller="average-cost">
