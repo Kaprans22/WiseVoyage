@@ -11,7 +11,7 @@ var countriesLayer = L.geoJSON(countriesGeoJSON, {
       fillColor: "white",
       color: "white",
       weight: 1,
-      fillOpacity: 0.6,
+      fillOpacity: 0.2,
     };
   },
   onEachFeature: function (feature, layer) {
