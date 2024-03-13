@@ -10,17 +10,17 @@
         <!-- About us -->
         <li class="nav-item">
           <span class="hyperlink"><%= link_to 'About us', about_path, class: "nav-link" %></span>
-          <a class="icon" href="#" id="about-us"><i class="fa-solid fa-users-rectangle fa-xl" style="color: #ffffff;"></i></a>
+          <a class="icon" href="<%= about_path %>" id="about-us"><i class="fa-solid fa-users-rectangle fa-xl" style="color: #ffffff;"></i></a>
         </li>
         <!-- Home -->
         <li class="nav-item">
           <span class="hyperlink"><%= link_to "Home", "/", class: "nav-link" %></span>
-          <a class="icon" href="#" id="home"><i class="fa-solid fa-house fa-xl" style="color: #ffffff;"></i></a>
+          <a class="icon" href="<%= root_path %>" id="home"><i class="fa-solid fa-house fa-xl" style="color: #ffffff;"></i></a>
         </li>
         <!-- Dashboard -->
         <li class="nav-item">
           <span class="hyperlink"><%= link_to "Dashboard", dashboard_path, class: "nav-link" %></span>
-          <a class="icon" href="#" id="dashboard"><i class="fa-solid fa-user fa-xl" style="color: #ffffff;"></i></a>
+          <a class="icon" href="<%= dashboard_path %>" id="dashboard"><i class="fa-solid fa-user fa-xl" style="color: #ffffff;"></i></a>
         </li>
       </ul>
     </div>
