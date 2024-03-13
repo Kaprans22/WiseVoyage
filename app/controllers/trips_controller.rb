@@ -116,8 +116,6 @@ class TripsController < ApplicationController
       ]
     }
 
-    p body
-
     request.body = body.to_json
     response = http.request(request)
 
@@ -308,7 +306,7 @@ class TripsController < ApplicationController
                           activities: [ {title: title, price: price }, totalPrice: price * numberOfDays ],
                           total: rangeOfPrice
                         }
-                        price should be a string with the currency symbol in euros like : '€23'.
+                        price should be an number.
                         rangeOfPrice should be a string with the currency symbol in euros like : '€23-€45'.
                         " }
 
@@ -318,15 +316,25 @@ class TripsController < ApplicationController
     response = http.request(request)
 
     if response.code == '200'
+      response.body.gsub!(/(```|json)/, '')
       result = JSON.parse(response.body)
       # Extract content from the predictions
       content_data = result['predictions'].first['content']
       Rails.logger.error(content_data)
+      content_data = JSON.parse(content_data)
       @trip.update(average_cost: content_data)
     else
       Rails.logger.error("API request failed with code #{response.code} for destination #{@trip.destination}")
     end
-    # redirect_to trip_path(@trip)
+
+
+    # @trip.update(average_cost: content_data.to_json)
+
+    # respond_to do |format|
+    #   format.html { redirect_to @trip }
+    #   format.text { render partial: 'average_cost', locals: { content: content_data }, formats: [:html] }
+    #   format.json
+    # end
   end
 
   def get_additional_suggestions(destinations, start_date, end_date, _limit_words)

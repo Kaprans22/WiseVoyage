@@ -61,7 +61,9 @@
   <br>
   <br>
   <h2>Calculated Average</h2>
-  <p>The average cost for the trip to <%= @trip.destination %> is <%= @trip.average_cost %></p>
+  <div class="average-cost" data-controller="average-cost">
+    <p>The average cost for the trip to <%= @trip.destination %> is <%= @trip.average_cost %></p>
+  </div>
   <br>
   <div class="flight-info" data-controller="flights">
     <%= form_with url: { action: "get_trip_flight_info", id: @trip.id }, method: :post, html: {data: {action: "submit->flights#generate"}} do %>
