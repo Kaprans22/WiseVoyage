@@ -8,61 +8,6 @@ class TripsController < ApplicationController
     render 'map/index', countries_geojson: @countries_geojson
   end
 
-  def calculate_average
-    @trip = Trip.find(params[:id])
-    city_from = params[:city_name]
-    json_key_io = StringIO.new(ENV.fetch('GOOGLE_JSON_KEY', nil))
-    scopes = ['https://www.googleapis.com/auth/cloud-platform']
-    authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
-      json_key_io:,
-      scope: scopes
-    )
-    authorizer.fetch_access_token!
-    access_token = authorizer.access_token
-    url = ENV.fetch('searchAI', nil)
-    uri = URI(url)
-
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    request = Net::HTTP::Post.new(uri.path)
-    request['Content-Type'] = 'application/json'
-    request['Authorization'] = "Bearer #{access_token}"
-
-    body = {
-      instances: [
-        { prompt: "Please calculate the trip cost to #{@trip.destination} from #{city_from}
-                      if I want to visit: #{@trip.additional_suggestions}.
-                        I'm using you as an API, don't send me any human language.
-                        Give me a JSON with the following structure:
-                        breakdown: {
-                          accomodation: { { budget: price, midrange: price, luxury: price }, totalPrice: rangeOfPrice },
-                          transportation: { { publicTransports: price, taxis: price }, totalPrice: price * numberOfDays },
-                          activities: [ {title: title, price: price }, totalPrice: price * numberOfDays ],
-                          total: rangeOfPrice,
-                          flights: [ { link: link, price: price }]
-                          //give more than one if you can find more than one flight :)
-                        }
-                        price should be a string with the currency symbol in euros like : '€23'.
-                        rangeOfPrice should be a string with the currency symbol in euros like : '€23-€45'.
-                        " },
-
-      ]
-    }
-    request.body = body.to_json
-    response = http.request(request)
-
-    if response.code == '200'
-      result = JSON.parse(response.body)
-      # Extract content from the predictions
-      content_data = result['predictions'].first['content']
-      Rails.logger.error(content_data)
-      @trip.update(average_cost: content_data)
-    else
-      Rails.logger.error("API request failed with code #{response.code} for destination #{@trip.destination}")
-    end
-    redirect_to trip_path(@trip)
-  end
-
   def show
     @trip = Trip.find(params[:id])
     @user_trip = UserTrip.new
@@ -81,6 +26,8 @@ class TripsController < ApplicationController
     result = JSON.parse(response.body)
 
     @trip.update_attribute(:image_urls, result['hits'].map { |hit| hit['webformatURL'] })
+
+    calculate_average()
 
     return unless @trip.additional_suggestions.nil? || @trip.additional_suggestions.empty?
 
@@ -131,6 +78,64 @@ class TripsController < ApplicationController
     end
 
     results
+  end
+
+  def get_trip_flight_info
+    @trip = Trip.find(params[:id])
+    city_from = params[:city_name]
+    json_key_io = StringIO.new(ENV.fetch('GOOGLE_JSON_KEY', nil))
+    scopes = ['https://www.googleapis.com/auth/cloud-platform']
+    authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
+      json_key_io:,
+      scope: scopes
+    )
+    authorizer.fetch_access_token!
+    access_token = authorizer.access_token
+    url = ENV.fetch('searchAI', nil)
+    uri = URI(url)
+
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    request = Net::HTTP::Post.new(uri.path)
+    request['Content-Type'] = 'application/json'
+    request['Authorization'] = "Bearer #{access_token}"
+
+    body = {
+      instances: [
+        { prompt: "Please calculate the flight costs from #{city_from} to #{@trip.destination}
+                        I'm using you as an API, don't send me any human language.
+                        Give me a JSON with the following structure:
+                        flights: [{
+                          links: link, price: price, departure: departure, arrival: arrival, duration: duration, airline: airline
+                         }]
+                        Ideally between 2 and 4 flights.
+                        Price should be a string with the currency symbol in euros like : '€23'.
+                        Make sure the links are valid and take to the airline's homepage.
+                        " }
+
+      ]
+    }
+
+    request.body = body.to_json
+    response = http.request(request)
+
+    if response.code == '200'
+      response.body.gsub!(/(```|json)/, '')
+      result = JSON.parse(response.body)
+      # Extract content from the predictions
+      content_data = result['predictions'].first['content']
+      Rails.logger.error(content_data)
+    else
+      Rails.logger.error("API request failed with code #{response.code} for destination #{@trip.destination}")
+    end
+
+    content = JSON.parse(content_data)
+
+    respond_to do |format|
+      format.html { redirect_to @trip }
+      format.text { render partial: 'flights_info', locals: { content: content }, formats: [:html] }
+      format.json
+    end
   end
 
   def destroy_all
@@ -227,9 +232,9 @@ class TripsController < ApplicationController
       body =  {
         instances: [
           {
-            content: "I'm using you as an API, don't send me any human language. Please suggest a single activity in  #{params[:destination]} on the date:#{params[:dateForSug]} that you havent recommended me yet, without mentioning the date}.
+            content: "I'm using you as an API, don't send me any human language. Please suggest a single activity in  #{params[:destination]} on the date:#{params[:dateForSug]} that you havent recommended me yet, without mentioning the date.
             I'd like to have a single suggestion formatted In a JSON like this:
-            activity: 'activity'
+            { activity: 'activity' }
             "
           }
         ],
@@ -268,6 +273,69 @@ class TripsController < ApplicationController
   end
 
   private
+
+  def calculate_average
+    @trip = Trip.find(params[:id])
+    city_from = params[:city_name]
+    json_key_io = StringIO.new(ENV.fetch('GOOGLE_JSON_KEY', nil))
+    scopes = ['https://www.googleapis.com/auth/cloud-platform']
+    authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
+      json_key_io:,
+      scope: scopes
+    )
+    authorizer.fetch_access_token!
+    access_token = authorizer.access_token
+    url = ENV.fetch('searchAI', nil)
+    uri = URI(url)
+
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    request = Net::HTTP::Post.new(uri.path)
+    request['Content-Type'] = 'application/json'
+    request['Authorization'] = "Bearer #{access_token}"
+
+    body = {
+      instances: [
+        { prompt: "Please calculate the trip cost to #{@trip.destination} from #{city_from}
+                      if I want to visit: #{@trip.additional_suggestions}.
+                        I'm using you as an API, don't send me any human language.
+                        Give me a JSON with the following structure:
+                        breakdown: {
+                          accomodation: { { budget: price, midrange: price, luxury: price }, totalPrice: rangeOfPrice },
+                          transportation: { { publicTransports: price, taxis: price }, totalPrice: price * numberOfDays },
+                          activities: [ {title: title, price: price }, totalPrice: price * numberOfDays ],
+                          total: rangeOfPrice
+                        }
+                        price should be an number.
+                        rangeOfPrice should be a string with the currency symbol in euros like : '€23-€45'.
+                        " }
+
+      ]
+    }
+    request.body = body.to_json
+    response = http.request(request)
+
+    if response.code == '200'
+      response.body.gsub!(/(```|json)/, '')
+      result = JSON.parse(response.body)
+      # Extract content from the predictions
+      content_data = result['predictions'].first['content']
+      Rails.logger.error(content_data)
+      content_data = JSON.parse(content_data)
+      @trip.update(average_cost: content_data)
+    else
+      Rails.logger.error("API request failed with code #{response.code} for destination #{@trip.destination}")
+    end
+
+
+    # @trip.update(average_cost: content_data.to_json)
+
+    # respond_to do |format|
+    #   format.html { redirect_to @trip }
+    #   format.text { render partial: 'average_cost', locals: { content: content_data }, formats: [:html] }
+    #   format.json
+    # end
+  end
 
   def get_additional_suggestions(destinations, start_date, end_date, _limit_words)
     destinations = [destinations] unless destinations.is_a?(Array)
