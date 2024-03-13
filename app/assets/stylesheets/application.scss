@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Old+Standard+TT:ital,wght@0,700;1,400&display=swap');
+
 // Graphical variables
 @import "config/fonts";
 @import "config/colors";
@@ -17,3 +20,15 @@
 // #loading-bar {
 //   display: none;
 // }
+// body {
+//   font-family: "Montserrat" !important, sans-serif !important;
+//   font-optical-sizing: auto !important;
+//   font-weight: 400 !important;
+//   font-style: normal !important;
+// }
+body {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}

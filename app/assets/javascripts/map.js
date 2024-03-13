@@ -25,16 +25,12 @@ function onCountryClick(e) {
   var layer = e.target;
   var countryName = layer.feature.properties.name;
 
-  // Get the hidden field
   var destinationField = document.getElementById("destination-field");
-  // Get the text field
   var destinationTextField = document.getElementById("destination-text-field");
 
-  // Check if the country is already selected
   var selectedCountries = destinationField.value.trim().split(/\s*,\s*/);
   var index = selectedCountries.indexOf(countryName);
 
-  // If the country is already selected, remove it
   if (index !== -1) {
     selectedCountries.splice(index, 1);
     layer.setStyle({
@@ -44,7 +40,6 @@ function onCountryClick(e) {
       fillOpacity: 0.6,
     });
   } else {
-    // If the country is not selected, add it to the list
     selectedCountries.push(countryName);
     layer.setStyle({
       fillColor: "#FE5F55",
@@ -55,8 +50,6 @@ function onCountryClick(e) {
   }
 
   destinationField.value = selectedCountries.filter(Boolean).join(", ");
-
-  // Enable/disable the text field based on the number of selected countries
   if (selectedCountries.length > 0) {
     destinationTextField.disabled = true;
   } else {
