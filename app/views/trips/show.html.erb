@@ -41,12 +41,12 @@
   <div>
     <% suggestions = JSON.parse(@trip.additional_suggestions)  %>
     <% suggestions.each_with_index do |suggestion, i| %>
-      <div class="suggestion-card">
-        <button class="collapsible w-100 text-left d-flex border-top">
+      <div class="suggestion-card" data-controller="collapsible">
+        <button class="collapsible w-100 text-left d-flex border-top" data-action="click->collapsible#toggle">
           <div class="mr-auto p-2"><h6>Day <%= i + 1 %></h6></div>
           <span class="ml-4"></span>
         </button>
-        <div class="collapsible-content">
+        <div class="collapsible-content" data-collapsible-target="content">
           <div class="text-right mt-3"><%= suggestion["date"]%></div>
           <% suggestion["suggestions"].each do |sug|%>
             <div class="sug d-flex justify-content-between mt-2 align-middle" data-controller="reload-suggestion">
@@ -68,20 +68,3 @@
   <p>The average cost for the trip to <%= @trip.destination %> is <%= @trip.average_cost %></p>
   <%= button_to 'Back', trips_path, class: "btn btn-outline-black", method: :get %>
 </div>
-
-<!-- Collapsible script -->
-<script>
-  let coll = document.getElementsByClassName("collapsible");
-
-  for (let i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function() {
-      this.classList.toggle("active");
-      let content = this.nextElementSibling;
-      if (content.style.maxHeight){
-        content.style.maxHeight = null;
-      } else {
-        content.style.maxHeight = content.scrollHeight + "px";
-      }
-    });
-  }
-</script>
