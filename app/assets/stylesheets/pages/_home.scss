@@ -41,3 +41,33 @@
 #curacaobackground {
 background-color: white!important;
 }
+.searchbar {
+  position: absolute;
+  top: 29%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  flex-shrink: 0;
+  border: 1px solid #000;
+  background: #FFF;
+  backdrop-filter: blur(2px)
+}
+
+#fieldSB{
+  border: solid;
+  border-width: 0.25px;
+  border-color: #ccc; /* Make the border color lighter so it stands out against the white background */
+}
+
+#submit-btn {
+  background-color: #000000; /* Make the submit button lighter so it stands out against the white background */
+  color: rgb(255, 255, 255); /* Make the icon color darker so it stands out against the lighter background */
+}
+.welcomeText{
+  position: absolute;
+  top: 20%;
+  left: 31%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  flex-shrink: 0;
+}

@@ -1,7 +1,6 @@
  <br style="height: 500px;">
   <!-- MAP #######-->
 <div id="map" class="w-100" style="height: 500px; z-index: 1"></div>
-
   <script>
     var countriesGeoJSON = <%= @countries_geojson.html_safe %>;
     document.addEventListener('DOMContentLoaded', function() {
@@ -21,22 +20,30 @@
   <script src="/assets/map.js"></script>
 <div class="container">
 <div class="d-flex justify-content-center" id="form-container" >
-<%= form_tag("/trips", method: "post", remote: true, id: "trip-form") do %>
-<div>
-  <%= label_tag(:destination, "Country:") %>
-  <%= text_field_tag(:destination, nil, id: "destination-text-field") %>
-  <%= hidden_field_tag :hidden_destination, nil, id: "destination-field" %>
-</div>
-  <div>
+      <div class='welcomeText'>
+      <h2>Your smart travel advisor</h2>
+      <p>Let’s plan a trip quickly and smart together!</p>
+      </div>
+  <div class='searchbar'>
+<%= form_tag("/trips", method: "post", remote: true, id: "trip-form", class: "d-flex") do %>
+  <div id="fieldSB" class="mr-2">
+    <%= label_tag(:destination, "Country:") %>
+    <%= text_field_tag(:destination, nil, id: "destination-text-field") %>
+    <%= hidden_field_tag :hidden_destination, nil, id: "destination-field" %>
+  </div>
+  <div id="fieldSB" class="mr-2">
     <%= label_tag(:start_date, "Start Date:") %>
-    <%= text_field_tag(:start_date, nil, type: "date") %>
+    <%= text_field_tag(:start_date, nil, type: "date", required: true) %>
   </div>
-  <div>
+  <div id="fieldSB" class="mr-2">
     <%= label_tag(:end_date, "End Date:") %>
-    <%= text_field_tag(:end_date, nil, type: "date") %>
+    <%= text_field_tag(:end_date, nil, type: "date", required: true) %>
   </div>
-  <%= submit_tag("Submit", id: "submit-btn") %>
+<%= button_tag(type: 'submit', id: 'submit-btn') do %>
+  <i class="fa fa-search"></i>
 <% end %>
+<% end %>
+</div>
 <main class="flex flex-col justify-items-stretch grow shrink">
   <header>
   </header>
