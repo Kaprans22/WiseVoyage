@@ -1,28 +1,28 @@
+
 <div id="map" class="w-100" style="height: 500px; z-index: 1">
   <div class="container">
     <div class="d-flex justify-content-center" id="form-container" >
       <div class='welcomeBox'>
           <div class='welcomeText'>
-          <h2>Your smart</h2>
-          <h2>travel advisor</h2>
+          <h2>Your smart travel advisor</h2>
           <p>Let's plan a trip quickly and smart together!</p>
           </div>
       <div class='searchbar'>
     <%= form_tag("/trips", method: "post", remote: true, id: "trip-form", class: "d-flex") do %>
-      <div id="fieldSB" class="mr-2">
-        <%= text_field_tag(:destination, nil, id: "destination-text-field", class: "full-width-input") %>
-        <p class="field-description">Destination <i class="fa-solid fa-mountain-sun"></i></p>
+      <div id="fieldSB" class="ml-3 input-icon">
+        <%= text_field_tag(:destination, nil, id: "destination-text-field", class: "full-width-input", placeholder: "Destination", style:"padding-left:14px; padding-right:14px;") %>
+        <i class="fa-solid fa-mountain-sun"></i>
         <%= hidden_field_tag :hidden_destination, nil, id: "destination-field" %>
       </div>
-      <div id="fieldSB" class="mr-2">
-        <%= text_field_tag(:start_date, nil, type: "date", required: true, class: "full-width-input") %>
-        <p class="field-description">Trip's start date <i class="fa-solid fa-plane-departure"></i></i></p>
+      <div id="fieldSB" class="input-icon">
+        <%= text_field_tag(:start_date, nil, type: "date", required: true, class: "full-width-input", placeholder: "Start date", id:"flatpickr", style:"padding-left:14px; padding-right:14px;") %>
+      <i class="fa-solid fa-plane-departure"></i>
       </div>
-      <div id="fieldSB" class="mr-2">
-        <%= text_field_tag(:end_date, nil, type: "date", required: true, class: "full-width-input") %>
-        <p class="field-description">Trip's end date <i class="fa-solid fa-plane-arrival"></i></p>
+      <div id="fieldSB" class="input-icon">
+        <%= text_field_tag(:end_date, nil, type: "date", required: true, class: "full-width-input", placeholder: "End date", id:"flatpickr", style:"padding-left:14px; padding-right:14px;") %>
+        <i class="fa-solid fa-plane-arrival"></i>
       </div>
-      <%= button_tag(type: 'submit', id: 'submit-btn') do %>
+      <%= button_tag(type: 'submit', id: 'submit-btn', class: 'btn-outline-black') do %>
         <i class="fa fa-search"></i>
       <% end %>
     <% end %>
@@ -58,9 +58,9 @@
 <br>
 
     <div class="h2">
-  <h2>Where to travel?</h2>
+  <h2 class="h2home">Where to travel?</h2>
   </div>
-<h2 class="h2home">European Escapes: Uncover the Old World's Charm!</h2>
+<h2 class="h2home">European escapes: Uncover the old world's charm!</h2>
   <div id="carouselExampleControls1" class="carousel slide">
     <div class="carousel-inner">
       <div class="carousel-item active" id="curacaobackground">
@@ -108,7 +108,7 @@
     </button>
 </div>
 
-<h2 class="h2home">Asian Adventures Await: Discover Exotic Destinations!</h2>
+<h2 class="h2home">Asian adventures await: Discover exotic destinations!</h2>
 
 <div id="carouselExampleControls2" class="carousel slide">
     <div class="carousel-inner">
@@ -148,7 +148,7 @@
     </button>
   </div>
 
-  <h2 class="h2home">Latin Rhythms & Riches: Embark on a Journey through Latin America!</h2>
+  <h2 class="h2home">Latin rhythms & riches: Embark on a journey through Latin America!</h2>
 
   <div id="carouselExampleControls" class="carousel slide">
     <div class="carousel-inner">
@@ -193,3 +193,4 @@
 
 
 </div>
+<script>flatpickr("#flatpickr", {});</script>
