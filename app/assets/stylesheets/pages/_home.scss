@@ -1,4 +1,20 @@
 // Specific CSS for your home-page
+
+// input[type="date"]::-webkit-inner-spin-button,
+// input[type="date"]::-webkit-calendar-picker-indicator {
+//     display: none;
+// }
+
+// input[type="date"]::before {
+//     content: attr(placeholder) !important;
+//     color: #909090;
+// }
+
+// input[type="date"]:focus::before,
+// input[type="date"]:valid::before {
+//     content: "";
+// }
+
 .card-suggestion {
   background-size: cover;
   background-position: center;
@@ -22,11 +38,12 @@
 .segment {
   padding: 16px;
 }
-.h2 {
+.h2home{
   font-size: 24px;
-  font-weight: bold;
+  margin-bottom: 35px;
+  margin-top: 35px;
   padding-top: 16px;
-  padding-left: 16px;
+  padding-left: 106px!important;
 }
 .carousel-item.active {
   justify-content: center;
@@ -41,33 +58,93 @@
 #curacaobackground {
 background-color: white!important;
 }
+.welcomeText, .searchbar {
+  position: absolute;
+}
+
+#submit-btn {
+  background-color: #000000; /* Make the submit button lighter so it stands out against the white background */
+  color: rgb(255, 255, 255);
+  width: 50px;
+  i {
+    font-size: 15px;
+  } /* Make the icon color darker so it stands out against the lighter background */
+}
 .searchbar {
   position: absolute;
-  top: 29%;
+  width: 80%;
+  top: 83%; // Adjust these values as needed
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
   flex-shrink: 0;
   border: 1px solid #000;
   background: #FFF;
-  backdrop-filter: blur(2px)
+  backdrop-filter: blur(2px);
+}
+
+#map {
+  position: relative;
+}
+.h2home {
+  margin-left: 73px;
+}
+#welcomeBox {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  right: 10%;
+  bottom: 10%;
+}
+.full-width-input {
+  width: 100%;
+}
+.welcomeText {
+  position: absolute;
+  top: 70%;
+  left: 26%;
+  transform: translate(-50%, -50%); // This centers the text within #welcomeBox
+  z-index: 1000;
+  flex-shrink: 0;
+  color: #000000;
+  font-size: 24px;
+}
+.trip-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #fieldSB{
+  position:relative;
   border: solid;
   border-width: 0.25px;
-  border-color: #ccc; /* Make the border color lighter so it stands out against the white background */
+  border-color: #ccc;
+  flex: 1;
+  height: 54px;
+  line-height: 50px;
+  font-size: 15px;
 }
 
-#submit-btn {
-  background-color: #000000; /* Make the submit button lighter so it stands out against the white background */
-  color: rgb(255, 255, 255); /* Make the icon color darker so it stands out against the lighter background */
-}
-.welcomeText{
+.field-description {
   position: absolute;
-  top: 20%;
-  left: 31%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  flex-shrink: 0;
+  width: 100%;
+  text-align: center;
+  background-color: transparent;
+  color: #000;
+  margin-top: 4px;
+}
+.full-width-input {
+  border:none;
+}
+.input-icon {
+  position: relative;
+}
+.input-icon i {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
 }

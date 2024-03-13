@@ -6,7 +6,7 @@
 <div class="containershow">
   <div class="section d-flex justify-content-center my-3">
     <div style="display: flex; flex-direction: column; justify-content: center; margin-right:16px; ">
-      <h2 class="h2"><%= @suggestion.subtitle %></h2>
+      <h2 class="h2 my-4"><%= @suggestion.subtitle %></h2>
       <p class="pshow"> <%= @suggestion.paragraph1 %> </p>
     </div>
     <div>
@@ -14,10 +14,10 @@
     </div>
   </div>
 
-  <div class="section d-flex flex-column justify-content-center align-items-center my-3">
+  <div class="section d-flex flex-column justify-content-center align-items-center my-3" style="position: relative;">
     <p class="italic pshow"><%= @suggestion.author %></p>
-    <h5 class="italic" style="margin-bottom: 16px;"><i class="fa-solid fa-quote-left" style="color: #e95653;"></i> <%= @suggestion.quote %></h5>
-    <p class="pshow"> <%= @suggestion.paragraph2 %> </p>
+    <h5 class="italic" style="margin-bottom: 16px;"><i class="fa-solid fa-quote-left" style="color: #e95653; position: absolute; top: -27px;left: 20px;font-size: 49px;"></i>  <%= @suggestion.quote %> </h5>
+    <p class="pshow mt-3"> <%= @suggestion.paragraph2 %> </p>
   </div>
 
   <div class="section d-flex justify-content-center my-3">

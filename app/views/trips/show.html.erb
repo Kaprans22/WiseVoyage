@@ -7,11 +7,11 @@
 <div class="container">
   <br>
   <div>
-    <h1><strong><%= @trip.destination %>✨</strong></h1>
+    <h1><%= @trip.destination.capitalize %></h1>
   </div>
   <br>
   <div class="d-flex justify-content-between">
-    <div class="dates">
+    <div class="dates pshowtrip">
       <p>Start date: <%= @trip.start_date %></p>
       <p>End date: <%= @trip.end_date %></p>
     </div>
@@ -32,8 +32,10 @@
   </div>
   <br>
   <br>
-  <h5 class="border-top pt-3 mt-4"><i class="fa-solid fa-quote-left" style="color: #e95653;"></i></h5>
-  <h5><%= @trip.content.split("=>").last[1..-3] %></h5>
+  <div style="position:relative">
+  <h5 class="border-top pt-3 mt-4"><i class="fa-solid fa-quote-left" style="color: #e95653; position:absolute; top: 28px;left: 3px;font-size:36px"></i></h5>
+  <p class="pshowtrip border-button"><%= @trip.content.split("=>").last[1..-3] %></p>
+  </div>
   <br>
 
   <!-- Daily Activities---------------- -->
@@ -59,6 +61,13 @@
     <% end %>
   </div>
   <br>
+<<<<<<< HEAD
+=======
+  <%= form_with url: { action: "calculate_average", id: @trip.id }, method: :get do %>
+    <%= text_field_tag :city_name, nil, placeholder: "#{current_user.address}" %>
+    <%= submit_tag 'Calculate Average Cost' %>
+  <% end %>
+>>>>>>> master
   <br>
   <h2>Calculated Average</h2>
   <div class="average-cost" data-controller="average-cost">
