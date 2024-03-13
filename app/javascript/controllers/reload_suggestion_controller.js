@@ -2,9 +2,6 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
 
-  connect() {
-    console.log("connected")
-  }
   fire(event) {
     event.preventDefault()
 
@@ -13,6 +10,7 @@ export default class extends Controller {
     })
     .then(response => response.text())
     .then((data) => {
+
       this.element.outerHTML = data
     })
 

@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   delete '/trips', to: 'trips#destroy_all', as: 'destroy_all_trips'
 
+
   post 'token', to: 'trips#refresh_access_token'
 
   get 'map', to: 'map#index'
@@ -30,6 +31,6 @@ Rails.application.routes.draw do
 
 
   get 'trips/:id/calculate_average', to: 'trips#calculate_average', as: 'calculate_average'
+  get 'about', to: 'pages#about', as: 'about'
 
-  resources :suggestions, only: [:index, :show]
 end

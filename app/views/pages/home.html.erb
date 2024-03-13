@@ -1,42 +1,55 @@
- <br style="height: 500px;">
-  <!-- MAP #######-->
-<div id="map" class="w-100" style="height: 500px; z-index: 1"></div>
 
-  <script>
-    var countriesGeoJSON = <%= @countries_geojson.html_safe %>;
-    document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('trip-form').addEventListener('submit', function() {
-      // Show loading overlay and bar when form is submitted
-      document.getElementById('loading-overlay').style.display = 'block';
-      document.getElementById('loading-bar-container').style.display = 'block';
-    });
-
-    // Hide loading overlay and bar after a delay (simulate loading completion)
-    window.addEventListener('load', function() {
-      document.getElementById('loading-overlay').style.display = 'none';
-      document.getElementById('loading-bar-container').style.display = 'none';
-    });
-  });
-  </script>
-  <script src="/assets/map.js"></script>
-<div class="container">
-<div class="d-flex justify-content-center" id="form-container" >
-<%= form_tag("/trips", method: "post", remote: true, id: "trip-form") do %>
-<div>
-  <%= label_tag(:destination, "Country:") %>
-  <%= text_field_tag(:destination, nil, id: "destination-text-field") %>
-  <%= hidden_field_tag :hidden_destination, nil, id: "destination-field" %>
+<div id="map" class="w-100" style="height: 500px; z-index: 1">
+  <div class="container">
+    <div class="d-flex justify-content-center" id="form-container" >
+      <div class='welcomeBox'>
+          <div class='welcomeText'>
+          <h2>Your smart</h2>
+          <h2>travel advisor</h2>
+          <p>Let's plan a trip quickly and smart together!</p>
+          </div>
+      <div class='searchbar'>
+    <%= form_tag("/trips", method: "post", remote: true, id: "trip-form", class: "d-flex") do %>
+      <div id="fieldSB" class="mr-2">
+        <%= text_field_tag(:destination, nil, id: "destination-text-field", class: "full-width-input") %>
+        <p class="field-description">Destination <i class="fa-solid fa-mountain-sun"></i></p>
+        <%= hidden_field_tag :hidden_destination, nil, id: "destination-field" %>
+      </div>
+      <div id="fieldSB" class="mr-2">
+        <%= text_field_tag(:start_date, nil, type: "date", required: true, class: "full-width-input") %>
+        <p class="field-description">Trip's start date <i class="fa-solid fa-plane-departure"></i></i></p>
+      </div>
+      <div id="fieldSB" class="mr-2">
+        <%= text_field_tag(:end_date, nil, type: "date", required: true, class: "full-width-input") %>
+        <p class="field-description">Trip's end date <i class="fa-solid fa-plane-arrival"></i></p>
+      </div>
+      <%= button_tag(type: 'submit', id: 'submit-btn') do %>
+        <i class="fa fa-search"></i>
+      <% end %>
+    <% end %>
+    </div>
+      </div>
+  </div>
 </div>
-  <div>
-    <%= label_tag(:start_date, "Start Date:") %>
-    <%= text_field_tag(:start_date, nil, type: "date") %>
-  </div>
-  <div>
-    <%= label_tag(:end_date, "End Date:") %>
-    <%= text_field_tag(:end_date, nil, type: "date") %>
-  </div>
-  <%= submit_tag("Submit", id: "submit-btn") %>
-<% end %>
+
+<script>
+  var countriesGeoJSON = <%= @countries_geojson.html_safe %>;
+  document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('trip-form').addEventListener('submit', function() {
+    // Show loading overlay and bar when form is submitted
+    document.getElementById('loading-overlay').style.display = 'block';
+    document.getElementById('loading-bar-container').style.display = 'block';
+  });
+
+  // Hide loading overlay and bar after a delay (simulate loading completion)
+  window.addEventListener('load', function() {
+    document.getElementById('loading-overlay').style.display = 'none';
+    document.getElementById('loading-bar-container').style.display = 'none';
+  });
+});
+</script>
+<script src="/assets/map.js"></script>
+
 <main class="flex flex-col justify-items-stretch grow shrink">
   <header>
   </header>
@@ -48,7 +61,7 @@
     <div class="h2">
   <h2>Where to travel?</h2>
   </div>
-<h2 class="h2">European Escapes: Uncover the Old World's Charm!</h2>
+<h2 class="h2home">European Escapes: Uncover the Old World's Charm!</h2>
   <div id="carouselExampleControls1" class="carousel slide">
     <div class="carousel-inner">
       <div class="carousel-item active" id="curacaobackground">
@@ -96,7 +109,7 @@
     </button>
 </div>
 
-<h2 class="h2">Asian Adventures Await: Discover Exotic Destinations!</h2>
+<h2 class="h2home">Asian Adventures Await: Discover Exotic Destinations!</h2>
 
 <div id="carouselExampleControls2" class="carousel slide">
     <div class="carousel-inner">
@@ -136,7 +149,7 @@
     </button>
   </div>
 
-  <h2 class="h2">Latin Rhythms & Riches: Embark on a Journey through Latin America!</h2>
+  <h2 class="h2home">Latin Rhythms & Riches: Embark on a Journey through Latin America!</h2>
 
   <div id="carouselExampleControls" class="carousel slide">
     <div class="carousel-inner">
