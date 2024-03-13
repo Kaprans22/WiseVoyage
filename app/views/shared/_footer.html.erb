@@ -2,21 +2,24 @@
   <div class="footer-empty w-100 h-30"></div>
   <div class="footer-container">
     <div class="footer-logo">
-      <%= image_tag "logo.png" %>
+      <%= image_tag "black-logo.png" %>
     </div>
-    <div class="footer-menu">
-      <h2>Menu</h2>
-      <p>Home</p>
-      <p>Discover</p>
-      <p>About us</p>
+    <div class="footer-menu d-flex flex-column">
+      <h4>Menu</h2>
+      <%= link_to 'Home', root_path, style: "text-decoration: none; color: white;" %>
+      <p> </p>
+      <%= link_to 'About', about_path, style: "text-decoration: none; color: white;" %>
+      <p> </p>
     </div>
     <div class="contact-info">
-      <h2>Contact info</h2>
-      <p>info@travellian.com</p>
-      <p>1081 TG Amsterdam, Netherlands</p>
+      <h4>Contact info</h2>
+      <p>info@wisevoyage.com</p>
+      <p>IJsbaanpad 9, 1076 CV Amsterdam, Netherlands</p>
     </div>
     <div class="footer-social-media">
-      <h2>Follow us on</h2>
+      <h4>Follow us on</h2>
+      <p>  </p>
+      <p> </p>
       <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><i class="fab fa-instagram"></i></a>
       <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><i class="fab fa-facebook"></i></a>
       <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><i class="fab fa-linkedin"></i></a>
