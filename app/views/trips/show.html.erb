@@ -36,9 +36,9 @@
   <br>
   <br>
   <div class="d-flex justify-content-between border-top">
-  <div style="position:relative">
-      <h5 class=" pt-3 mt-4"><i class="fa-solid fa-quote-left" style="color: #e95653; position:absolute; top: 28px;left: 3px;font-size:50px"></i> <i class="fa-solid fa-quote-left" style="color: #e95653; position:absolute; top: 348px;left: 816px;font-size:50px; transform: rotate(180deg);"></i></h5>
-      <p class="pshowtrip border-button" style="margin-right:199px; margin-top:69px;"><%= @trip.content.split("=>").last[1..-3] %></p>
+  <div style="position:relative; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+    <h5 class=" pt-3 mt-4"><i class="fa-solid fa-quote-left" style="color: #e95653; position:absolute; top: 28px;left: 3px;font-size:50px"></i> <i class="fa-solid fa-quote-left" style="color: #e95653; position:absolute; top: 348px;left: 816px;font-size:50px; transform: rotate(180deg);"></i></h5>
+    <p class="pshowtrip border-button" style="margin-right:199px; margin-top:69px;"><%= @trip.content.split("=>").last[1..-3] %></p>
   </div>
   <div class="average-cost" data-controller="average-cost" style="margin-top:28px; margin-right: 25px">
   <h3 class="h3showtripclass" >Average costs</h3>
