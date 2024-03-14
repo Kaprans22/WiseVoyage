@@ -41,7 +41,7 @@
       <p class="pshowtrip border-button" style="margin-right:199px; margin-top:69px;"><%= @trip.content.split("=>").last[1..-3] %></p>
   </div>
   <div class="average-cost" data-controller="average-cost" style="margin-top:28px; margin-right: 25px">
-  <h2 class="h2showtripclass" >Average costs</h2>
+  <h3 class="h3showtripclass" >Average costs</h3>
     <p><%= render 'average_cost', average_cost: @content_data %></p>
   </div>
 
