@@ -203,6 +203,7 @@ class TripsController < ApplicationController
 
     redirect_to trips_path, notice: 'Trip was successfully deleted.'
   end
+
   def cancel_suggestion
     @trip = Trip.find(params[:id])
     suggestions = JSON.parse(@trip.additional_suggestions)
@@ -321,15 +322,6 @@ class TripsController < ApplicationController
     else
       Rails.logger.error("API request failed with code #{response.code} for destination #{@trip.destination}")
     end
-
-
-    # @trip.update(average_cost: content_data.to_json)
-
-    # respond_to do |format|
-    #   format.html { redirect_to @trip }
-    #   format.text { render partial: 'average_cost', locals: { content: content_data }, formats: [:html] }
-    #   format.json
-    # end
   end
 
   def get_additional_suggestions(destinations, start_date, end_date, _limit_words)
