@@ -32,3 +32,7 @@ body {
   font-weight: 400;
   font-style: normal;
 }
+.card:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
