@@ -1,4 +1,9 @@
 <% average_cost.each do |key, value| %>
-  <h2><%= key %></h2>
-  <p><%= value["totalPrice"] %></p>
+  <h2><%= key.capitalize %></h2>
+  <p><%= value['totalPrice'] %></p>
 <% end %>
+
+<!-- <% average_cost['accommodation'] do %>
+  <h2>Accommodation</h2>
+  <p><%= value['totalPrice'] %></p>
+<% end %> -->
