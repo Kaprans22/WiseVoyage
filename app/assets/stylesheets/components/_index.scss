@@ -16,11 +16,14 @@
   margin-top: 30px !important;
 }
 .card {
-  border-color: black !important;
+  border:none;
   height: 100%;
   .card-body {
     display: flex !important;
     flex-direction: column !important;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+    border-bottom: 1px solid #000000;
   }
   .btn {
     align-self: end !important;
