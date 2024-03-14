@@ -203,7 +203,6 @@ class TripsController < ApplicationController
 
     redirect_to trips_path, notice: 'Trip was successfully deleted.'
   end
-
   def cancel_suggestion
     @trip = Trip.find(params[:id])
     suggestions = JSON.parse(@trip.additional_suggestions)
@@ -217,7 +216,6 @@ class TripsController < ApplicationController
     access_token = authorizer.access_token
     url = ENV.fetch('searchAI', nil)
     uri = URI(url)
-
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     request = Net::HTTP::Post.new(uri.path)
@@ -226,15 +224,15 @@ class TripsController < ApplicationController
     date_object = suggestions.find do |obj|
       obj['suggestions'].include?(params[:suggestion]) && obj['date'] == params[:date]
     end
-
     if date_object
       index = date_object['suggestions'].index(params[:suggestion])
       body =  {
         instances: [
           {
-            content: "I'm using you as an API, don't send me any human language. Please suggest a single activity in  #{params[:destination]} on the date:#{params[:dateForSug]} that you havent recommended me yet, without mentioning the date.
+            content: "I'm using you as an API, don't send me any human language. Please suggest a single activity in  #{params[:destination]} on the date:#{params[:dateForSug]} that you haven't recommended me yet, without mentioning the date.
+            Please don't repeat #{params[:suggestion]}
             I'd like to have a single suggestion formatted In a JSON like this:
-            { activity: 'activity' }
+            activity: 'activity'
             "
           }
         ],
@@ -259,12 +257,7 @@ class TripsController < ApplicationController
         @suggestion = params['suggestion']
       end
     end
-
-
-
     @trip.update(additional_suggestions: suggestions.to_json)
-
-
     respond_to do |format|
       format.html { redirect_to @trip }
       format.text { render partial: 'trip_suggestion', locals: { suggestion: @suggestion, trip: @trip, date: params[:date] }, formats: [:html] }
@@ -303,7 +296,7 @@ class TripsController < ApplicationController
                         breakdown: {
                           accomodation: { { budget: price, midrange: price, luxury: price }, totalPrice: rangeOfPrice },
                           transportation: { { publicTransports: price, taxis: price }, totalPrice: price * numberOfDays },
-                          activities: [ {title: title, price: price }, totalPrice: price * numberOfDays ],
+                          activities: { activities_breakdown: [title: title, price: price ], totalPrice: price * numberOfDays },
                           total: rangeOfPrice
                         }
                         price should be an number.
@@ -321,8 +314,10 @@ class TripsController < ApplicationController
       # Extract content from the predictions
       content_data = result['predictions'].first['content']
       Rails.logger.error(content_data)
-      content_data = JSON.parse(content_data)
-      @trip.update(average_cost: content_data)
+      @content_data = JSON.parse(content_data)
+      @trip.update(average_cost: @content_data)
+
+      @content_data = @content_data['breakdown']
     else
       Rails.logger.error("API request failed with code #{response.code} for destination #{@trip.destination}")
     end

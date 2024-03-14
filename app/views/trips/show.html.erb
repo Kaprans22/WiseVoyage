@@ -65,7 +65,9 @@
   <br>
   <h2>Calculated Average</h2>
   <div class="average-cost" data-controller="average-cost">
-    <p>The average cost for the trip to <%= @trip.destination %> is <%= @trip.average_cost %></p>
+    <p>The average cost for the trip to <%= @trip.destination %> is</p>
+
+    <p><%= render 'average_cost', average_cost: @content_data %></p>
   </div>
   <br>
   <h5>Where will you be flying from?</h5>

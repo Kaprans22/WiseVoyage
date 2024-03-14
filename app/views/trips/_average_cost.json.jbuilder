@@ -1,3 +1,0 @@
-if @trip.update
-
-end
