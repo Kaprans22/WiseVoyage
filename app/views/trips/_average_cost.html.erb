@@ -7,7 +7,9 @@
       </h5>
     </div>
     <div>
-      <p class="mt-3" style="font-weight: <%= 'bold' if index == average_cost.length - 1 %>;"><%= value["totalPrice"].gsub('-', ' - ') %></p>
+      <p class="mt-3" style="font-weight: <%= 'bold' if index == average_cost.length - 1 %>;">
+        <%= value.is_a?(Hash) ? (value["totalPrice"].is_a?(String) ? value["totalPrice"].gsub('-', ' - ') : "€#{value["totalPrice"]}") : value %>
+      </p>
     </div>
   </div>
 <% end %>

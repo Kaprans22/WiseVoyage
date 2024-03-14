@@ -26,16 +26,19 @@ class TripsController < ApplicationController
     result = JSON.parse(response.body)
 
     @trip.update_attribute(:image_urls, result['hits'].map { |hit| hit['webformatURL'] })
-
     calculate_average()
 
     return unless @trip.additional_suggestions.nil? || @trip.additional_suggestions.empty?
 
-    additional_suggestions = get_additional_suggestions(@trip.destination, @trip.start_date, @trip.end_date, false)
-    return unless additional_suggestions[@trip.destination.strip]
+    begin
+      additional_suggestions = get_additional_suggestions(@trip.destination, @trip.start_date, @trip.end_date, false)
+      return unless additional_suggestions[@trip.destination.strip]
 
-    @trip.update_attribute(:additional_suggestions,
-                           additional_suggestions[@trip.destination.strip])
+      @trip.update_attribute(:additional_suggestions,
+                             additional_suggestions[@trip.destination.strip])
+    rescue => e
+      flash[:error] = "Error getting additional suggestions: #{e.message}"
+    end
   end
 
   def get_trip_cost(_content, _homeplace)
@@ -246,15 +249,21 @@ class TripsController < ApplicationController
       request.body = body.to_json
       response = http.request(request)
       Rails.logger.error(response.body)
-      if response.code == '200'
-        response.body.gsub!(/(```|json)/, '')
-        result = JSON.parse(response.body)
-        @new_suggestion = JSON.parse(result['predictions'][0]['content'])
-        date_object['suggestions'][index] = @new_suggestion['activity']
-        @suggestion = @new_suggestion['activity']
-      else
-        Rails.logger.error("API request failed with code #{response.code} for destination #{params[:destination]}")
-        @suggestion = params['suggestion']
+      begin
+        if response.code == '200'
+          response.body.gsub!(/(```|json)/, '')
+          result = JSON.parse(response.body)
+          @new_suggestion = JSON.parse(result['predictions'][0]['content'])
+          date_object['suggestions'][index] = @new_suggestion['activity']
+          @suggestion = @new_suggestion['activity']
+          Rails.logger.error(@suggestion)
+        else
+          Rails.logger.error("API request failed with code #{response.code} for destination #{params[:destination]}")
+          @suggestion = params['suggestion']
+        end
+      rescue JSON::ParserError => e
+        flash[:error] = "Error parsing JSON: #{e.message}"
+        @suggestion = 'Visit their famous deli'
       end
     end
     @trip.update(additional_suggestions: suggestions.to_json)
@@ -267,13 +276,14 @@ class TripsController < ApplicationController
 
   private
 
+
   def calculate_average
     @trip = Trip.find(params[:id])
     city_from = params[:city_name]
     json_key_io = StringIO.new(ENV.fetch('GOOGLE_JSON_KEY', nil))
     scopes = ['https://www.googleapis.com/auth/cloud-platform']
     authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
-      json_key_io:,
+      json_key_io: json_key_io,
       scope: scopes
     )
     authorizer.fetch_access_token!
@@ -297,10 +307,10 @@ class TripsController < ApplicationController
                           accomodation: { { budget: price, midrange: price, luxury: price }, totalPrice: rangeOfPrice },
                           transportation: { { publicTransports: price, taxis: price }, totalPrice: price * numberOfDays },
                           activities: { activities_breakdown: [title: title, price: price ], totalPrice: price * numberOfDays },
-                          total: totalPrice: rangeOfPrice
+                          total: rangeOfPrice
                         }
-                        price should be a number.
-                        rangeOfPrice should be a string with the currency symbol in euros like : '€23-€45'.
+                        price should be an number. Please do not write more than 350 characters in the JSON answer.
+                        rangeOfPrice should be a string with the currency symbol in euros like : '€23 - €45'.
                         " }
 
       ]
@@ -308,28 +318,24 @@ class TripsController < ApplicationController
     request.body = body.to_json
     response = http.request(request)
 
-    if response.code == '200'
-      response.body.gsub!(/(```|json)/, '')
-      result = JSON.parse(response.body)
-      # Extract content from the predictions
-      content_data = result['predictions'].first['content']
-      Rails.logger.error(content_data)
-      @content_data = JSON.parse(content_data)
-      @trip.update(average_cost: @content_data)
+    begin
+      if response.code == '200'
+        response.body.gsub!(/(```|json)/, '')
+        result = JSON.parse(response.body)
+        # Extract content from the predictions
+        content_data = result['predictions'].first['content']
+        Rails.logger.error(content_data)
+        @content_data = JSON.parse(content_data)
+        @trip.update(average_cost: @content_data)
 
-      @content_data = @content_data['breakdown']
-    else
-      Rails.logger.error("API request failed with code #{response.code} for destination #{@trip.destination}")
+        @content_data = @content_data['breakdown']
+        Rails.logger.error(@content_data)
+      else
+        Rails.logger.error("API request failed with code #{response.code} for destination #{@trip.destination}")
+      end
+    rescue JSON::ParserError => e
+      flash[:error] = "Error parsing JSON: #{e.message}"
     end
-
-
-    # @trip.update(average_cost: content_data.to_json)
-
-    # respond_to do |format|
-    #   format.html { redirect_to @trip }
-    #   format.text { render partial: 'average_cost', locals: { content: content_data }, formats: [:html] }
-    #   format.json
-    # end
   end
 
   def get_additional_suggestions(destinations, start_date, end_date, _limit_words)
