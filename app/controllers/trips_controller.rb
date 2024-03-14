@@ -297,9 +297,9 @@ class TripsController < ApplicationController
                           accomodation: { { budget: price, midrange: price, luxury: price }, totalPrice: rangeOfPrice },
                           transportation: { { publicTransports: price, taxis: price }, totalPrice: price * numberOfDays },
                           activities: { activities_breakdown: [title: title, price: price ], totalPrice: price * numberOfDays },
-                          total: rangeOfPrice
+                          total: totalPrice: rangeOfPrice
                         }
-                        price should be an number.
+                        price should be a number.
                         rangeOfPrice should be a string with the currency symbol in euros like : '€23-€45'.
                         " }
 

@@ -79,10 +79,10 @@
     <%= form_with url: { action: "get_trip_flight_info", id: @trip.id }, method: :post, html: {data: {action: "submit->flights#generate"}, style: "display: flex; height:50px;"} do %>
       <%= text_field_tag :city_name, nil, placeholder: "From #{current_user.address}", html: {data: {flights_target: "input"}}, style: "border-radius: 0; height: 50px; width:358px; border: 1px solid black; padding:16px;" %>
       <%= button_tag(type: 'submit', id: 'submit-btn', class: 'btn btn-outline-black', style: "border:none;") do %>
-  <i class="fa fa-search"></i>
-<% end %>
-<% end %>
-<h4 class="mt-4">Flight options</h4>
+        <i class="fa fa-search"></i>
+      <% end %>
+      <% end %>
+      <h4 class="mt-4">Flight options</h4>
     <div class="flight-results" data-flights-target="results"></div>
   </div>
   <br>
