@@ -64,18 +64,13 @@
     <% end %>
   </div>
   <br>
-  <div class="calculating border-top">
-    <h2 class="h2showtripclass">Lets calculate average cost for your trip to <%= @trip.destination.capitalize %></h2>
-  <%= form_with url: { action: "calculate_average", id: @trip.id }, method: :get, html: { style: "display: flex; height:50px;" } do %>
-    <%= text_field_tag :city_name, nil, placeholder: "Trip to #{@trip.destination.capitalize}", style: "border-radius: 0; height: 50px; width:358px; border: 1px solid black; padding:16px;" %>
-    <%= button_tag(type: 'submit', id: 'submit-btn', class: 'btn btn-outline-black', style: "border:none;") do %>
-  <i class="fa fa-search"></i>
-<% end %>
-  <% end %>
+  <br>
   <br>
   <h4>Calculated Average</h4>
   <div class="average-cost" data-controller="average-cost">
-    <p>The average cost for the trip to <%= @trip.destination %> is <%= @trip.average_cost %></p>
+    <p>The average cost for the trip to <%= @trip.destination %> is</p>
+
+    <p><%= render 'average_cost', average_cost: @content_data %></p>
   </div>
   </div>
   <br>
@@ -90,7 +85,8 @@
 <h4 class="mt-4">Flight options</h4>
     <div class="flight-results" data-flights-target="results"></div>
   </div>
-
+  <br>
+  <br>
   <br>
   <%= button_to 'Back', trips_path, class: "btn btn-outline-black", method: :get %>
 </div>
