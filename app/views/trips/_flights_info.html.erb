@@ -1,0 +1,5 @@
+<br>
+<% flights = content["flights"] %>
+<% flights.each do |flight| %>
+  <a href="<%= flight['links'] %>"><p>From <%= flight['departure'] %> to <%= flight['arrival'] %> is a <%= flight['duration'] %> flight and costs: <%= flight['price'] %> flying with: <%= flight['airline'] %></p></a>
+<% end %>

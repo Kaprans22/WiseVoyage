@@ -29,8 +29,7 @@ Rails.application.routes.draw do
     get 'dashboard', on: :member
   end
 
-
+  post 'trips/:id/get_trip_flight_info', to: 'trips#get_trip_flight_info', as: 'get_trip_flight_info'
   get 'trips/:id/calculate_average', to: 'trips#calculate_average', as: 'calculate_average'
   get 'about', to: 'pages#about', as: 'about'
-
 end
