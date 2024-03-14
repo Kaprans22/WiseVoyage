@@ -35,14 +35,21 @@
   </div>
   <br>
   <br>
+  <div class="d-flex justify-content-between border-top">
   <div style="position:relative">
-  <h5 class="border-top pt-3 mt-4"><i class="fa-solid fa-quote-left" style="color: #e95653; position:absolute; top: 28px;left: 3px;font-size:36px"></i></h5>
-  <p class="pshowtrip border-button"><%= @trip.content.split("=>").last[1..-3] %></p>
+      <h5 class=" pt-3 mt-4"><i class="fa-solid fa-quote-left" style="color: #e95653; position:absolute; top: 28px;left: 3px;font-size:50px"></i> <i class="fa-solid fa-quote-left" style="color: #e95653; position:absolute; top: 348px;left: 816px;font-size:50px; transform: rotate(180deg);"></i></h5>
+      <p class="pshowtrip border-button" style="margin-right:199px; margin-top:69px;"><%= @trip.content.split("=>").last[1..-3] %></p>
+  </div>
+  <div class="average-cost" data-controller="average-cost" style="margin-top:28px;">
+  <h2 class="h2showtripclass" >Average costs</h2>
+    <p><%= render 'average_cost', average_cost: @content_data %></p>
+  </div>
+
   </div>
   <br>
 
   <!-- Daily Activities---------------- -->
-  <h2>Plan your trip</h2>
+  <h2 class="mt-4 mb-4">Plan your trip</h2>
   <div>
     <% suggestions = JSON.parse(@trip.additional_suggestions)  %>
     <% suggestions.each_with_index do |suggestion, i| %>
@@ -63,17 +70,6 @@
       </div>
     <% end %>
   </div>
-  <br>
-  <br>
-  <br>
-  <h4>Calculated Average</h4>
-  <div class="average-cost" data-controller="average-cost">
-    <p>The average cost for the trip to <%= @trip.destination %> is</p>
-
-    <p><%= render 'average_cost', average_cost: @content_data %></p>
-  </div>
-  </div>
-  <br>
   <div class="flight-info border-top" data-controller="flights">
     <h2 class="h2showtripclass">Lets find the best flights to <%= @trip.destination.capitalize %></h2>
     <%= form_with url: { action: "get_trip_flight_info", id: @trip.id }, method: :post, html: {data: {action: "submit->flights#generate"}, style: "display: flex; height:50px;"} do %>
@@ -82,7 +78,7 @@
   <i class="fa fa-search"></i>
 <% end %>
 <% end %>
-<h4 class="mt-4">Flight options</h4>
+<h4 class="mt-4">Flight options:</h4>
     <div class="flight-results" data-flights-target="results"></div>
   </div>
   <br>
@@ -90,3 +86,5 @@
   <br>
   <%= button_to 'Back', trips_path, class: "btn btn-outline-black", method: :get %>
 </div>
+
+  </div>
