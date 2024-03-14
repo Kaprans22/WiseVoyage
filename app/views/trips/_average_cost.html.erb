@@ -1,9 +1,12 @@
-<% average_cost.each do |key, value| %>
-  <h2><%= key.capitalize %></h2>
-  <p><%= value['totalPrice'] %></p>
+<div style="border: 1px solid black; padding:16px; width:364px;">
+<% average_cost.each_with_index do |(key, value), index| %>
+  <div class="<%= 'border-bottom' unless index == average_cost.length - 1 %> d-flex justify-content-between">
+    <div>
+      <h5 class="mt-3"><%= key.capitalize %></h5>
+    </div>
+    <div>
+      <p class="mt-3"><%= value["totalPrice"] %></p>
+    </div>
+  </div>
 <% end %>
-
-<!-- <% average_cost['accommodation'] do %>
-  <h2>Accommodation</h2>
-  <p><%= value['totalPrice'] %></p>
-<% end %> -->
+</div>
