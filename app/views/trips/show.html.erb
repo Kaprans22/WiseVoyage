@@ -6,14 +6,17 @@
 
 <div class="container">
   <br>
+  <%= button_to 'Back', trips_path, class: "btn btn-outline-black", method: :get %>
+  <br>
+
   <div>
     <h1><%= @trip.destination.capitalize %></h1>
   </div>
   <br>
   <div class="d-flex justify-content-between">
     <div class="dates pshowtrip">
-      <p>Start date: <%= @trip.start_date %></p>
-      <p>End date: <%= @trip.end_date %></p>
+      <p><em>Start date: <%= @trip.start_date %></em></p>
+      <p><em>End date: <%= @trip.end_date %></em></p>
     </div>
 
     <%= render "user_trips/new"  %>
@@ -39,7 +42,7 @@
   <br>
 
   <!-- Daily Activities---------------- -->
-  <h2>Plan your trip:</h2>
+  <h2>Plan your trip</h2>
   <div>
     <% suggestions = JSON.parse(@trip.additional_suggestions)  %>
     <% suggestions.each_with_index do |suggestion, i| %>
@@ -63,19 +66,23 @@
   <br>
   <br>
   <br>
-  <h2>Calculated Average</h2>
+  <h4>Calculated Average</h4>
   <div class="average-cost" data-controller="average-cost">
     <p>The average cost for the trip to <%= @trip.destination %> is</p>
 
     <p><%= render 'average_cost', average_cost: @content_data %></p>
   </div>
+  </div>
   <br>
-  <h5>Where will you be flying from?</h5>
-  <div class="flight-info" data-controller="flights">
-    <%= form_with url: { action: "get_trip_flight_info", id: @trip.id }, method: :post, html: {data: {action: "submit->flights#generate"}} do %>
-      <%= text_field_tag :city_name, nil, placeholder: "Enter city name", html: {data: {flights_target: "input"}} %>
-      <%= submit_tag 'Calculate Average Cost' %>
-    <% end %>
+  <div class="flight-info border-top" data-controller="flights">
+    <h2 class="h2showtripclass">Lets find the best flights to <%= @trip.destination.capitalize %></h2>
+    <%= form_with url: { action: "get_trip_flight_info", id: @trip.id }, method: :post, html: {data: {action: "submit->flights#generate"}, style: "display: flex; height:50px;"} do %>
+      <%= text_field_tag :city_name, nil, placeholder: "From #{current_user.address}", html: {data: {flights_target: "input"}}, style: "border-radius: 0; height: 50px; width:358px; border: 1px solid black; padding:16px;" %>
+      <%= button_tag(type: 'submit', id: 'submit-btn', class: 'btn btn-outline-black', style: "border:none;") do %>
+  <i class="fa fa-search"></i>
+<% end %>
+<% end %>
+<h4 class="mt-4">Flight options</h4>
     <div class="flight-results" data-flights-target="results"></div>
   </div>
   <br>

@@ -1,11 +1,10 @@
-
 <div id="map" class="w-100" style="height: 500px; z-index: 1">
   <div class="container">
     <div class="d-flex justify-content-center" id="form-container" >
       <div class='welcomeBox'>
           <div class='welcomeText'>
           <h2>Your smart travel advisor</h2>
-          <p>Let's plan a trip quickly and smart together!</p>
+          <p>Click on the map or type your dream destination to start!</p>
           </div>
       <div class='searchbar'>
     <%= form_tag("/trips", method: "post", remote: true, id: "trip-form", class: "d-flex") do %>
@@ -22,7 +21,7 @@
         <%= text_field_tag(:end_date, nil, type: "date", required: true, class: "full-width-input", placeholder: "End date", id:"flatpickr", style:"padding-left:14px; padding-right:14px;") %>
         <i class="fa-solid fa-plane-arrival"></i>
       </div>
-      <%= button_tag(type: 'submit', id: 'submit-btn', class: 'btn-outline-black') do %>
+      <%= button_tag(type: 'submit', id: 'submit-btn', class: 'btn btn-outline-black', style:"border:none;") do %>
         <i class="fa fa-search"></i>
       <% end %>
     <% end %>
@@ -58,7 +57,7 @@
 <br>
 
     <div class="h2">
-  <h2 class="h2home">Where to travel?</h2>
+  <h1 class="h1home">Where to travel?</h1>
   </div>
 <h2 class="h2home">European escapes: Uncover the old world's charm!</h2>
   <div id="carouselExampleControls1" class="carousel slide">
